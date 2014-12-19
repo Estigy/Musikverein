@@ -1,0 +1,24 @@
+{
+    "name": "Musikverein",
+    "description": "Vereinsverwaltung eines Musikvereins",
+    "license": "",
+    "keywords": [
+        "Musik",
+        "Blasmusik",
+        "Verein",
+        "Verwaltung"
+    ],
+    "homepage": "https://github.com/Estigy/Musikverein",
+    "require": {
+        "php": ">=5.3.3",
+        "zendframework/zendframework": "2.3.*",
+        "doctrine/doctrine-orm-module": "0.8.*",
+        "neilime/zf2-twb-bundle": "2.*@stable"
+    },
+ "autoload": {
+     "classmap": [
+      "vendor/anexia/bootstrap-demos",
+      "vendor/anexia/bootstrap"
+     ]
+ }
+}

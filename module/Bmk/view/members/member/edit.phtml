@@ -1,0 +1,62 @@
+<?php
+$title = 'Mitglied bearbeiten';
+$this->headTitle($title);
+?>
+
+<?php echo $this->getTabnav($tabnav); ?>
+
+<h1><?php echo $this->escapeHtml($title); ?></h1>
+
+<?php
+$form->setAttribute('action', $this->url('memberEdit', array('id' => $id)));
+$form->prepare();
+
+echo $this->form()->openTag($form);
+?>
+<div class="row">
+    <div class="col-sm-6">
+        <fieldset>
+        <legend>Stammdaten</legend>
+        <?php
+        $this->formHidden($form->get('id'));
+        echo $this->formRow($form->get('title'));
+        echo $this->formRow($form->get('firstname'));
+        echo $this->formRow($form->get('lastname'));
+        echo $this->formRow($form->get('address'));
+        echo $this->formRow($form->get('zip'));
+        echo $this->formRow($form->get('city'));
+        echo $this->formRow($form->get('birthDate'));
+        echo $this->formRow($form->get('birthCity'));
+        echo $this->formRow($form->get('comment'));
+        ?>
+        </fieldset>
+    </div>
+    <div class="col-sm-6">
+        <fieldset>
+        <legend>Kontakt</legend>
+        <?php
+        echo $this->formRow($form->get('email1'));
+        echo $this->formRow($form->get('email2'));
+        echo $this->formRow($form->get('phone1'));
+        echo $this->formRow($form->get('phone2'));
+        echo $this->formRow($form->get('boardUser'));
+        ?>
+        </fieldset>
+        <fieldset>
+        <legend>Vordienstjahre</legend>
+        <?php
+        echo $this->formRow($form->get('preYears'));
+        echo $this->formRow($form->get('preYearsComment'));
+        ?>
+        </fieldset>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-6">
+        <a href="<?php echo $this->url('members'); ?>" class="btn btn-default">Abbrechen</a>
+        <?php echo $this->formSubmit($form->get('submit')); ?>
+    </div>
+</div>
+<?php
+echo $this->form()->closeTag();
+?>

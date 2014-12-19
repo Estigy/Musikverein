@@ -1,0 +1,60 @@
+<?php
+$title = 'Dokumente';
+$this->headTitle($title);
+?>
+<h1><?php echo $this->escapeHtml($title); ?></h1>
+<p>
+	<a href="<?php echo $this->url('documentEdit', array('id' => 0));?>">Neues Dokument hochladen</a>
+</p>
+
+<?php
+$form->setAttribute('action', $this->url('documents'));
+$form->prepare();
+echo $this->form()->openTag($form);
+?>
+<div class="well well-sm">
+    <div class="row">
+        <div class="col-md-6">
+            <?php
+            echo $this->formRow($form->get('category'));
+            ?>
+        </div>
+        <div class="col-md-6">
+            <?php
+            echo $this->formRow($form->get('description'));
+            echo $this->formRow($form->get('submit'));
+            ?>
+        </div>
+    </div>
+</div>
+<?php
+echo $this->form()->closeTag();
+?>
+
+<table class="table table-striped table-hover">
+	<tr>
+        <th>Kategorie</th>
+        <th>Hochgeladen am</th>
+        <th>Beschreibung</th>
+		<th>&nbsp;</th>
+	</tr>
+	<?php foreach ($documents as $document) { ?>
+		<tr>
+            <td><?php echo $this->escapeHtml($document->category->name);?></td>
+            <td><?php echo $this->escapeHtml($document->uploadDate->format('d.m.Y'));?></td>
+            <td><?php echo $this->escapeHtml($document->description);?></td>
+			<td>
+				<a href="<?php echo $this->url('documentEdit', array('id' => $piece->id));?>">Edit</a>
+			</td>
+		</tr>
+		<?php } ?>
+</table>
+
+<?php
+echo $this->paginationControl($documents,
+    'Sliding',
+    '_partials/paginator', array(
+        'route' => 'documents',
+        'route_params' => array()
+    )
+);

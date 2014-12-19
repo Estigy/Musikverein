@@ -1,0 +1,19 @@
+SETUP
+rechte-system
+aktiven menüpunkt highlighten
+
+INSTRUMENTE
+
+PERSONEN
+suche
+registerzugehörigkeit bearbeitbar machen
+
+KALENDER
+kopieren
+board-verknüpfung
+homepage-verknüpfung (?)
+
+DOKUMENTE
+liste
+hochladen
+(löschen)

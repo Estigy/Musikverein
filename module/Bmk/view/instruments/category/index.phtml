@@ -1,0 +1,30 @@
+<?php
+$title = 'Instrumentenkategorien';
+$this->headTitle($title);
+?>
+<h1><?php echo $this->escapeHtml($title); ?></h1>
+
+<table class="table table-striped table-hover">
+	<tr>
+        <th>Register</th>
+        <th width="100%">Kategorie</th>
+	</tr>
+	<?php
+    foreach ($registers as $register) {
+        ?>
+        <tr>
+            <td><?php echo $this->escapeHtml($register->name);?></td>
+            <td>&nbsp;</td>
+        </tr>
+        <?php
+        foreach ($register->categories as $category) {
+            ?>
+		    <tr>
+                <td>&nbsp;</td>
+                <td><?php echo $this->escapeHtml($category->name);?></td>
+		    </tr>
+		    <?php
+        }
+    }
+    ?>
+</table>

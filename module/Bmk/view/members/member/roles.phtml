@@ -1,0 +1,68 @@
+<?php
+$title = 'Funktion eintragen';
+$this->headTitle($title);
+?>
+
+<?php echo $this->getTabnav($tabnav); ?>
+
+<h1><?php echo $this->escapeHtml($title); ?></h1>
+
+<?php
+
+$form->setAttribute('action', $this->url('memberRoles', array('id' => $id)));
+$form->prepare();
+
+echo $this->form()->openTag($form);
+?>
+<div class="row">
+    <div class="col-sm-6">
+        <?php
+            echo $this->formRow($form->get('role'));
+            echo $this->formRow($form->get('beginDate'));
+            echo $this->formRow($form->get('endDate'));
+        ?>
+    </div>
+    <div class="col-sm-6">
+        <?php
+        ?>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-6">
+        <a href="<?php echo $this->url('members'); ?>" class="btn btn-default">Abbrechen</a>
+        <?php echo $this->formSubmit($form->get('submit')); ?>
+    </div>
+</div>
+<?php
+echo $this->form()->closeTag();
+
+echo '<p>&nbsp;</p>';
+
+if (count($member->member2roles)) {
+    ?>
+    <table class="table table-striped">
+        <tr>
+            <th>Funktion</th>
+            <th>Eintritt</th>
+            <th>Austritt</th>
+            <th>&nbsp;</th>
+        </tr>
+        <?php foreach ($member->member2roles as $connector) { ?>
+            <tr>
+                <td>
+                    <?php echo $connector->role->name; ?>
+                </td>
+                <td>
+                    <?php echo $connector->beginDate->format('d.m.Y'); ?>
+                </td>
+                <td>
+                    <?php echo $connector->endDate->format('d.m.Y'); ?>
+                </td>
+                <td>
+                    <a href="<?php echo $this->url('memberRoles', array('id' => $id, 'connId' => $connector->id)); ?>">Bearbeiten</a>
+                </td>
+            </tr>
+        <?php } ?>
+    </table>
+    <?php
+}

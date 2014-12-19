@@ -1,0 +1,37 @@
+<?php
+$title = 'Kurs bearbeiten';
+$this->headTitle($title);
+?>
+
+<h1><?php echo $this->escapeHtml($title); ?></h1>
+
+<?php
+$form->setAttribute('action', $this->url('workshopEdit', array('id' => $id)));
+$form->prepare();
+
+echo $this->form()->openTag($form);
+?>
+<div class="row">
+    <div class="col-sm-6">
+        <?php
+        $this->formHidden($form->get('id'));
+        echo $this->formRow($form->get('name'));
+        echo $this->formRow($form->get('beginDate'));
+        echo $this->formRow($form->get('endDate'));
+        echo $this->formRow($form->get('city'));
+        ?>
+    </div>
+    <div class="col-sm-6">
+        <?php
+        ?>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-6">
+        <a href="<?php echo $this->url('workshops'); ?>" class="btn btn-default">Abbrechen</a>
+        <?php echo $this->formSubmit($form->get('submit')); ?>
+    </div>
+</div>
+<?php
+echo $this->form()->closeTag();
+?>

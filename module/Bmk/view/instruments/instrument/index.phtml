@@ -1,0 +1,82 @@
+<?php
+$title = 'Instrumente';
+$this->headTitle($title);
+?>
+<h1><?php echo $this->escapeHtml($title); ?></h1>
+<p>
+	<a href="<?php echo $this->url('instrumentEdit', array('id' => 0));?>">Neues Instrument hinzufügen</a>
+</p>
+
+<?php
+$form->setAttribute('action', $this->url('instruments', array('action' => 'index')));
+$form->prepare();
+echo $this->form()->openTag($form);
+?>
+<div class="well well-sm">
+    <div class="row">
+        <div class="col-md-6">
+            <?php
+            echo $this->formRow($form->get('status'));
+            echo $this->formRow($form->get('serialsearch'));
+            ?>
+        </div>
+        <div class="col-md-6">
+            <?php
+            echo $this->formRow($form->get('submit'));
+            ?>
+        </div>
+    </div>
+</div>
+<?php
+echo $this->form()->closeTag();
+?>
+
+<table class="table table-striped table-hover">
+	<tr>
+        <th width="20%">Marke</th>
+        <th width="20%">Seriennummer</th>
+        <th width="20%">Ausführung</th>
+		<th width="20%">Vergeben an</th>
+		<th width="20%">&nbsp;</th>
+	</tr>
+    <?php foreach ($registers as $register) { ?>
+        <tr>
+            <th><?php echo $this->escapeHtml($register->name);?></th>
+            <td colspan="5">&nbsp;</td>
+        </tr>
+    <?php foreach ($register->categories as $category) {
+        $instruments = $category->getInstruments($instrFilter); ?>
+        <tr class="category-row" data-row="<?php echo $category->id; ?>">
+            <th>
+                &nbsp;&nbsp;&nbsp;
+                <?php echo $this->escapeHtml($category->name);?> 
+                <span class="badge pull-right"><?php echo count($instruments); ?></span>
+            </th>
+            <td colspan="4">&nbsp;</td>
+        </tr>
+	<?php foreach ($instruments as $instrument) {
+        $currentMember = $instrument->getCurrentMember();
+        ?>
+		<tr class="row-<?php echo $category->id; ?>" style="display:none;">
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $this->escapeHtml($instrument->brand);?></td>
+            <td><?php echo $this->escapeHtml($instrument->serialNumber);?></td>
+            <td><?php echo $this->escapeHtml($instrument->variant);?></td>
+			<td><?php echo $this->escapeHtml($currentMember ? $currentMember->lastname . ' ' . $currentMember->firstname : '');?></td>
+			<td>
+                <a href="<?php echo $this->url('instrumentEdit', array('id' => $instrument->id));?>">Edit</a>
+				<a href="<?php echo $this->url('instrumentLend', array('id' => $instrument->id));?>">Verleih</a>
+				<a href="<?php echo $this->url('instruments');?>">Delete</a>
+			</td>
+		</tr>
+        <?php } ?>
+        <?php } ?>
+		<?php } ?>
+</table>
+
+<script>
+$(function() {
+    $('.category-row').click(function() {
+        $('tr.row-' + $(this).data('row')).toggle();
+    })
+});
+</script>

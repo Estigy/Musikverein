@@ -1,0 +1,96 @@
+<?php echo $this->doctype(); ?>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <?php echo $this->headTitle('Vereinsverwaltung')->setSeparator(' - ')->setAutoEscape(false) ?>
+
+        <?php echo $this->headMeta()
+        ->appendName('viewport', 'width=device-width, initial-scale=1.0')
+        ->appendHttpEquiv('X-UA-Compatible', 'IE=edge')
+        ?>
+
+        <?php echo $this->headLink(array('rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/favicon.ico'))
+        ->prependStylesheet($this->basePath() . '/css/style.css')
+        ->prependStylesheet('//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css')
+        ->prependStylesheet($this->basePath() . '/vendor/datepicker/datepicker3.css')
+        ->prependStylesheet($this->basePath() . '/vendor/bootstrap/css/bootstrap-theme.min.css')
+        ->prependStylesheet($this->basePath() . '/vendor/bootstrap/css/bootstrap.min.css') ?>
+
+        <?php echo $this->headScript()
+        ->prependFile($this->basePath() . '/js/bmk.js')
+        ->prependFile($this->basePath() . '/js/application.js')
+        ->prependFile($this->basePath() . '/vendor/datepicker/locales/bootstrap-datepicker.de.js')
+        ->prependFile($this->basePath() . '/vendor/datepicker/bootstrap-datepicker.js')
+        ->prependFile($this->basePath() . '/js/twb3bugfix.js')
+        ->prependFile($this->basePath() . '/vendor/bootstrap/js/bootstrap.min.js')
+        ->prependFile($this->basePath() . '/vendor/jquery/jquery-2.1.1.min.js')
+        //->prependFile($this->basePath() . '/js/respond.min.js', 'text/javascript', array('conditional' => 'lt IE 9'))
+        //->prependFile($this->basePath() . '/js/html5shiv.js',   'text/javascript', array('conditional' => 'lt IE 9'))
+        ; ?>
+
+    </head>
+    <body>
+        <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="<?php echo $this->url('home') ?>">Vereinsverwaltung</a>
+                </div>
+                <div class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav">
+                        <li><a href="<?php echo $this->url('home') ?>"><i class="fa fa-home fa-fw"></i> Home</a></li>
+
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-group fa-fw"></i> Mitglieder <span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="<?php echo $this->url('members'); ?>">Personenliste</a></li>
+                                <li class="divider"></li>
+                                <li><a href="<?php echo $this->url('workshops'); ?>">Kurse</a></li>
+                                <li><a href="<?php echo $this->url('medals'); ?>">Abzeichen</a></li>
+                            </ul>
+                        </li>
+
+                        <li><a href="<?php echo $this->url('calendar') ?>"><i class="fa fa-calendar fa-fw"></i> Termine</a></li>
+
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-tags fa-fw"></i> Instrumente <span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="<?php echo $this->url('instruments'); ?>">Liste</a></li>
+                                <li class="divider"></li>
+                                <li><a href="<?php echo $this->url('instrumentCategories'); ?>">Kategorien</a></li>
+                            </ul>
+                        </li>
+                        
+                        <li><a href="<?php echo $this->url('sheetmusic'); ?>"><i class="fa fa-music fa-fw"></i> Noten</a></li>
+                        
+                        <li><a href="<?php echo $this->url('documents'); ?>"><i class="fa fa-file fa-fw"></i> Dokumente</a></li> 
+                    </ul>
+                    
+                    <?php
+                    $user = $this->identity();
+                    if ($user) {
+                        ?>
+                        <p class="navbar-text navbar-right"><a href="<?php echo $this->url('logout'); ?>" class="navbar-link">Logout <i class="fa fa-sign-out fa-fw text-danger"></i></a></p>
+                        <?php
+                    }
+                    ?>
+                </div><!--/.nav-collapse -->
+            </div>
+        </nav>
+        <div class="container">
+            <?php echo $this->content; ?>
+
+            <hr>
+
+            <footer>
+                <p>&copy; 2014 - <?php echo date('Y') ?> by GS-Music</p>
+            </footer>
+        </div>
+        <?php echo $this->inlineScript() ?>
+    </body>
+</html>

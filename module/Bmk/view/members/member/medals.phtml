@@ -1,0 +1,67 @@
+<?php
+$title = 'Abzeichen eintragen';
+$this->headTitle($title);
+?>
+
+<?php echo $this->getTabnav($tabnav); ?>
+
+<h1><?php echo $this->escapeHtml($title); ?></h1>
+
+<?php
+$form->setAttribute('action', $this->url('memberMedals', array('id' => $id, 'connId' => $connId)));
+$form->prepare();
+
+echo $this->form()->openTag($form);
+?>
+<div class="row">
+    <div class="col-sm-6">
+        <?php
+            echo $this->formRow($form->get('medal'));
+            echo $this->formRow($form->get('date'));
+            echo $this->formRow($form->get('infos'));
+        ?>
+    </div>
+    <div class="col-sm-6">
+        <?php
+        ?>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-6">
+        <a href="<?php echo $this->url('members'); ?>" class="btn btn-default">Abbrechen</a>
+        <?php echo $this->formSubmit($form->get('submit')); ?>
+    </div>
+</div>
+<?php
+echo $this->form()->closeTag();
+
+echo '<p>&nbsp;</p>';
+
+if (count($member->member2medals)) {
+    ?>
+    <table class="table table-striped">
+        <tr>
+            <th>Abzeichen</th>
+            <th>Datum</th>
+            <th>Zusatzinfos</th>
+            <th>&nbsp;</th>
+        </tr>
+        <?php foreach ($member->member2medals as $connector) { ?>
+            <tr>
+                <td>
+                    <?php echo $connector->medal->name; ?>
+                </td>
+                <td>
+                    <?php echo $connector->date->format('d.m.Y'); ?>
+                </td>
+                <td>
+                    <?php echo $connector->infos; ?>
+                </td>
+                <td>
+                    <a href="<?php echo $this->url('memberMedals', array('id' => $id, 'connId' => $connector->id)); ?>">Bearbeiten</a>
+                </td>
+            </tr>
+        <?php } ?>
+    </table>
+    <?php
+}

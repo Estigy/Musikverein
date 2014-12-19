@@ -1,0 +1,76 @@
+<?php
+$title = 'Kursbesuch eintragen';
+$this->headTitle($title);
+?>
+
+<?php echo $this->getTabnav($tabnav); ?>
+
+<h1><?php echo $this->escapeHtml($title); ?></h1>
+
+<?php
+
+$form->setAttribute('action', $this->url('memberWorkshops', array('id' => $id)));
+$form->prepare();
+
+echo $this->form()->openTag($form);
+?>
+<div class="row">
+    <div class="col-sm-6">
+        <?php
+            echo $this->formRow($form->get('workshop'));
+            echo $this->formRow($form->get('infos'));
+        ?>
+    </div>
+    <div class="col-sm-6">
+        <?php
+        ?>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-6">
+        <a href="<?php echo $this->url('members'); ?>" class="btn btn-default">Abbrechen</a>
+        <?php echo $this->formSubmit($form->get('submit')); ?>
+    </div>
+</div>
+<?php
+echo $this->form()->closeTag();
+
+echo '<p>&nbsp;</p>';
+
+if (count($member->member2workshops)) {
+    ?>
+    <table class="table table-striped">
+        <tr>
+            <th>Datum</th>
+            <th>Kurs</th>
+            <th>Ort</th>
+            <th>Zusatzinfos</th>
+            <th>&nbsp;</th>
+        </tr>
+        <?php foreach ($member->member2workshops as $connector) { ?>
+            <tr>
+                <td>
+                    <?php
+                    echo $connector->workshop->beginDate->format('d.m.Y');
+                    if ($connector->workshop->endDate) {
+                        echo ' &ndash; ' . $connector->workshop->endDate->format('d.m.Y');
+                    }
+                    ?>
+                </td>
+                <td>
+                    <?php echo $connector->workshop->name; ?>
+                </td>
+                <td>
+                    <?php echo $connector->workshop->city; ?>
+                </td>
+                <td>
+                    <?php echo $connector->infos; ?>
+                </td>
+                <td>
+                    <a href="<?php echo $this->url('memberWorkshops', array('id' => $id, 'connId' => $connector->id)); ?>">Bearbeiten</a>
+                </td>
+            </tr>
+        <?php } ?>
+    </table>
+    <?php
+}

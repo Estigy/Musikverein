@@ -1,0 +1,39 @@
+<?php
+$title = 'Kurse';
+$this->headTitle($title);
+?>
+<h1><?php echo $this->escapeHtml($title); ?></h1>
+<p>
+    <a href="<?php echo $this->url('workshopEdit', array('id' => 0));?>">Neuen Kurs hinzufügen</a>
+</p>
+
+<table class="table table-striped table-hover">
+	<tr>
+        <th>Datum</th>
+        <th>Name</th>
+        <th>Ort</th>
+        <th>&nbsp;</th>
+	</tr>
+	<?php
+    foreach ($workshops as $workshop) {
+        ?>
+        <tr>
+            <td>
+                <?php
+                echo $this->escapeHtml($workshop->beginDate->format('d. m. Y'));
+                if ($workshop->endDate) {
+                    echo ' bis ' . $this->escapeHtml($workshop->endDate->format('d. m. Y'));
+                }
+                ?>
+            </td>
+            <td><?php echo $this->escapeHtml($workshop->name);?></td>
+            <td><?php echo $this->escapeHtml($workshop->city);?></td>
+            <td>
+                <a href="<?php echo $this->url('workshopEdit', array('id' => $workshop->id));?>">Edit</a>
+                <a href="<?php echo $this->url('workshops');?>">Delete</a>
+            </td>
+        </tr>
+        <?php
+    }
+    ?>
+</table>

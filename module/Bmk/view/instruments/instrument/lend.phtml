@@ -1,0 +1,116 @@
+<?php
+$title = 'Instrument verleihen/rücknehmen';
+$this->headTitle($title);
+?>
+
+<?php echo $this->getTabnav($tabnav); ?>
+
+<h1><?php echo $this->escapeHtml($title); ?></h1>
+
+<?php
+if ($instrument->status != \Instruments\Entity\Instrument::STATUS_INACTIVE) {
+    $form->setAttribute('action', $this->url('instrumentLend', array('id' => $id)));
+    $form->prepare();
+
+    echo $this->form()->openTag($form);
+    ?>
+    <div class="row">
+        <div class="col-sm-6">
+            <?php
+            if ($form->getName() == 'giveaway-instrument-form') {
+                echo $this->formRow($form->get('member'));
+                echo $this->formRow($form->get('giveAwayDate'));
+                echo '<hr>';
+                echo $this->formRow($form->get('giveAwayMember'));
+            }
+            if ($form->getName() == 'takeback-instrument-form') {
+                echo $this->formRow($form->get('takeBackDate'));
+                echo '<hr>';
+                echo $this->formRow($form->get('takeBackMember'));
+            }
+            ?>
+        </div>
+        <div class="col-sm-6">
+            <?php
+            ?>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6">
+            <a href="<?php echo $this->url('instruments'); ?>" class="btn btn-default">Abbrechen</a>
+            <?php echo $this->formSubmit($form->get('submit')); ?>
+        </div>
+    </div>
+    <?php
+    echo $this->form()->closeTag();
+};
+
+echo '<p>&nbsp;</p>';
+
+if (count($instrument->instrument2members)) {
+    ?>
+    <table class="table table-striped">
+        <tr>
+            <th>Ausgabe</th>
+            <th>Rücknahme</th>
+            <th>Mitglied</th>
+        </tr>
+        <?php foreach ($instrument->instrument2members as $connector) { ?>
+            <tr>
+                <td>
+                    <?php
+                    echo $connector->giveAwayDate ? $connector->giveAwayDate->format('d.m.Y') : 'Datum unbekannt';
+                    if ($connector->giveAwayMember) {
+                        echo ', ';
+                        echo $connector->giveAwayMember->lastname . ' ' . $connector->giveAwayMember->firstname;
+                    }
+                    ?>
+                </td>
+                <td>
+                    <?php
+                    echo $connector->takeBackDate ? $connector->takeBackDate->format('d.m.Y') : 'Datum unbekannt';
+                    if ($connector->takeBackMember) {
+                        echo ', ';
+                        echo $connector->takeBackMember->lastname . ' ' . $connector->takeBackMember->firstname;
+                    }
+                    ?>
+                </td>
+                <td>
+                    <?php
+                    echo $connector->member->lastname . ' ' . $connector->member->firstname;
+                    ?>
+                </td>
+            </tr>
+            <?php } ?>
+    </table>
+    <?php
+}
+return;
+$form->setAttribute('action', $this->url('sheetmusicEdit', array('id' => $id)));
+$form->prepare();
+
+echo $this->form()->openTag($form);
+?>
+<div class="row">
+    <div class="col-sm-6">
+        <?php
+        $this->formHidden($form->get('id'));
+        echo $this->formRow($form->get('category'));
+        echo $this->formRow($form->get('brand'));
+        echo $this->formRow($form->get('variant'));
+        echo $this->formRow($form->get('serialNumber'));
+        echo $this->formRow($form->get('buyDate'));
+        echo $this->formRow($form->get('outDate'));
+        ?>
+    </div>
+    <div class="col-sm-6">
+        <?php
+        echo $this->formRow($form->get('insurance'));
+        echo $this->formRow($form->get('comment'));
+        echo $this->formRow($form->get('submit'));
+        ?>
+    </div>
+</div>
+<?php
+echo $this->form()->closeTag();
+?>

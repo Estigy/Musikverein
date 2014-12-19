@@ -1,0 +1,68 @@
+<?php
+$title = 'Kalender';
+$this->headTitle($title);
+?>
+<h1><?php echo $this->escapeHtml($title); ?></h1>
+<p>
+    <a href="<?php echo $this->url('calendarEdit', array('id' => 0));?>">Neuen Termin anlegen</a>
+</p>
+
+<?php
+$form->setAttribute('action', $this->url('calendar'));
+$form->prepare();
+
+echo $this->form()->openTag($form);
+?>
+<div class="well well-sm">
+    <div class="row">
+        <div class="col-sm-6">
+            <?php
+            echo $this->formRow($form->get('year'));
+            echo $this->formRow($form->get('status'));
+            ?>
+        </div>
+        <div class="col-sm-6">
+            <?php
+            echo $this->formRow($form->get('type'));
+            echo $this->formRow($form->get('band'));
+            echo $this->formRow($form->get('submit'));
+            ?>
+        </div>
+    </div>
+</div>
+<?php
+echo $this->form()->closeTag();
+?>
+
+<table class="table table-striped table-hover">
+    <tr>
+        <th>Datum</th>
+        <th>Name</th>
+        <th>Ort</th>
+        <th>Wer</th>
+        <th>Status</th>
+        <th>&nbsp;</th>
+    </tr>
+    <?php foreach ($events as $event) : ?>
+        <tr>
+            <td><?php echo $this->escapeHtml($event->date->format('Y-m-d'));?></td>
+            <td><?php echo $this->escapeHtml($event->name);?></td>
+            <td><?php echo $this->escapeHtml($event->city);?></td>
+            <td><?php echo $this->escapeHtml($event->band ? implode(', ', $event->band) : '');?></td>
+            <td><?php echo $this->escapeHtml($event->status);?></td>
+            <td>
+                <a href="<?php echo $this->url('calendarEdit', array('id' => $event->id));?>">Edit</a>
+                <a href="<?php echo $this->url('calendar', array('action' => 'delete', 'id' => $event->id));?>">Delete</a>
+            </td>
+        </tr>
+        <?php endforeach; ?>
+</table>
+
+<?php
+echo $this->paginationControl($events,
+    'Sliding',
+    '_partials/paginator', array(
+        'route' => 'calendar',
+        'route_params' => array()
+    )
+);

@@ -1,0 +1,27 @@
+<?php if ($this->last <= 1) { return; } ?>
+
+<nav>
+    <ul class="pagination">
+        <li <?php if ($this->current - 10 <= 0) { echo 'class="disabled"'; }?>>
+            <a href="<?php echo $this->url($this->route, $this->route_params + array('page' => $this->current - 10)); ?>">&laquo;</a>
+        </li>
+        
+        <li <?php if (!$this->previous) { echo 'class="disabled"'; }?>>
+        <a href="<?php echo $this->url($this->route, $this->route_params + array('page' => $this->previous)); ?>">&lsaquo;</a>
+        </li>
+        
+        <?php foreach ($this->pagesInRange as $page) { ?>
+        <li <?php if ($page == $this->current) { echo 'class="active"'; } ?>>
+            <a href="<?php echo $this->url($this->route, $this->route_params + array('page' => $page)); ?>"><?php echo $page; ?></a>
+        </li>
+        <?php } ?>
+        
+        <li <?php if (!$this->next) { echo 'class="disabled"'; }?>>
+        <a href="<?php echo $this->url($this->route, $this->route_params + array('page' => $this->next)); ?>">&rsaquo;</a>
+        </li>
+        
+        <li <?php if ($this->current + 10 > $this->last) { echo 'class="disabled"'; }?>>
+            <a href="<?php echo $this->url($this->route, $this->route_params + array('page' => $this->current + 10)); ?>">&raquo;</a>
+        </li>
+    </ul>
+</nav>
