@@ -38,6 +38,9 @@ return array(
             )
         ),
     ),
+    'documents' => array(
+        'upload_path' => 'data/uploads',
+    ),
 	'router' => array(
 		'routes' => array(
             'calendar' => array(
@@ -99,6 +102,19 @@ return array(
                     'defaults' => array(
                         'controller' => 'Documents\Controller\Category',
                         'action'     => 'index',
+                    ),
+                ),
+            ),
+            'documentDownload' => array(
+                'type'    => 'segment',
+                'options' => array(
+                    'route'    => '/documents/:hash',
+                    'constraints' => array(
+                        'page' => '[0-9a-z]{32}',
+                    ),
+                    'defaults' => array(
+                        'controller' => 'Documents\Controller\Document',
+                        'action'     => 'download',
                     ),
                 ),
             ),

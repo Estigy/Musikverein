@@ -59,15 +59,30 @@ class DocumentController extends BaseController
 
         if ($request->isPost()) {
             //$form->setInputFilter($entity->getInputFilter());
-            $form->setData($request->getPost());
-
+            $post = array_merge_recursive(
+                $request->getPost()->toArray(),
+                $request->getFiles()->toArray()
+            );
+            $form->setData($post);
+            
             if ($form->isValid()) {
-                if ($entity->id === null) {
-                    // Daten ergänzen
+                $uploadData = $form->get('upload')->getValue();
+                // Wenn eine Datei mitgekommen ist (muss beim Bearbeiten ja nicht sein)
+                if ($uploadData['name']) {
+                    $entity->filename   = $uploadData['name'];
+                    $entity->uploadDate = new \DateTime();
+                    $entity->uploadUser = $em->find('\Application\Entity\User', $this->identity()->id);
+                    $entity->hash       = hash_file('md5', $uploadData['tmp_name']);
                 }
                 
                 $em->persist($entity);
                 $em->flush();
+                
+                if ($uploadData['name']) {
+                    $config = $this->getServiceLocator()->get('Config');
+                    $path = $config['documents']['upload_path'] . '/' . $entity->id . '.' . $entity->getExtension();
+                    move_uploaded_file($uploadData['tmp_name'], $path);
+                }
                 return $this->redirect()->toRoute('documents');
             }
         }
@@ -77,10 +92,59 @@ class DocumentController extends BaseController
             'form' => $form,
         );
     }
+    
+    public function downloadAction()
+    {
+        $em     = $this->getEntityManager();
+        $config = $this->getServiceLocator()->get('Config');
+        
+        $hash = $this->params()->fromRoute('hash');
+        $entities = $em->getRepository('\Documents\Entity\Document')->findByHash($hash);
+        if (empty($entities)) {
+            return $this->redirect()->toRoute('documents');
+        }
+        $entity = $entities[0];
+        
+        $response = new \Zend\Http\Response\Stream();
+        $response->setStream(fopen($config['documents']['upload_path'] . '/' . $entity->id . '.' . $entity->getExtension(), 'r'));
+        $response->setStatusCode(200);
+        
+        $contentType = $this->getContentType($entity->getExtension());
+
+        $headers = new \Zend\Http\Headers();
+        $headers->addHeaderLine('Content-Type', $contentType)
+                ->addHeaderLine('Content-Disposition', 'attachment; filename="' . $entity->filename . '"')
+                ->addHeaderLine('Content-Length', filesize($fileName));
+
+        $response->setHeaders($headers);
+        return $response;
+    }
 
     public function deleteAction()
     {
 
+    }
+    
+    protected function getContentType($extension)
+    {
+        switch (strtolower($extension)) {
+            case 'doc':
+                return 'application/msword';
+            case 'docx':
+                return 'application/vnd.openxmlformats-officedocument.wordprocessingml.document';
+            case 'txt':
+                return 'text/plain';
+            case 'pdf':
+                return 'application/pdf';
+            case 'xls':
+                return 'application/vnd.ms-excel';
+            case 'xlsx':
+                return 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
+            case 'zip':
+                return 'application/zip';
+            default:
+                return 'application/octet-stream';
+        }
     }
 }
 

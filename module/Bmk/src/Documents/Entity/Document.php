@@ -79,4 +79,11 @@ class Document extends Entity
     * @var string
     */
     protected $hash;
+    
+    public function getExtension()
+    {
+        $pieces = explode('.', $this->filename);
+        return array_pop($pieces);
+    }
+    
 }

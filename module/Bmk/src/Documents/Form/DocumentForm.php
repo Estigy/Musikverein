@@ -16,6 +16,8 @@ use Zend\InputFilter\InputFilterProviderInterface;
 
 class DocumentForm extends Form implements InputFilterProviderInterface
 {
+    protected $hash = null;
+    
 	public function __construct(ObjectManager $objectManager)
 	{
 		parent::__construct('edit-piece-form');
@@ -102,6 +104,9 @@ class DocumentForm extends Form implements InputFilterProviderInterface
             'category' => array(
                 'required' => true,
             ),
+            'upload' => array(
+                'required' => $this->getObject()->id == null, // beim Bearbeiten muss es nicht enthalten sein
+            ),
             'description' => array(
                 'required' => true,
             ),
@@ -113,5 +118,5 @@ class DocumentForm extends Form implements InputFilterProviderInterface
             ),
         );
     }
-    
+      
 }
