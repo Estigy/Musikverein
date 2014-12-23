@@ -1,12 +1,11 @@
 # Composer files
 composer.phar
-vendor/
+/vendor/
 
 # Local configs
 config/autoload/*.local.php
 
 # Data
-data/logs/
-data/cache/
-data/tmp/
-temp/
+/data/logs/
+/data/cache/
+/data/tmp/
