@@ -17,8 +17,6 @@
     },
  "autoload": {
      "classmap": [
-      "vendor/anexia/bootstrap-demos",
-      "vendor/anexia/bootstrap"
      ]
  }
 }
