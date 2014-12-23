@@ -47,3 +47,37 @@ ALTER TABLE `lt_mitglieder2funktion` CHANGE `funktion` `id_funktion` INT UNSIGNE
 ALTER TABLE `lt_termine` CHANGE `id_bmk_calendar_events` `id_bmk_calendar_events` INT(10) UNSIGNED NULL DEFAULT '0', CHANGE `status` `status` VARCHAR(12) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL; 
 ALTER TABLE `lt_instrumente` CHANGE `status` `status` INT(10) UNSIGNED NOT NULL; 
 ALTER TABLE `lt_noten` CHANGE `unbrauchbar` `unbrauchbar` TINYINT(4) NOT NULL DEFAULT '0', CHANGE `ausgelagert` `ausgelagert` TINYINT(4) NOT NULL DEFAULT '0'; 
+
+-- Tabellen für Dokumenten-Modul
+
+CREATE TABLE IF NOT EXISTS `lt_dokumente` (
+`id` int(10) unsigned NOT NULL,
+  `dateiname` varchar(255) NOT NULL,
+  `hochgeladen_am` datetime NOT NULL,
+  `hochgeladen_von` int(10) unsigned NOT NULL,
+  `id_kategorie` int(10) unsigned NOT NULL,
+  `beschreibung` varchar(255) DEFAULT NULL,
+  `referenz_datum` datetime DEFAULT NULL,
+  `anmerkungen` text,
+  `hash` varchar(32) NOT NULL
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+
+CREATE TABLE IF NOT EXISTS `lt_dokumente_kategorien` (
+`id` int(10) unsigned NOT NULL,
+  `name` varchar(128) NOT NULL
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+
+INSERT INTO `lt_dokumente_kategorien` (`id`, `name`) VALUES
+(1, 'VSS-Protokolle');
+
+ALTER TABLE `lt_dokumente`
+ ADD PRIMARY KEY (`id`), ADD KEY `id_kategorie` (`id_kategorie`,`referenz_datum`,`hash`);
+
+ALTER TABLE `lt_dokumente_kategorien`
+ ADD PRIMARY KEY (`id`);
+
+ALTER TABLE `lt_dokumente`
+MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+
+ALTER TABLE `lt_dokumente_kategorien`
+MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
