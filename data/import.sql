@@ -37,10 +37,28 @@ UPDATE `lt_termine` SET kapelle = '["BMK","Kleine Gruppe"]' WHERE kapelle = '~|~
 
 ALTER TABLE `lt_mitglieder2abzeichen` CHANGE `abzeichen` `id_abzeichen` INT UNSIGNED NOT NULL;
 
+-- Funktionen-Tabelle
+
+CREATE TABLE IF NOT EXISTS `lt_funktionen` (
+`id` int(10) unsigned NOT NULL,
+  `name` varchar(64) NOT NULL,
+  `vorstand` tinyint(4) NOT NULL,
+  `order` smallint(5) unsigned NOT NULL
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+
+INSERT INTO `lt_funktionen` (`id`, `name`, `vorstand`, `order`) VALUES
+(1, 'Obmann', 1, 1),
+(2, 'Obmann Stv.', 1, 2);
+
+ALTER TABLE `lt_funktionen`
+ ADD PRIMARY KEY (`id`);
+
+ALTER TABLE `lt_funktionen`
+MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+
 -- Funktionen-Zuordnungstabelle: Fremdschlüssel
 
 ALTER TABLE `lt_mitglieder2funktion` CHANGE `funktion` `id_funktion` INT UNSIGNED NOT NULL;
-
 
 -- NULLable-Änderungen
 
