@@ -16,14 +16,14 @@ class CalendarController extends BaseController
     public function indexAction()
     {
         $em = $this->getEntityManager();
-        
+
         $form = new EventFilterForm($em);
         if ($form->handleRequest($this->getRequest())) {
             $this->redirect()->toRoute('calendar');
         }
-        
+
         $filters = $form->getFilledValues();
-        
+
         $entities = $em->getRepository('\Calendar\Entity\Event')->getPaginator($filters, 25);
 
         return new ViewModel(array(
@@ -69,10 +69,5 @@ class CalendarController extends BaseController
             'id'   => $entity->id ?: 0,
             'form' => $form,
         );
-    }
-
-    public function deleteAction()
-    {
-
     }
 }

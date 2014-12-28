@@ -15,19 +15,19 @@ class SheetmusicController extends BaseController
     public function indexAction()
     {
         $em = $this->getEntityManager();
-        
+
         $form = new PieceFilterForm($em);
         if ($form->handleRequest($this->getRequest())) {
             $this->redirect()->toRoute('sheetmusic');
         }
-        
+
         $filters = $form->getFilledValues();
-        
+
         $entities = $em->getRepository('\Sheetmusic\Entity\Piece')->getPaginator($filters, 25);
-        
+
         $page = (int) $this->params()->fromRoute('page', 1);
         $entities->setCurrentPageNumber($page);
-        
+
         return new ViewModel(array(
             'form' => $form,
             'pieces' => $entities
@@ -37,7 +37,7 @@ class SheetmusicController extends BaseController
     public function editAction()
     {
         $em = $this->getEntityManager();
-        
+
         $id = (int) $this->params()->fromRoute('id', 0);
         if ($id) {
             $entity = $em->find('\Sheetmusic\Entity\Piece', $id);
@@ -72,11 +72,6 @@ class SheetmusicController extends BaseController
             'id'   => $entity->id ?: 0,
             'form' => $form,
         );
-    }
-
-    public function deleteAction()
-    {
-
     }
 }
 

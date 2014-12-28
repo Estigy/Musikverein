@@ -47,10 +47,7 @@ echo $this->form()->closeTag();
             <td><?php echo $this->escapeHtml($member->email1);?></td>
             <td><?php echo $this->escapeHtml($member->phone1);?></td>
 			<td>
-                <a href="<?php echo $this->url('memberEdit', array('id' => $member->id));?>">Edit</a>
-                <a href="<?php echo $this->url('memberMedals', array('id' => $member->id));?>">Verleih.</a>
-                <a href="<?php echo $this->url('memberWorkshops', array('id' => $member->id));?>">Kurse</a>
-				<a href="<?php echo $this->url('members');?>">Delete</a>
+                <a href="<?php echo $this->url('memberEdit', array('id' => $member->id));?>">Bearbeiten</a>
 			</td>
 		</tr>
     <?php } ?>

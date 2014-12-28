@@ -265,11 +265,6 @@ class MemberController extends BaseController
         );
     }
 
-    public function deleteAction()
-    {
-
-    }
-
     protected function getTabnav($id = null)
     {
         $id = (int) $id;

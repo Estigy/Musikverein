@@ -14,12 +14,12 @@ class WorkshopController extends BaseController
     public function indexAction()
     {
         $em = $this->getEntityManager();
-        
+
         $entities = $em->getRepository('\Members\Entity\Workshop')->getPaginator(array(), 25);
-        
+
         $page = (int) $this->params()->fromRoute('page', 1);
         $entities->setCurrentPageNumber($page);
-                
+
         return new ViewModel(array(
             'workshops' => $entities
         ));
@@ -28,7 +28,7 @@ class WorkshopController extends BaseController
     public function editAction()
     {
         $em = $this->getEntityManager();
-        
+
         $id = (int) $this->params()->fromRoute('id', 0);
         if ($id) {
             $entity = $em->find('\Members\Entity\Workshop', $id);
@@ -63,11 +63,6 @@ class WorkshopController extends BaseController
             'id'   => $entity->id ?: 0,
             'form' => $form,
         );
-    }
-
-    public function deleteAction()
-    {
-
     }
 }
 

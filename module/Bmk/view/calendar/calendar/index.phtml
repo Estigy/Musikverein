@@ -53,8 +53,7 @@ echo $this->form()->closeTag();
             <td><?php echo $this->escapeHtml($event->band ? implode(', ', $event->band) : '');?></td>
             <td><?php echo $this->escapeHtml($event->status);?></td>
             <td>
-                <a href="<?php echo $this->url('calendarEdit', array('id' => $event->id));?>">Edit</a>
-                <a href="<?php echo $this->url('calendar', array('action' => 'delete', 'id' => $event->id));?>">Delete</a>
+                <a href="<?php echo $this->url('calendarEdit', array('id' => $event->id));?>">Bearbeiten</a>
             </td>
         </tr>
         <?php endforeach; ?>

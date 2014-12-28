@@ -23,16 +23,16 @@ class InstrumentController extends BaseController
     public function indexAction()
     {
         $em = $this->getEntityManager();
-        
+
         $form = new InstrumentFilterForm($em);
         if ($form->handleRequest($this->getRequest())) {
             $this->redirect()->toRoute('instruments');
         }
-        
+
         $filters = $form->getFilledValues();
-        
+
         $entities = $em->getRepository('\Instruments\Entity\Register')->findAll();
-        
+
         return new ViewModel(array(
             'form' => $form,
             'registers' => $entities,
@@ -43,7 +43,7 @@ class InstrumentController extends BaseController
     public function editAction()
     {
         $em = $this->getEntityManager();
-        
+
         $entity = $this->getEntityFromRouteId('\Instruments\Entity\Instrument');
         if ($entity === null) { // ID gegebene, aber nicht gefunden
             return $this->redirect()->toRoute('instruments');
@@ -78,16 +78,16 @@ class InstrumentController extends BaseController
             'tabnav' => $this->getTabnav($entity->id),
         );
     }
-    
+
     public function lendAction()
     {
         $em = $this->getEntityManager();
-        
+
         $entity = $this->getEntityFromRouteId('\Instruments\Entity\Instrument');
         if (!$entity) {
             return $this->redirect()->toRoute('instruments');
         }
-        
+
         switch ($entity->status) {
             case Instrument::STATUS_IN_ARCHIVE:
                 $form = new GiveAwayForm($em);
@@ -104,7 +104,7 @@ class InstrumentController extends BaseController
             default:
                 $form = null;
         }
-        
+
         if ($form) {
             $form->bind($i2m);
 
@@ -129,7 +129,7 @@ class InstrumentController extends BaseController
                 }
             }
         }
-        
+
         return array(
             'id'         => $entity->id,
             'instrument' => $entity,
@@ -137,16 +137,16 @@ class InstrumentController extends BaseController
             'tabnav'     => $this->getTabnav($entity->id),
         );
     }
-    
+
     public function repairAction()
     {
         $em = $this->getEntityManager();
-        
+
         $id = (int) $this->params()->fromRoute('id', 0);
         if (!$entity) {
             return $this->redirect()->toRoute('instruments');
         }
-                
+
         $repair = new Repair();
         $repair->instrument = $entity;
 
@@ -172,17 +172,12 @@ class InstrumentController extends BaseController
             'instrument' => $entity,
             'tabnav' => $this->getTabnav($entity->id),
         );
-    }    
-
-    public function deleteAction()
-    {
-
     }
-    
+
     protected function getTabnav($id = null)
     {
         $id = (int) $id;
-        
+
         $config = array(
             array(
                 'label' => 'Stammdaten',
@@ -208,7 +203,7 @@ class InstrumentController extends BaseController
                 'visible' => $id != 0,
             ),
         );
-        
+
         $factory = new ConstructedNavigationFactory($config);
         return $factory->createService($this->getServiceLocator());
     }

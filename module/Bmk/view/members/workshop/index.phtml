@@ -31,8 +31,7 @@ $this->headTitle($title);
             <td><?php echo $this->escapeHtml($workshop->name);?></td>
             <td><?php echo $this->escapeHtml($workshop->city);?></td>
             <td>
-                <a href="<?php echo $this->url('workshopEdit', array('id' => $workshop->id));?>">Edit</a>
-                <a href="<?php echo $this->url('workshops');?>">Delete</a>
+                <a href="<?php echo $this->url('workshopEdit', array('id' => $workshop->id));?>">Bearbeiten</a>
             </td>
         </tr>
         <?php

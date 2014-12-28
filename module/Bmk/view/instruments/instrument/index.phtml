@@ -65,9 +65,8 @@ echo $this->form()->closeTag();
             <td><?php echo $this->escapeHtml($instrument->variant);?></td>
 			<td><?php echo $this->escapeHtml($currentMember ? $currentMember->lastname . ' ' . $currentMember->firstname : '');?></td>
 			<td>
-                <a href="<?php echo $this->url('instrumentEdit', array('id' => $instrument->id));?>">Edit</a>
+                <a href="<?php echo $this->url('instrumentEdit', array('id' => $instrument->id));?>">Bearbeiten</a>
 				<a href="<?php echo $this->url('instrumentLend', array('id' => $instrument->id));?>">Verleih</a>
-				<a href="<?php echo $this->url('instruments');?>">Delete</a>
 			</td>
 		</tr>
         <?php } ?>

@@ -15,19 +15,19 @@ class DocumentController extends BaseController
     public function indexAction()
     {
         $em = $this->getEntityManager();
-        
+
         $form = new DocumentFilterForm($em);
         if ($form->handleRequest($this->getRequest())) {
             $this->redirect()->toRoute('documents');
         }
-        
+
         $filters = $form->getFilledValues();
-        
+
         $entities = $em->getRepository('\Documents\Entity\Document')->getPaginator($filters, 25);
-        
+
         $page = (int) $this->params()->fromRoute('page', 1);
         $entities->setCurrentPageNumber($page);
-        
+
         return new ViewModel(array(
             'form' => $form,
             'documents' => $entities
@@ -37,7 +37,7 @@ class DocumentController extends BaseController
     public function editAction()
     {
         $em = $this->getEntityManager();
-        
+
         $id = (int) $this->params()->fromRoute('id', 0);
         if ($id) {
             $entity = $em->find('\Documents\Entity\Document', $id);
@@ -64,7 +64,7 @@ class DocumentController extends BaseController
                 $request->getFiles()->toArray()
             );
             $form->setData($post);
-            
+
             if ($form->isValid()) {
                 $uploadData = $form->get('upload')->getValue();
                 // Wenn eine Datei mitgekommen ist (muss beim Bearbeiten ja nicht sein)
@@ -74,10 +74,10 @@ class DocumentController extends BaseController
                     $entity->uploadUser = $em->find('\Application\Entity\User', $this->identity()->id);
                     $entity->hash       = hash_file('md5', $uploadData['tmp_name']);
                 }
-                
+
                 $em->persist($entity);
                 $em->flush();
-                
+
                 if ($uploadData['name']) {
                     $config = $this->getServiceLocator()->get('Config');
                     $path = $config['documents']['upload_path'] . '/' . $entity->id . '.' . $entity->getExtension();
@@ -92,23 +92,23 @@ class DocumentController extends BaseController
             'form' => $form,
         );
     }
-    
+
     public function downloadAction()
     {
         $em     = $this->getEntityManager();
         $config = $this->getServiceLocator()->get('Config');
-        
+
         $hash = $this->params()->fromRoute('hash');
         $entities = $em->getRepository('\Documents\Entity\Document')->findByHash($hash);
         if (empty($entities)) {
             return $this->redirect()->toRoute('documents');
         }
         $entity = $entities[0];
-        
+
         $response = new \Zend\Http\Response\Stream();
         $response->setStream(fopen($config['documents']['upload_path'] . '/' . $entity->id . '.' . $entity->getExtension(), 'r'));
         $response->setStatusCode(200);
-        
+
         $contentType = $this->getContentType($entity->getExtension());
 
         $headers = new \Zend\Http\Headers();
@@ -120,11 +120,6 @@ class DocumentController extends BaseController
         return $response;
     }
 
-    public function deleteAction()
-    {
-
-    }
-    
     protected function getContentType($extension)
     {
         switch (strtolower($extension)) {
