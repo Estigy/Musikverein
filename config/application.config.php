@@ -6,6 +6,7 @@ return array(
         'Bmk',
         'DoctrineModule',
         'DoctrineORMModule',
+        'Guard',
         'TwbBundle',
     ),
 

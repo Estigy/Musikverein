@@ -1,8 +1,9 @@
 SETUP
-rechte-system
 aktiven menüpunkt highlighten
+menüpunkte ohne berechtigung ausblenden
 
 INSTRUMENTE
+status "ausgeschieden" setzen
 
 PERSONEN
 suche

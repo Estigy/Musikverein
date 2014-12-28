@@ -19,7 +19,7 @@ MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 
 -- Instrumenten-Verleich: Ausgebender und Rücknehmender dürfen NULL sein
 
-ALTER TABLE `lt_instrumente_verleih` CHANGE `ausgebender` `ausgebender` INT(10) NULL, CHANGE `ruecknehmender` `ruecknehmender` INT(10) UNSIGNED NULL; 
+ALTER TABLE `lt_instrumente_verleih` CHANGE `ausgebender` `ausgebender` INT(10) NULL, CHANGE `ruecknehmender` `ruecknehmender` INT(10) UNSIGNED NULL;
 UPDATE `lt_instrumente_verleih` SET ausgebender = NULL where ausgebender = 0;
 UPDATE `lt_instrumente_verleih` SET ruecknehmender = NULL where ruecknehmender = 0;
 
@@ -35,18 +35,18 @@ UPDATE `lt_termine` SET kapelle = '["BMK","Kleine Gruppe"]' WHERE kapelle = '~|~
 
 -- Abzeichen-Verleihungstabelle: Fremdschlüssel
 
-ALTER TABLE `lt_mitglieder2abzeichen` CHANGE `abzeichen` `id_abzeichen` INT UNSIGNED NOT NULL; 
+ALTER TABLE `lt_mitglieder2abzeichen` CHANGE `abzeichen` `id_abzeichen` INT UNSIGNED NOT NULL;
 
 -- Funktionen-Zuordnungstabelle: Fremdschlüssel
 
-ALTER TABLE `lt_mitglieder2funktion` CHANGE `funktion` `id_funktion` INT UNSIGNED NOT NULL; 
+ALTER TABLE `lt_mitglieder2funktion` CHANGE `funktion` `id_funktion` INT UNSIGNED NOT NULL;
 
 
 -- NULLable-Änderungen
 
-ALTER TABLE `lt_termine` CHANGE `id_bmk_calendar_events` `id_bmk_calendar_events` INT(10) UNSIGNED NULL DEFAULT '0', CHANGE `status` `status` VARCHAR(12) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL; 
-ALTER TABLE `lt_instrumente` CHANGE `status` `status` INT(10) UNSIGNED NOT NULL; 
-ALTER TABLE `lt_noten` CHANGE `unbrauchbar` `unbrauchbar` TINYINT(4) NOT NULL DEFAULT '0', CHANGE `ausgelagert` `ausgelagert` TINYINT(4) NOT NULL DEFAULT '0'; 
+ALTER TABLE `lt_termine` CHANGE `id_bmk_calendar_events` `id_bmk_calendar_events` INT(10) UNSIGNED NULL DEFAULT '0', CHANGE `status` `status` VARCHAR(12) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL;
+ALTER TABLE `lt_instrumente` CHANGE `status` `status` INT(10) UNSIGNED NOT NULL;
+ALTER TABLE `lt_noten` CHANGE `unbrauchbar` `unbrauchbar` TINYINT(4) NOT NULL DEFAULT '0', CHANGE `ausgelagert` `ausgelagert` TINYINT(4) NOT NULL DEFAULT '0';
 
 -- Tabellen für Dokumenten-Modul
 
@@ -81,3 +81,7 @@ MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 
 ALTER TABLE `lt_dokumente_kategorien`
 MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+
+-- Add Role Column
+
+ALTER TABLE `lt_users` ADD `roles` VARCHAR( 255 ) NULL AFTER `password` ;

@@ -15,12 +15,8 @@ class Module
 {
     public function onBootstrap(MvcEvent $e)
     {
-        $eventManager        = $e->getApplication()->getEventManager();
-        $moduleRouteListener = new ModuleRouteListener();
-        $moduleRouteListener->attach($eventManager);
-
         ServiceLocatorFactory::setInstance($e->getApplication()->getServiceManager());
-        
+
         $this->initSession(array(
             'remember_me_seconds' => 180,
             'use_cookies' => true,
