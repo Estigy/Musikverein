@@ -4,6 +4,7 @@
 </div>
 
 <div class="row">
+    <?php if ($this->isAllowed('Members\Controller\Member')) { ?>
     <div class="col-md-4">
         <div class="panel panel-default">
             <div class="panel-heading">
@@ -16,7 +17,9 @@
             </div>
         </div>
     </div>
-    
+    <?php } ?>
+
+    <?php if ($this->isAllowed('Instruments\Controller\Instrument')) { ?>
     <div class="col-md-4">
         <div class="panel panel-default">
             <div class="panel-heading">
@@ -28,7 +31,9 @@
             </div>
         </div>
     </div>
+    <?php } ?>
 
+    <?php if ($this->isAllowed('Sheetmusic\Controller\Sheetmusic')) { ?>
     <div class="col-md-4">
         <div class="panel panel-default">
             <div class="panel-heading">
@@ -39,9 +44,11 @@
             </div>
         </div>
     </div>
+    <?php } ?>
 </div>
 
 <div class="row">
+    <?php if ($this->isAllowed('Calendar\Controller\Calendar')) { ?>
     <div class="col-md-4">
         <div class="panel panel-default">
             <div class="panel-heading">
@@ -52,6 +59,9 @@
             </div>
         </div>
     </div>
+    <?php } ?>
+
+    <?php if ($this->isAllowed('Documents\Controller\Document')) { ?>
     <div class="col-md-4">
         <div class="panel panel-default">
             <div class="panel-heading">
@@ -62,4 +72,5 @@
             </div>
         </div>
     </div>
+    <?php } ?>
 </div>
