@@ -19,15 +19,11 @@ class PieceForm extends Form implements InputFilterProviderInterface
 	public function __construct(ObjectManager $objectManager)
 	{
 		parent::__construct('edit-piece-form');
-        
+
         $this->setHydrator(new DoctrineHydrator($objectManager, false))->setObject(new Piece);
-        
+
         $this->setAttribute('class', 'form-horizontal');
-             
-        $this->add(array(
-            'name' => 'id',
-            'type' => 'Hidden',
-        ));
+
         $this->add(array(
             'name' => 'title',
             'type' => 'Text',
@@ -161,7 +157,7 @@ class PieceForm extends Form implements InputFilterProviderInterface
             ),
         ));
 	}
-    
+
     public function getInputFilterSpecification()
     {
         return array(
@@ -200,5 +196,5 @@ class PieceForm extends Form implements InputFilterProviderInterface
             ),
         );
     }
-    
+
 }

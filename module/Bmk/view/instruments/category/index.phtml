@@ -5,10 +5,12 @@ $this->headTitle($title);
 <h1><?php echo $this->escapeHtml($title); ?></h1>
 
 <table class="table table-striped table-hover">
-	<tr>
-        <th>Register</th>
-        <th width="100%">Kategorie</th>
-	</tr>
+    <thead>
+	    <tr>
+            <th>Register</th>
+            <th width="100%">Kategorie</th>
+	    </tr>
+    </thead>
 	<?php
     foreach ($registers as $register) {
         ?>

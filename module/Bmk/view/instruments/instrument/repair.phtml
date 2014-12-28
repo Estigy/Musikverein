@@ -43,12 +43,14 @@ echo '<p>&nbsp;</p>';
 if (count($instrument->repairs)) {
     ?>
     <table class="table table-striped">
-        <tr>
-            <th>Datum</th>
-            <th>Firma</th>
-            <th>Beschreibung</th>
-            <th>Anmerkungen</th>
-        </tr>
+        <thead>
+            <tr>
+                <th>Datum</th>
+                <th>Firma</th>
+                <th>Beschreibung</th>
+                <th>Anmerkungen</th>
+            </tr>
+        </thead>
         <?php foreach ($instrument->repairs as $repair) { ?>
             <tr>
                 <td>

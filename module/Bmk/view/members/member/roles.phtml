@@ -3,9 +3,9 @@ $title = 'Funktion eintragen';
 $this->headTitle($title);
 ?>
 
-<?php echo $this->getTabnav($tabnav); ?>
+<h1><?php echo $this->escapeHtml($member->firstname . ' ' . $member->lastname); ?></h1>
 
-<h1><?php echo $this->escapeHtml($title); ?></h1>
+<?php echo $this->getTabnav($tabnav); ?>
 
 <?php
 
@@ -41,12 +41,14 @@ echo '<p>&nbsp;</p>';
 if (count($member->member2roles)) {
     ?>
     <table class="table table-striped">
-        <tr>
-            <th>Funktion</th>
-            <th>Eintritt</th>
-            <th>Austritt</th>
-            <th>&nbsp;</th>
-        </tr>
+        <thead>
+            <tr>
+                <th>Funktion</th>
+                <th>Eintritt</th>
+                <th>Austritt</th>
+                <th>&nbsp;</th>
+            </tr>
+        </thead>
         <?php foreach ($member->member2roles as $connector) { ?>
             <tr>
                 <td>

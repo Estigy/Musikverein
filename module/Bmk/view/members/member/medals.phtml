@@ -3,9 +3,9 @@ $title = 'Abzeichen eintragen';
 $this->headTitle($title);
 ?>
 
-<?php echo $this->getTabnav($tabnav); ?>
+<h1><?php echo $this->escapeHtml($member->firstname . ' ' . $member->lastname); ?></h1>
 
-<h1><?php echo $this->escapeHtml($title); ?></h1>
+<?php echo $this->getTabnav($tabnav); ?>
 
 <?php
 $form->setAttribute('action', $this->url('memberMedals', array('id' => $id, 'connId' => $connId)));
@@ -40,12 +40,14 @@ echo '<p>&nbsp;</p>';
 if (count($member->member2medals)) {
     ?>
     <table class="table table-striped">
-        <tr>
-            <th>Abzeichen</th>
-            <th>Datum</th>
-            <th>Zusatzinfos</th>
-            <th>&nbsp;</th>
-        </tr>
+        <thead>
+            <tr>
+                <th>Abzeichen</th>
+                <th>Datum</th>
+                <th>Zusatzinfos</th>
+                <th>&nbsp;</th>
+            </tr>
+        </thead>
         <?php foreach ($member->member2medals as $connector) { ?>
             <tr>
                 <td>

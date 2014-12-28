@@ -17,19 +17,15 @@ use Zend\InputFilter\InputFilterProviderInterface;
 class DocumentForm extends Form implements InputFilterProviderInterface
 {
     protected $hash = null;
-    
+
 	public function __construct(ObjectManager $objectManager)
 	{
 		parent::__construct('edit-piece-form');
-        
+
         $this->setHydrator(new DoctrineHydrator($objectManager, false))->setObject(new Document);
-        
+
         $this->setAttribute('class', 'form-horizontal');
-             
-        $this->add(array(
-            'name' => 'id',
-            'type' => 'Hidden',
-        ));
+
         $this->add(array(
             'name' => 'category',
             'type' => '\DoctrineModule\Form\Element\ObjectSelect',
@@ -97,7 +93,7 @@ class DocumentForm extends Form implements InputFilterProviderInterface
             ),
         ));
 	}
-    
+
     public function getInputFilterSpecification()
     {
         return array(
@@ -118,5 +114,5 @@ class DocumentForm extends Form implements InputFilterProviderInterface
             ),
         );
     }
-      
+
 }

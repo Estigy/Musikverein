@@ -35,14 +35,16 @@ echo $this->form()->closeTag();
 ?>
 
 <table class="table table-striped table-hover">
-    <tr>
-        <th>Datum</th>
-        <th>Name</th>
-        <th>Ort</th>
-        <th>Wer</th>
-        <th>Status</th>
-        <th>&nbsp;</th>
-    </tr>
+    <thead>
+        <tr>
+            <th>Datum</th>
+            <th>Name</th>
+            <th>Ort</th>
+            <th>Wer</th>
+            <th>Status</th>
+            <th>&nbsp;</th>
+        </tr>
+    </thead>
     <?php foreach ($events as $event) : ?>
         <tr>
             <td><?php echo $this->escapeHtml($event->date->format('Y-m-d'));?></td>

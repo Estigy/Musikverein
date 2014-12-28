@@ -19,15 +19,11 @@ class MemberForm extends Form implements InputFilterProviderInterface
 	public function __construct(ObjectManager $objectManager)
 	{
 		parent::__construct('edit-instrument-form');
-        
+
         $this->setHydrator(new DoctrineHydrator($objectManager, false))->setObject(new Member);
-        
+
         $this->setAttribute('class', 'form-horizontal');
-             
-        $this->add(array(
-            'name' => 'id',
-            'type' => 'Hidden',
-        ));
+
         $this->add(array(
             'name' => 'title',
             'type' => 'Text',
@@ -201,7 +197,7 @@ class MemberForm extends Form implements InputFilterProviderInterface
             ),
         ));
 	}
-    
+
     public function getInputFilterSpecification()
     {
         return array(
@@ -216,5 +212,5 @@ class MemberForm extends Form implements InputFilterProviderInterface
             ),
         );
     }
-    
+
 }

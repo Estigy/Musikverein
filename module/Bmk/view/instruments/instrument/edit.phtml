@@ -16,7 +16,6 @@ echo $this->form()->openTag($form);
 <div class="row">
     <div class="col-sm-6">
         <?php
-        $this->formHidden($form->get('id'));
         echo $this->formRow($form->get('category'));
         echo $this->formRow($form->get('brand'));
         echo $this->formRow($form->get('variant'));

@@ -3,9 +3,9 @@ $title = 'Kursbesuch eintragen';
 $this->headTitle($title);
 ?>
 
-<?php echo $this->getTabnav($tabnav); ?>
+<h1><?php echo $this->escapeHtml($member->firstname . ' ' . $member->lastname); ?></h1>
 
-<h1><?php echo $this->escapeHtml($title); ?></h1>
+<?php echo $this->getTabnav($tabnav); ?>
 
 <?php
 
@@ -40,13 +40,15 @@ echo '<p>&nbsp;</p>';
 if (count($member->member2workshops)) {
     ?>
     <table class="table table-striped">
-        <tr>
-            <th>Datum</th>
-            <th>Kurs</th>
-            <th>Ort</th>
-            <th>Zusatzinfos</th>
-            <th>&nbsp;</th>
-        </tr>
+        <thead>
+            <tr>
+                <th>Datum</th>
+                <th>Kurs</th>
+                <th>Ort</th>
+                <th>Zusatzinfos</th>
+                <th>&nbsp;</th>
+            </tr>
+        </thead>
         <?php foreach ($member->member2workshops as $connector) { ?>
             <tr>
                 <td>

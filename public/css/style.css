@@ -1,8 +1,15 @@
 body {
     padding-top: 60px;
-    padding-bottom: 40px;
+    /*padding-bottom: 40px;*/
 }
 
 .colored {
-    
+    color:#5c8ec4
+}
+
+.navbar-default {
+    border-color:#5c8ec4;
+}
+.nav-tabs {
+    margin-bottom:20px;
 }

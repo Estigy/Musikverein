@@ -19,13 +19,9 @@ class EventForm extends Form implements InputFilterProviderInterface
         parent::__construct('edit-event-form');
 
         $this->setHydrator(new DoctrineHydrator($objectManager, false))->setObject(new Event);
-        
+
         $this->setAttribute('class', 'form-horizontal');
 
-        $this->add(array(
-            'name' => 'id',
-            'type' => 'Hidden',
-        ));
         $this->add(array(
             'name' => 'date',
             'type' => 'Date',
@@ -159,7 +155,7 @@ class EventForm extends Form implements InputFilterProviderInterface
             'options' => array(
                 'help-block' => 'Zusätzlicher Text für Homepage (optional)',
                 'column-size' => 'sm-12',
-                
+
             )
         ));
         $this->add(array(
@@ -190,7 +186,7 @@ class EventForm extends Form implements InputFilterProviderInterface
             ),
         ));
     }
-    
+
     public function getInputFilterSpecification()
     {
         return array(

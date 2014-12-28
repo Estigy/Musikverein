@@ -50,11 +50,13 @@ echo '<p>&nbsp;</p>';
 if (count($instrument->instrument2members)) {
     ?>
     <table class="table table-striped">
-        <tr>
-            <th>Ausgabe</th>
-            <th>Rücknahme</th>
-            <th>Mitglied</th>
-        </tr>
+        <thead>
+            <tr>
+                <th>Ausgabe</th>
+                <th>Rücknahme</th>
+                <th>Mitglied</th>
+            </tr>
+        </thead>
         <?php foreach ($instrument->instrument2members as $connector) { ?>
             <tr>
                 <td>

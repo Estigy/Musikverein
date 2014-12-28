@@ -26,19 +26,19 @@ class MemberController extends BaseController
     public function indexAction()
     {
         $em = $this->getEntityManager();
-        
+
         $form = new MemberFilterForm($em);
         if ($form->handleRequest($this->getRequest())) {
             $this->redirect()->toRoute('members');
         }
-        
+
         $filters = $form->getFilledValues();
-        
+
         $entities = $em->getRepository('\Members\Entity\Member')->getPaginator($filters, 25);
-        
+
         $page = (int) $this->params()->fromRoute('page', 1);
         $entities->setCurrentPageNumber($page);
-                
+
         return new ViewModel(array(
             'form' => $form,
             'members' => $entities
@@ -48,7 +48,7 @@ class MemberController extends BaseController
     public function editAction()
     {
         $em = $this->getEntityManager();
-        
+
         $id = (int) $this->params()->fromRoute('id', 0);
         if ($id) {
             $entity = $em->find('\Members\Entity\Member', $id);
@@ -81,20 +81,21 @@ class MemberController extends BaseController
 
         return array(
             'id'   => $entity->id ?: 0,
+            'member' => $entity,
             'form' => $form,
             'tabnav' => $this->getTabnav($entity->id),
         );
     }
-    
+
     public function medalsAction()
     {
         $em = $this->getEntityManager();
-        
+
         $entity = $this->getEntityFromRouteId('\Members\Entity\Member');
         if (!$entity) {
             return $this->redirect()->toRoute('members');
         }
-        
+
         $connId = $this->params()->fromRoute('connId');
         if ($connId) {
             $connector = $em->find('\Members\Entity\Member2Medal', $connId);
@@ -105,7 +106,7 @@ class MemberController extends BaseController
             $connector = new Member2Medal();
             $connector->member = $entity;
         }
-        
+
         $form = new Member2MedalForm($em);
         $form->bind($connector);
 
@@ -121,7 +122,7 @@ class MemberController extends BaseController
                 return $this->redirect()->toRoute('memberMedals', array('id' => $entity->id));
             }
         }
-        
+
         return array(
             'id'     => $entity->id,
             'connId' => $connId,
@@ -130,16 +131,16 @@ class MemberController extends BaseController
             'tabnav' => $this->getTabnav($entity->id),
         );
     }
-    
+
     public function workshopsAction()
     {
         $em = $this->getEntityManager();
-        
+
         $entity = $this->getEntityFromRouteId('\Members\Entity\Member');
         if (!$entity) {
             return $this->redirect()->toRoute('members');
         }
-        
+
         $connId = $this->params()->fromRoute('connId');
         if ($connId) {
             $connector = $em->find('\Members\Entity\Member2Workshop', $connId);
@@ -150,7 +151,7 @@ class MemberController extends BaseController
             $connector = new Member2Workshop();
             $connector->member = $entity;
         }
-        
+
         $form = new Member2WorkshopForm($em);
         $form->bind($connector);
 
@@ -166,7 +167,7 @@ class MemberController extends BaseController
                 return $this->redirect()->toRoute('memberWorkshops', array('id' => $entity->id));
             }
         }
-        
+
         return array(
             'id'     => $entity->id,
             'connId' => $connId,
@@ -175,16 +176,16 @@ class MemberController extends BaseController
             'tabnav' => $this->getTabnav($entity->id),
         );
     }
-    
+
     public function bandsAction()
     {
         $em = $this->getEntityManager();
-        
+
         $entity = $this->getEntityFromRouteId('\Members\Entity\Member');
         if (!$entity) {
             return $this->redirect()->toRoute('members');
         }
-        
+
         $connId = $this->params()->fromRoute('connId');
         if ($connId) {
             $connector = $em->find('\Members\Entity\Member2Band', $connId);
@@ -195,7 +196,7 @@ class MemberController extends BaseController
             $connector = new Member2Band();
             $connector->member = $entity;
         }
-        
+
         $form = new Member2BandForm($em);
         $form->bind($connector);
 
@@ -211,7 +212,7 @@ class MemberController extends BaseController
                 return $this->redirect()->toRoute('memberBands', array('id' => $entity->id));
             }
         }
-        
+
         return array(
             'id'     => $entity->id,
             'member' => $entity,
@@ -223,12 +224,12 @@ class MemberController extends BaseController
     public function rolesAction()
     {
         $em = $this->getEntityManager();
-        
+
         $entity = $this->getEntityFromRouteId('\Members\Entity\Member');
         if (!$entity) {
             return $this->redirect()->toRoute('members');
         }
-        
+
         $connId = $this->params()->fromRoute('connId');
         if ($connId) {
             $connector = $em->find('\Members\Entity\Member2Role', $connId);
@@ -239,7 +240,7 @@ class MemberController extends BaseController
             $connector = new Member2Role();
             $connector->member = $entity;
         }
-        
+
         $form = new Member2RoleForm($em);
         $form->bind($connector);
 
@@ -255,7 +256,7 @@ class MemberController extends BaseController
                 return $this->redirect()->toRoute('memberRoles', array('id' => $entity->id));
             }
         }
-        
+
         return array(
             'id'     => $entity->id,
             'member' => $entity,
@@ -268,11 +269,11 @@ class MemberController extends BaseController
     {
 
     }
-    
+
     protected function getTabnav($id = null)
     {
         $id = (int) $id;
-        
+
         $config = array(
             array(
                 'label' => 'Stammdaten',
@@ -314,10 +315,10 @@ class MemberController extends BaseController
                 'visible' => $id != 0,
             ),
         );
-        
+
         $factory = new ConstructedNavigationFactory($config);
         return $factory->createService($this->getServiceLocator());
     }
-    
+
 }
 

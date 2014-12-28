@@ -19,15 +19,11 @@ class MedalForm extends Form implements InputFilterProviderInterface
 	public function __construct(ObjectManager $objectManager)
 	{
 		parent::__construct('edit-medal-form');
-        
+
         $this->setHydrator(new DoctrineHydrator($objectManager, false))->setObject(new Medal);
-        
+
         $this->setAttribute('class', 'form-horizontal');
-             
-        $this->add(array(
-            'name' => 'id',
-            'type' => 'Hidden',
-        ));
+
         $this->add(array(
             'name' => 'name',
             'type' => 'Text',
@@ -49,7 +45,7 @@ class MedalForm extends Form implements InputFilterProviderInterface
             ),
         ));
 	}
-    
+
     public function getInputFilterSpecification()
     {
         return array(
@@ -58,5 +54,5 @@ class MedalForm extends Form implements InputFilterProviderInterface
             ),
         );
     }
-    
+
 }

@@ -15,7 +15,6 @@ echo $this->form()->openTag($form);
 <div class="row">
     <div class="col-sm-6">
         <?php
-        echo $this->formHidden($form->get('id'));
         echo $this->formRow($form->get('name'));
         echo $this->formRow($form->get('date'));
         echo $this->formRow($form->get('dateTo'));
@@ -32,7 +31,7 @@ echo $this->form()->openTag($form);
         echo $this->formRow($form->get('band'));
         echo $this->formRow($form->get('status'));
         ?>
-    </div> 
+    </div>
 </div>
 
 <div class="row">
@@ -41,14 +40,14 @@ echo $this->form()->openTag($form);
         <?php
         echo $this->formRow($form->get('showOnHomepage'));
         echo $this->formRow($form->get('homepageText'));
-        ?>    
+        ?>
     </div>
     <div class="col-sm-6">
         <h3>Board</h3>
         <?php
         echo $this->formRow($form->get('showInBoard'));
         echo $this->formRow($form->get('boardText'));
-        ?>    
+        ?>
     </div>
 </div>
 

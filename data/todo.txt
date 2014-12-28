@@ -1,5 +1,4 @@
 SETUP
-aktiven menüpunkt highlighten
 
 INSTRUMENTE
 status "ausgeschieden" setzen
@@ -14,6 +13,3 @@ board-verknüpfung
 homepage-verknüpfung (?)
 
 DOKUMENTE
-liste
-hochladen
-(löschen)
