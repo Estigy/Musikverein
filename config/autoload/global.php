@@ -12,6 +12,10 @@
 */
 
 return array(
+    'customization' => array(
+        'company_name' => 'Musikverein ***',
+        'footer_line' => 'Footerline ***',
+    ),
 	'db' => array(
 		'driver'         => 'Pdo',
 		'driver_options' => array(
@@ -63,6 +67,9 @@ return array(
 Demo-Content von local.php:
 
 return array(
+    'application' => array(
+        'company_name' => 'Mein Musikverein',
+    ),
     'doctrine' => array(
        'connection' => array(
             'orm_default' => array(
@@ -76,5 +83,5 @@ return array(
             )
         )
     )
-);* 
+);*
 */

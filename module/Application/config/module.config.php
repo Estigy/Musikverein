@@ -88,6 +88,7 @@ return array(
     'view_helpers' => array(
         'invokables' => array(
             'getTabnav' => 'Application\Helper\GetTabnav',
+            'customization' => 'Application\Helper\Customization',
         ),
     ),
     'view_manager' => array(
