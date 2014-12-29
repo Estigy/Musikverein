@@ -7,8 +7,9 @@ $this->headTitle($title);
 
 <?php echo $this->getTabnav($tabnav); ?>
 
-<?php
+<h2>Mitgliedschaft <?php echo $form->getObject()->id === null ? 'eintragen' : 'bearbeiten'; ?></h2>
 
+<?php
 $form->setAttribute('action', $this->url('memberBands', array('id' => $id)));
 $form->prepare();
 
@@ -36,7 +37,7 @@ echo $this->form()->openTag($form);
 <?php
 echo $this->form()->closeTag();
 
-echo '<p>&nbsp;</p>';
+echo '<h2>Orchester</h2>';
 
 if (count($member->member2bands)) {
     ?>
@@ -58,7 +59,7 @@ if (count($member->member2bands)) {
                     <?php echo $connector->beginDate->format('d.m.Y'); ?>
                 </td>
                 <td>
-                    <?php echo $connector->endDate->format('d.m.Y'); ?>
+                    <?php echo $connector->endDate ? $connector->endDate->format('d.m.Y') : '&nbsp;'; ?>
                 </td>
                 <td>
                     <a href="<?php echo $this->url('memberBands', array('id' => $id, 'connId' => $connector->id)); ?>">Bearbeiten</a>

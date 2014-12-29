@@ -7,6 +7,8 @@ $this->headTitle($title);
 
 <?php echo $this->getTabnav($tabnav); ?>
 
+<h2>Verleihung <?php echo $form->getObject()->id === null ? 'eintragen' : 'bearbeiten'; ?></h2>
+
 <?php
 $form->setAttribute('action', $this->url('memberMedals', array('id' => $id, 'connId' => $connId)));
 $form->prepare();
@@ -35,7 +37,7 @@ echo $this->form()->openTag($form);
 <?php
 echo $this->form()->closeTag();
 
-echo '<p>&nbsp;</p>';
+echo '<h2>Verleihungen</h2>';
 
 if (count($member->member2medals)) {
     ?>

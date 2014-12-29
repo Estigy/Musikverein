@@ -73,9 +73,10 @@ class InstrumentController extends BaseController
         }
 
         return array(
-            'id'     => (int) $entity->id,
-            'form'   => $form,
-            'tabnav' => $this->getTabnav($entity->id),
+            'id'         => (int) $entity->id,
+            'instrument' => $entity,
+            'form'       => $form,
+            'tabnav'     => $this->getTabnav($entity->id),
         );
     }
 
@@ -84,6 +85,7 @@ class InstrumentController extends BaseController
         $em = $this->getEntityManager();
 
         $entity = $this->getEntityFromRouteId('\Instruments\Entity\Instrument');
+
         if (!$entity) {
             return $this->redirect()->toRoute('instruments');
         }
@@ -142,7 +144,8 @@ class InstrumentController extends BaseController
     {
         $em = $this->getEntityManager();
 
-        $id = (int) $this->params()->fromRoute('id', 0);
+        $entity = $this->getEntityFromRouteId('\Instruments\Entity\Instrument');
+
         if (!$entity) {
             return $this->redirect()->toRoute('instruments');
         }

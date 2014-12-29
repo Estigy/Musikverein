@@ -3,7 +3,6 @@ $title = 'Termin bearbeiten';
 $this->headTitle($title);
 ?>
 
-
 <h1><?php echo $this->escapeHtml($title); ?></h1>
 
 <?php
@@ -36,14 +35,14 @@ echo $this->form()->openTag($form);
 
 <div class="row">
     <div class="col-sm-6">
-        <h3>Homepage</h3>
+        <h2>Homepage</h2>
         <?php
         echo $this->formRow($form->get('showOnHomepage'));
         echo $this->formRow($form->get('homepageText'));
         ?>
     </div>
     <div class="col-sm-6">
-        <h3>Board</h3>
+        <h2>Board</h2>
         <?php
         echo $this->formRow($form->get('showInBoard'));
         echo $this->formRow($form->get('boardText'));

@@ -1,6 +1,5 @@
-<div class="jumbotron">
-    <h1><?php echo $this->customization('company_name'); ?></h1>
-    <p>Vereinsverwaltung</p>
+<div class="page-header">
+    <h1><?php echo $this->customization('company_name'); ?> <small>Vereinsverwaltung</small></h1>
 </div>
 
 <div class="row">
@@ -12,6 +11,7 @@
             </div>
             <div class="panel-body">
                 <p><a href="<?php echo $this->url('members'); ?>">Personenliste &raquo;</a></p>
+                <hr>
                 <p><a href="<?php echo $this->url('workshops'); ?>">Kurse &raquo;</a></p>
                 <p><a href="<?php echo $this->url('medals'); ?>">Abzeichen &raquo;</a></p>
             </div>
@@ -27,6 +27,7 @@
             </div>
             <div class="panel-body">
                 <p><a href="<?php echo $this->url('instruments'); ?>">Instrumentenliste &raquo;</a></p>
+                <hr>
                 <p><a href="<?php echo $this->url('instrumentCategories'); ?>">Kategorien &raquo;</a></p>
             </div>
         </div>

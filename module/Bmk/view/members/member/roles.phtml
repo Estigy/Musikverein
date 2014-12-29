@@ -7,8 +7,9 @@ $this->headTitle($title);
 
 <?php echo $this->getTabnav($tabnav); ?>
 
-<?php
+<h2>Funktion <?php echo $form->getObject()->id === null ? 'eintragen' : 'bearbeiten'; ?></h2>
 
+<?php
 $form->setAttribute('action', $this->url('memberRoles', array('id' => $id)));
 $form->prepare();
 
@@ -36,7 +37,7 @@ echo $this->form()->openTag($form);
 <?php
 echo $this->form()->closeTag();
 
-echo '<p>&nbsp;</p>';
+echo '<h2>Funktionen</h2>';
 
 if (count($member->member2roles)) {
     ?>
