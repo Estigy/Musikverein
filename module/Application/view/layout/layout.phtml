@@ -15,8 +15,7 @@
         ->prependStylesheet('http://fonts.googleapis.com/css?family=Josefin+Sans|Oswald')
         ->prependStylesheet('//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css')
         ->prependStylesheet($this->basePath() . '/vendor/datepicker/datepicker3.css')
-        //->prependStylesheet($this->basePath() . '/vendor/bootstrap/css/bootstrap-theme.min.css')
-        ->prependStylesheet($this->basePath() . '/vendor/bootstrap/css/bootstrap.min.css') ?>
+        ->prependStylesheet($this->basePath() . '/vendor/bootstrap/css/bootstrap.min.css'); ?>
 
         <?php echo $this->headScript()
         ->prependFile($this->basePath() . '/js/bmk.js')
@@ -40,15 +39,14 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="<?php echo $this->url('home') ?>">Vereinsverwaltung</a>
                 </div>
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav">
-                        <li><a href="<?php echo $this->url('home') ?>"><i class="fa fa-home fa-fw"></i> Home</a></li>
+                        <li><a href="<?php echo $this->url('home') ?>"><i class="fa fa-home fa-fw fa-lg"></i> Home</a></li>
 
                         <?php if ($this->isAllowed('Members\Controller\Member')) { ?>
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-group fa-fw"></i> Mitglieder <span class="caret"></span></a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-group fa-fw fa-lg"></i> Mitglieder <span class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu">
                                 <li><a href="<?php echo $this->url('members'); ?>">Personenliste</a></li>
                                 <li class="divider"></li>
@@ -59,12 +57,12 @@
                         <?php } ?>
 
                         <?php if ($this->isAllowed('Calendar\Controller\Calendar')) { ?>
-                        <li><a href="<?php echo $this->url('calendar') ?>"><i class="fa fa-calendar fa-fw"></i> Termine</a></li>
+                        <li><a href="<?php echo $this->url('calendar') ?>"><i class="fa fa-calendar fa-fw fa-lg"></i> Termine</a></li>
                         <?php } ?>
 
                         <?php if ($this->isAllowed('Instruments\Controller\Instrument')) { ?>
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-tags fa-fw"></i> Instrumente <span class="caret"></span></a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-tags fa-fw fa-lg"></i> Instrumente <span class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu">
                                 <li><a href="<?php echo $this->url('instruments'); ?>">Liste</a></li>
                                 <li class="divider"></li>
@@ -74,11 +72,11 @@
                         <?php } ?>
 
                         <?php if ($this->isAllowed('Sheetmusic\Controller\Sheetmusic')) { ?>
-                        <li><a href="<?php echo $this->url('sheetmusic'); ?>"><i class="fa fa-music fa-fw"></i> Noten</a></li>
+                        <li><a href="<?php echo $this->url('sheetmusic'); ?>"><i class="fa fa-music fa-fw fa-lg"></i> Noten</a></li>
                         <?php } ?>
 
                         <?php if ($this->isAllowed('Documents\Controller\Document')) { ?>
-                        <li><a href="<?php echo $this->url('documents'); ?>"><i class="fa fa-file fa-fw"></i> Dokumente</a></li>
+                        <li><a href="<?php echo $this->url('documents'); ?>"><i class="fa fa-file fa-fw fa-lg"></i> Dokumente</a></li>
                         <?php } ?>
                     </ul>
 
@@ -86,7 +84,7 @@
                     $user = $this->identity();
                     if ($user) {
                         ?>
-                        <p class="navbar-text navbar-right"><a href="<?php echo $this->url('logout'); ?>" class="navbar-link">Logout <i class="fa fa-sign-out fa-fw text-danger"></i></a></p>
+                        <p class="navbar-text navbar-right"><a href="<?php echo $this->url('logout'); ?>" class="navbar-link">Logout <i class="fa fa-sign-out fa-fw fa-lg"></i></a></p>
                         <?php
                     }
                     ?>

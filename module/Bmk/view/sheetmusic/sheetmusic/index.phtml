@@ -2,17 +2,17 @@
 $title = 'Noten';
 $this->headTitle($title);
 ?>
-<h1><?php echo $this->escapeHtml($title); ?></h1>
-<p>
-	<a href="<?php echo $this->url('sheetmusicEdit', array('id' => 0));?>">Neues Stück eingeben</a>
-</p>
+<h1>
+    <?php echo $this->escapeHtml($title); ?>
+	<a class="btn btn-success pull-right" href="<?php echo $this->url('sheetmusicEdit', array('id' => 0));?>">Neues Stück eingeben</a>
+</h1>
 
 <?php
 $form->setAttribute('action', $this->url('sheetmusic'));
 $form->prepare();
 echo $this->form()->openTag($form);
 ?>
-<div class="well well-sm">
+<div class="well">
     <div class="row">
         <div class="col-md-6">
             <?php

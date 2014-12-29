@@ -2,17 +2,17 @@
 $title = 'Mitglieder';
 $this->headTitle($title);
 ?>
-<h1><?php echo $this->escapeHtml($title); ?></h1>
-<p>
-	<a href="<?php echo $this->url('memberEdit', array('id' => 0));?>">Neues Mitglied hinzufügen</a>
-</p>
+<h1>
+    <?php echo $this->escapeHtml($title); ?>
+    <a class="btn btn-success pull-right" href="<?php echo $this->url('memberEdit', array('id' => 0));?>">Neues Mitglied hinzufügen</a>
+</h1>
 
 <?php
 $form->setAttribute('action', $this->url('members', array('action' => 'index')));
 $form->prepare();
 echo $this->form()->openTag($form);
 ?>
-<div class="well well-sm">
+<div class="well">
     <div class="row">
         <div class="col-md-6">
             <?php
@@ -30,7 +30,7 @@ echo $this->form()->openTag($form);
 echo $this->form()->closeTag();
 ?>
 
-<table class="table table-striped table-hover">
+<table class="table table-striped table-hover table-responsive">
     <thead>
 	    <tr>
             <th width="20%">Nachname</th>

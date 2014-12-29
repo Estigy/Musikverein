@@ -2,10 +2,10 @@
 $title = 'Abzeichen';
 $this->headTitle($title);
 ?>
-<h1><?php echo $this->escapeHtml($title); ?></h1>
-<p>
-    <a href="<?php echo $this->url('medalEdit', array('id' => 0));?>">Neues Abzeichen hinzufügen</a>
-</p>
+<h1>
+    <?php echo $this->escapeHtml($title); ?>
+    <a class="btn btn-success pull-right" href="<?php echo $this->url('medalEdit', array('id' => 0));?>">Neues Abzeichen hinzufügen</a>
+</h1>
 
 <table class="table table-striped table-hover">
     <thead>

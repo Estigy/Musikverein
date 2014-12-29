@@ -20,8 +20,11 @@ h1 {
     font-family:'Oswald';
     font-weight:normal;
 }
+h1 a.btn { /* Reset für Links innerhalb überschriften */
+    font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
+}
 
-h2, h3, h1 small {
+h2, h1 small {
     font-family:'Josefin Sans';
     font-weight:normal;
 }
@@ -30,3 +33,4 @@ h2, h3, h1 small {
     margin-top:10px;
     margin-bottom:10px;
 }
+
