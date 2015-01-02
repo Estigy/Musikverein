@@ -46,7 +46,7 @@ echo $this->form()->closeTag();
     </thead>
     <?php foreach ($events as $event) : ?>
         <tr>
-            <td><?php echo $this->escapeHtml($event->date->format('Y-m-d'));?></td>
+            <td><?php echo $this->escapeHtml($event->date->format('d.m.Y'));?></td>
             <td><?php echo $this->escapeHtml($event->name);?></td>
             <td><?php echo $this->escapeHtml($event->city);?></td>
             <td><?php echo $this->escapeHtml($event->band ? implode(', ', $event->band) : '');?></td>

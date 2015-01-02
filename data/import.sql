@@ -103,3 +103,8 @@ MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 -- Add Role Column
 
 ALTER TABLE `lt_users` ADD `roles` VARCHAR( 255 ) NULL AFTER `password` ;
+
+-- Termine: BoardEvent-Spalte NULL statt 0
+
+ALTER TABLE `lt_termine` CHANGE `id_bmk_calendar_events` `id_bmk_calendar_events` INT( 10 ) UNSIGNED NULL ;
+UPDATE `lt_termine` SET id_bmk_calendar_events = NULL WHERE id_bmk_calendar_events = 0;

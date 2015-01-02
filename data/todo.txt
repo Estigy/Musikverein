@@ -9,7 +9,5 @@ registerzugehörigkeit bearbeitbar machen
 
 KALENDER
 kopieren
-board-verknüpfung
-homepage-verknüpfung (?)
 
 DOKUMENTE

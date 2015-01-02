@@ -5,6 +5,7 @@ namespace Calendar\Controller;
 use Application\Controller\BaseController;
 
 use Calendar\Entity\Event;
+use Calendar\Entity\BoardEvent;
 use Calendar\Form\EventFilterForm;
 use Calendar\Form\EventForm;
 use Calendar\Form\DemoForm;
@@ -41,12 +42,14 @@ class CalendarController extends BaseController
             if ($entity === null) {
                 return $this->redirect()->toRoute('calendar', array('action' => 'index'));
             }
+            $entity->boardText = $entity->boardEvent ? $entity->boardEvent->event_text : null;
         } else {
             $entity = new Event();
         }
 
         $form = new EventForm($em);
         $form->bind($entity);
+        $form->get('boardText')->setValue(str_replace('<br>', "\n", $entity->boardText)); // nötig, weil nicht vom DoctrineHydrator befüllt
 
         if ($entity->id == null) {
             $form->get('submit')->setValue('Hinzufügen');
@@ -59,6 +62,21 @@ class CalendarController extends BaseController
             $form->setData($request->getPost());
 
             if ($form->isValid()) {
+
+                if ($entity->showInBoard == 0) { // Keine Anzeige im Board?
+                    if ($entity->boardEvent != null) {
+                        $em->remove($entity->boardEvent);
+                        $entity->boardEvent = null;
+                    }
+                } else {                         // Anzeige im Board?
+                    if ($entity->boardEvent == null) {
+                        $entity->boardEvent = new BoardEvent;
+                    }
+                    $entity->boardEvent->title = $entity->name;
+                    $entity->boardEvent->event_text = $form->get('boardText')->getValue();
+                    $entity->boardEvent->setDate($entity->date);
+                }
+
                 $em->persist($entity);
                 $em->flush();
                 return $this->redirect()->toRoute('calendar', array('action' => 'index'));
