@@ -66,6 +66,14 @@ class InstrumentController extends BaseController
             $form->setData($request->getPost());
 
             if ($form->isValid()) {
+                // Wenn ein Ausscheidungsdatum gegeben ist, dann Status auf "Ausgeschieden".
+                if ($entity->outDate !== null) {
+                    $entity->status = Instrument::STATUS_INACTIVE;
+                // Wenn kein Ausscheidungsdatum da ist, aber der Status "Ausgeschieden" war, dann wieder zurück ins Archiv.
+                } elseif ($entity->status == Instrument::STATUS_INACTIVE) {
+                    $entity->status = Instrument::STATUS_IN_ARCHIVE;
+                }
+
                 $em->persist($entity);
                 $em->flush();
                 return $this->redirect()->toRoute('instruments');
