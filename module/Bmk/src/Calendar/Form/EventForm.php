@@ -207,6 +207,9 @@ class EventForm extends Form implements InputFilterProviderInterface
             'appointmentTime' => array(
                 'required' => false,
             ),
+            'band' => array(
+                'required' => false,
+            ),
         );
     }
 

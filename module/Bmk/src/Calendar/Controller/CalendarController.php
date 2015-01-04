@@ -25,7 +25,7 @@ class CalendarController extends BaseController
 
         $filters = $form->getFilledValues();
 
-        $entities = $em->getRepository('\Calendar\Entity\Event')->getPaginator($filters, 25);
+        $entities = $em->getRepository('\Calendar\Entity\Event')->getPaginator($filters, 100);
 
         return new ViewModel(array(
             'form' => $form,
