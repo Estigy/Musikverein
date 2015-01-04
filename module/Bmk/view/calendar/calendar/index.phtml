@@ -53,6 +53,7 @@ echo $this->form()->closeTag();
             <td><?php echo $this->escapeHtml($event->status);?></td>
             <td>
                 <a href="<?php echo $this->url('calendarEdit', array('id' => $event->id));?>">Bearbeiten</a>
+                <a href="<?php echo $this->url('calendarEdit', array('id' => 0));?>?preload=<?php echo $event->id; ?>">Kopieren</a>
             </td>
         </tr>
         <?php endforeach; ?>

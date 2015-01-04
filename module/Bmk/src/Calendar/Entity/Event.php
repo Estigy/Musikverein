@@ -177,4 +177,17 @@ class Event extends Entity
             'Abgesagt'  => 'Abgesagt',
         );
     }
+
+    public function __clone()
+    {
+        // Dieses if-Konstrukt ist nötig. Siehe hier:
+        // http://doctrine-orm.readthedocs.org/en/latest/cookbook/implementing-wakeup-or-clone.html
+        if ($this->id) {
+            $this->id = null;
+            if ($this->boardEvent) {
+                $this->boardText = $this->boardEvent->event_text;
+            }
+            $this->boardEvent = null;
+        }
+    }
 }

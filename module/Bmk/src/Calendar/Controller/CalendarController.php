@@ -40,9 +40,15 @@ class CalendarController extends BaseController
         if ($id) {
             $entity = $em->find('\Calendar\Entity\Event', $id);
             if ($entity === null) {
-                return $this->redirect()->toRoute('calendar', array('action' => 'index'));
+                return $this->redirect()->toRoute('calendar');
             }
             $entity->boardText = $entity->boardEvent ? $entity->boardEvent->event_text : null;
+        } elseif ($this->params()->fromQuery('preload')) {
+            $preload = $em->find('\Calendar\Entity\Event', $this->params()->fromQuery('preload'));
+            if ($preload === null) {
+                return $this->redirect()->toRoute('calendar');
+            }
+            $entity = clone $preload;
         } else {
             $entity = new Event();
         }
@@ -79,7 +85,7 @@ class CalendarController extends BaseController
 
                 $em->persist($entity);
                 $em->flush();
-                return $this->redirect()->toRoute('calendar', array('action' => 'index'));
+                return $this->redirect()->toRoute('calendar');
             }
         }
 

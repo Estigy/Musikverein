@@ -12,7 +12,6 @@ board-liste durch verwaltungs-tool speisen
 e-mail-liste pro orchester
 
 KALENDER
-kopieren
 export liste für generalversammlung
 kalender: auto-close
 
