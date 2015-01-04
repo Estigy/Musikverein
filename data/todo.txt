@@ -1,13 +1,26 @@
 SETUP
+logging bei login
+logging bei änderungen
+user bearbeiten (?)
 
-INSTRUMENTE
-status "ausgeschieden" setzen
-
-PERSONEN
+MITGLIEDER
 suche
 registerzugehörigkeit bearbeitbar machen
+anzeige stammdatenblatt mit allen infos
+runde geburtstage / anstehende verleihungen pro jahr
+board-liste durch verwaltungs-tool speisen
+e-mail-liste pro orchester
 
 KALENDER
 kopieren
+export liste für generalversammlung
+kalender: auto-close
+
+INSTRUMENTE
+export stammdatenblatt
+
+NOTEN
+noten verborgen (wann, wer, an wen)
 
 DOKUMENTE
+verzeichnisschutz für upload-ordner

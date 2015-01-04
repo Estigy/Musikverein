@@ -35,14 +35,14 @@ class Event extends Entity
     protected $dateTo;
 
     /**
-    * @ORM\Column(name="beginn", length=5, nullable=true)
+    * @ORM\Column(name="beginn", type="time", nullable=true)
     *
     * @var DateTime
     */
     protected $beginTime;
 
     /**
-    * @ORM\Column(name="treffpunkt", length=5, nullable=true)
+    * @ORM\Column(name="treffpunkt", type="time", nullable=true)
     *
     * @var string
     */

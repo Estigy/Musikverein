@@ -52,6 +52,7 @@ class EventForm extends Form implements InputFilterProviderInterface
                 'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
                 'column-size' => 'sm-9',
                 'label_attributes' => array('class' => 'col-sm-3'),
+                'format' => 'H:i',
             ),
         ));
         $this->add(array(
@@ -62,6 +63,7 @@ class EventForm extends Form implements InputFilterProviderInterface
                 'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
                 'column-size' => 'sm-9',
                 'label_attributes' => array('class' => 'col-sm-3'),
+                'format' => 'H:i',
             ),
         ));
         $this->add(array(
