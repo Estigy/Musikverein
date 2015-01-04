@@ -52,3 +52,12 @@ echo $this->form()->closeTag();
 		</tr>
     <?php } ?>
 </table>
+
+<?php
+echo $this->paginationControl($members,
+    'Sliding',
+    '_partials/paginator', array(
+        'route' => 'members',
+        'route_params' => array()
+    )
+);
