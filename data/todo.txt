@@ -12,8 +12,6 @@ board-liste durch verwaltungs-tool speisen
 e-mail-liste pro orchester
 
 KALENDER
-export liste für generalversammlung
-kalender: auto-close
 
 INSTRUMENTE
 export stammdatenblatt

@@ -66,6 +66,16 @@ return array(
                     ),
                 ),
             ),
+            'calendarExport' => array(
+                'type'    => 'literal',
+                'options' => array(
+                    'route'    => '/calendar/export',
+                    'defaults' => array(
+                        'controller' => 'Calendar\Controller\Calendar',
+                        'action'     => 'export',
+                    ),
+                ),
+            ),
             'documents' => array(
                 'type'    => 'segment',
                 'options' => array(

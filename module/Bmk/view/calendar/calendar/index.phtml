@@ -41,7 +41,7 @@ echo $this->form()->closeTag();
             <th>Ort</th>
             <th>Wer</th>
             <th>Status</th>
-            <th>&nbsp;</th>
+            <td><a href="<?php echo $this->url('calendarExport'); ?>"><i class="fa fa-file-excel-o"></i> Exportieren</a></td>
         </tr>
     </thead>
     <?php foreach ($events as $event) : ?>
@@ -58,12 +58,3 @@ echo $this->form()->closeTag();
         </tr>
         <?php endforeach; ?>
 </table>
-
-<?php
-echo $this->paginationControl($events,
-    'Sliding',
-    '_partials/paginator', array(
-        'route' => 'calendar',
-        'route_params' => array()
-    )
-);

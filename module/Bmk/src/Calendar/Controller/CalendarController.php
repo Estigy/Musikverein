@@ -25,7 +25,7 @@ class CalendarController extends BaseController
 
         $filters = $form->getFilledValues();
 
-        $entities = $em->getRepository('\Calendar\Entity\Event')->getPaginator($filters, 100);
+        $entities = $em->getRepository('\Calendar\Entity\Event')->findEntities($filters);
 
         return new ViewModel(array(
             'form' => $form,
@@ -93,5 +93,66 @@ class CalendarController extends BaseController
             'id'   => $entity->id ?: 0,
             'form' => $form,
         );
+    }
+
+    public function exportAction()
+    {
+        $em = $this->getEntityManager();
+        $request = $this->getRequest();
+
+        $form = new EventFilterForm($em);
+        $form->handleRequest($this->getRequest());
+        $filters = $form->getFilledValues();
+        $filters['status'] = 'Fixiert';
+
+        $entities = $em->getRepository('\Calendar\Entity\Event')->findEntities($filters);
+
+        $headers = array(
+            'Datum',
+            'Datum-Bis',
+            'Name',
+            'Ort',
+            'Location',
+            'Typ',
+            'Orchester',
+        );
+
+        $s = $this->echoCsvData($headers);
+
+        foreach ($entities as $entity) {
+            $data = array(
+                $entity->date->format('d.m.Y'),
+                $entity->dateTo ? $entity->dateTo->format('d.m.Y') : '',
+                $entity->name,
+                $entity->city,
+                $entity->location,
+                $entity->type,
+                $entity->band ? implode(', ', $entity->band) : '',
+            );
+
+            $s .= $this->echoCsvData($data);
+        }
+
+        $r = $this->getResponse();
+
+        $r->setContent($s);
+
+        $r->getHeaders()->addHeaders(array(
+            'Content-Encoding' => 'UTF-8',
+            'Content-Type' => 'application/csv; charset=UTF-8',
+            'Content-Disposition' => 'attachment; filename=termine.xls',
+            'Pragma' => 'no-cache',
+        ));
+
+        return $r;
+    }
+
+    protected function echoCsvData($array)
+    {
+        $array = array_map('utf8_decode', $array);
+        foreach ($array as $key => $data) {
+            $array[$key] = '"' . $data . '"';
+        }
+        return implode("\t", $array) . "\r\n";
     }
 }
