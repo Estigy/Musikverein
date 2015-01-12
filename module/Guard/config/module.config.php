@@ -7,6 +7,7 @@ return array(
         // Alle anderen Rollen leiten von Gast ab, dürfen also alle zum Login.
         'Administrator' => array(
             'Application\Controller\Index' => '*',
+            'Attendance\Controller\Attendance' => '*',
             'Calendar\Controller\Calendar' => '*',
             'Documents\Controller\Document' => '*',
             'Instruments\Controller\Category' => '*',
@@ -18,6 +19,7 @@ return array(
         ),
         'Vorstand' => array(
             'Application\Controller\Index' => '*',
+            'Attendance\Controller\Attendance' => '*',
             'Calendar\Controller\Calendar' => '*',
             'Documents\Controller\Document' => '*',
             'Instruments\Controller\Category' => '*',

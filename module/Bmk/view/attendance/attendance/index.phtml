@@ -1,0 +1,40 @@
+<?php
+$title = 'Anwesenheitslisten';
+$this->headTitle($title);
+?>
+<h1>
+    <?php echo $this->escapeHtml($title); ?>
+    <a class="btn btn-success pull-right" href="<?php echo $this->url('attendanceEdit', array('id' => 0));?>">Neue Liste anlegen</a>
+</h1>
+
+<table class="table table-striped table-hover">
+    <thead>
+	    <tr>
+            <th>Name</th>
+            <th>Orchester</th>
+            <th>&nbsp;</th>
+	    </tr>
+    </thead>
+	<?php
+    foreach ($sheets as $sheet) {
+        ?>
+        <tr>
+            <td><?php echo $this->escapeHtml($list->name);?></td>
+            <td><?php echo $this->escapeHtml($list->band);?></td>
+            <td>
+                <a href="<?php echo $this->url('attendanceEdit', array('id' => $sheet->id));?>">Bearbeiten</a>
+            </td>
+        </tr>
+        <?php
+    }
+    ?>
+</table>
+
+<?php
+echo $this->paginationControl($sheets,
+    'Sliding',
+    '_partials/paginator', array(
+        'route' => 'attendance',
+        'route_params' => array()
+    )
+);

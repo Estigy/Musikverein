@@ -21,3 +21,10 @@ noten verborgen (wann, wer, an wen)
 
 DOKUMENTE
 verzeichnisschutz für upload-ordner
+
+ANWESENHEITSLISTE
+tabellen anlegen
+listen anzeigen/bearbeiten
+anwesenheit erfassen
+tabelle anzeigen
+auswertung für ein orchester fürs ganze jahr

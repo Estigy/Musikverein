@@ -3,6 +3,7 @@
 return array(
 	'controllers' => array(
 		'invokables' => array(
+            'Attendance\Controller\Sheet'       => 'Attendance\Controller\SheetController',
             'Calendar\Controller\Calendar'      => 'Calendar\Controller\CalendarController',
             'Documents\Controller\Category'     => 'Documents\Controller\CategoryController',
             'Documents\Controller\Document'     => 'Documents\Controller\DocumentController',
@@ -20,6 +21,7 @@ return array(
                 'class' => 'Doctrine\ORM\Mapping\Driver\AnnotationDriver',
                 'cache' => 'array',
                 'paths' => array(
+                    __DIR__  . '/../src/Attendance/Entity',
                     __DIR__  . '/../src/Calendar/Entity',
                     __DIR__  . '/../src/Documents/Entity',
                     __DIR__  . '/../src/Instruments/Entity',
@@ -29,6 +31,7 @@ return array(
             ),
             'orm_default' => array(
                 'drivers' => array(
+                    'Attendance\Entity'  => 'ApplicationDriver',
                     'Calendar\Entity'    => 'ApplicationDriver',
                     'Documents\Entity'   => 'ApplicationDriver',
                     'Instruments\Entity' => 'ApplicationDriver',
@@ -43,6 +46,32 @@ return array(
     ),
 	'router' => array(
 		'routes' => array(
+            'attendance' => array(
+                'type'    => 'segment',
+                'options' => array(
+                    'route'    => '/attendance[/][:page]e',
+                    'constraints' => array(
+                        'page' => '[0-9]+',
+                    ),
+                    'defaults' => array(
+                        'controller' => 'Attendance\Controller\Sheet',
+                        'action'     => 'index',
+                    ),
+                ),
+            ),
+            'attendanceEdit' => array(
+                'type'    => 'segment',
+                'options' => array(
+                    'route'    => '/attendance/edit/:id',
+                    'constraints' => array(
+                        'id'     => '[0-9]+',
+                    ),
+                    'defaults' => array(
+                        'controller' => 'Attendance\Controller\Sheet',
+                        'action'     => 'edit',
+                    ),
+                ),
+            ),
             'calendar' => array(
                 'type'    => 'literal',
                 'options' => array(
