@@ -9,3 +9,6 @@ config/autoload/*.local.php
 /data/logs/
 /data/cache/
 /data/tmp/
+
+# PhpStorm
+/.idea
