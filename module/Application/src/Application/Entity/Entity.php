@@ -1,193 +1,145 @@
 <?php
 
-namespace Calendar\Entity;
+namespace Application\Entity;
 
-use Application\Entity\Entity;
-use Doctrine\ORM\Mapping as ORM;
+use \RuntimeException;
+use Application\Factory\ServiceLocatorFactory;
 
-/**
-* @ORM\Entity(repositoryClass="Calendar\Repository\Event")
-* @ORM\Table(name="lt_termine")
-*/
-class Event extends Entity
+class Entity
 {
-    /**
-    * @ORM\Id
-    * @ORM\Column(type="integer")
-    * @ORM\GeneratedValue
-    *
-    * @var integer
-    */
-    protected $id;
+    protected $entityManager;
+
+    protected $propertyMapping;
 
     /**
-    * @ORM\Column(name="datum", type="date")
-    *
-    * @var DateTime
-    */
-    protected $date;
-
-    /**
-    * @ORM\Column(name="datum_bis", type="date", nullable=true)
-    *
-    * @var DateTime
-    */
-    protected $dateTo;
-
-    /**
-    * @ORM\Column(name="beginn", type="time", nullable=true)
-    *
-    * @var DateTime
-    */
-    protected $beginTime;
-
-    /**
-    * @ORM\Column(name="treffpunkt", type="time", nullable=true)
-    *
-    * @var string
-    */
-    protected $appointmentTime;
-
-    /**
-    * @ORM\Column(name="name", type="string", length=50)
-    *
-    * @var string
-    */
-    protected $name;
-
-    /**
-    * @ORM\Column(name="ort", type="string", length=50, nullable=true)
-    *
-    * @var string
-    */
-    protected $city;
-
-    /**
-    * @ORM\Column(name="location", type="string", length=50, nullable=true)
-    *
-    * @var string
-    */
-    protected $location;
-
-    /**
-    * @ORM\Column(name="kapelle", type="json_array", nullable=true)
-    *
-    * @var string
-    */
-    protected $band;
-
-    /**
-    * @ORM\Column(name="einordnung", type="string", length=50, nullable=true)
-    *
-    * @var string
-    */
-    protected $type;
-
-    /**
-    * @ORM\Column(name="kommentar", type="text", nullable=true)
-    *
-    * @var string
-    */
-    protected $comment;
-
-    /**
-    * @ORM\Column(name="status", type="string", length=50)
-    *
-    * @var string
-    */
-    protected $status;
-
-    /**
-    * @ORM\Column(name="homepage_anzeige", type="string", length=50)
-    *
-    * @var integer
-    */
-    protected $showOnHomepage;
-
-    /**
-    * @ORM\Column(name="homepage_text", type="string", length=50, nullable=true)
-    *
-    * @var string
-    */
-    protected $homepageText;
-
-    /**
-    * @ORM\Column(name="board_anzeige", type="string", length=50)
-    *
-    * @var integer
-    */
-    protected $showInBoard;
-
-    /**
-    * @ORM\OneToOne(targetEntity="BoardEvent", cascade={"persist"})
-    * @ORM\JoinColumn(name="id_bmk_calendar_events", referencedColumnName="eventid", nullable=true)
-    *
-    * @var BoardEvent
-    */
-    protected $boardEvent;
-
-    /**
-    * @ORM\Column(name="verrechnungsinfo", type="string", length=50, nullable=true)
-    *
-    * @var string
-    */
-    protected $accountingInfo;
-
-    /**
-    * @ORM\Column(name="rechnungsanschrift", type="string", length=50, nullable=true)
-    *
-    * @var string
-    */
-    protected $accountingAddress;
-
-    /**
-    * Nicht von Doctrine gemappt, aber vom Formular befüllt!
-    *
-    * @var string
-    */
-    protected $boardText;
-
-    public static function getTypes()
+     * Magic-Getter-Methode, um protected Felder nach außen zu öffnen.
+     * Falls eine entsprechende get-Methode vorhanden ist, wird diese verwendet.
+     *
+     * @param string $property
+     * @return mixed
+     */
+    public function __get($property)
     {
-        return array(
-            'Ausrückung'         => 'Ausrückung',
-            'Eigenveranstaltung' => 'Eigenveranstaltung',
-            'Arbeitseinsatz'     => 'Arbeitseinsatz',
-            'Vorstandssithung'   => 'Vorstandssitzung',
-            'Information'        => 'Information',
-            'Sonstiges'          => 'Sonstiges',
-        );
+        $getter = 'get' . ucfirst($property);
+        if (method_exists($this, $getter)) {
+            return call_user_func(array($this, $getter));
+        }
+
+        return $this->$property;
     }
 
-    public static function getBands()
+    /**
+     * Magic-Setter-Methode, um protected Felder nach außen zu öffnen
+     * Falls eine entsprechende set-Methode vorhanden ist, wird diese verwendet.
+     *
+     * @param string $property
+     * @param mixed $value
+     * @return mixed
+     */
+    public function __set($property, $value)
     {
-        return array(
-            'BMK'           => 'BMK',
-            'JK'            => 'JK',
-            'NWK'           => 'NWK',
-            'Brass2'        => 'Brass²',
-            'Böhmische'     => 'Königstetter Böhmische',
-            'Kleine Gruppe' => 'Kleine Gruppe',
-        );
+        $setter = 'set' . ucfirst($property);
+        if (method_exists($this, $setter)) {
+            return call_user_func(array($this, $setter), $value);
+        }
+
+        $this->$property = $value;
+        return $value;
     }
 
-    public static function getStati()
+    /**
+     * Is this property set or not?
+     * @param string $property
+     * @return boolean
+     */
+    public function __isset($property)
     {
-        return array(
-            'Anbahnung' => 'Anbahnung',
-            'Fixiert'   => 'Fixiert',
-            'Abgesagt'  => 'Abgesagt',
-        );
+        return isset($this->$property);
     }
 
-    public function __clone()
+    /**
+     * Unsetting a property means: Set it to null.
+     * @param string $property
+     */
+    public function __unset($property)
     {
-        if ($this->id) {
-            $this->id = null;
-            if ($this->boardEvent) {
-                $this->boardText = $this->boardEvent->event_text;
-            }
-            $this->boardEvent = null;
+        if (isset($this->$property)) {
+            $this->$property = null;
         }
     }
+
+    /**
+     * @param string $name
+     * @param array $arguments
+     * @throws RuntimeException
+     * @return mixed
+     */
+    public function __call($name, $arguments)
+    {
+        // Betroffenes Property ermitteln: getFirstName => firstName
+        $property = lcfirst(substr($name, 3));
+
+        if (!property_exists($this, $property)) {
+            throw new RuntimeException('Undefined property: ' . $name);
+        }
+
+        if (strpos($name, 'get') === 0) {
+            return $this->$property;
+        }
+
+        if (strpos($name, 'set') === 0) {
+            $value = array_shift($arguments);
+
+            // If our property is an object but the given value is an array, we have to take further actions
+            if (is_object($this->$property) && is_array($value)) {
+                // If the property has a populate() method, then use it
+                if (method_exists($this->$property, 'populate')) {
+                    return $this->$property->populate($value);
+                }
+                // If the property is a Collection, populate it via its methods
+                if ($this->$property instanceof \Doctrine\Common\Collections\Collection) {
+                    $this->$property->clear();
+                    foreach ($value as $dataset) {
+                        $this->$property->add($dataset);
+                    }
+                    return $this->$property;
+                }
+                // If nothing helps, give up
+                throw new RuntimeException('Object on property "'.$property.'" can\'t be filled with array');
+            }
+            // Default: assign the given value
+            return $this->$property = $value;
+        }
+
+        throw new RuntimeException('Undefined method called: ' . $name);
+    }
+
+    /**
+     * Get Doctrine Entity Manager
+     * @return EntityManager
+     */
+    public function getEntityManager()
+    {
+        if (!$this->entityManager) {
+            $this->entityManager = ServiceLocatorFactory::getInstance()->get('Doctrine\ORM\EntityManager');
+        }
+        return $this->entityManager;
+    }
+
+    /**
+     * Return an array with "external property name" and "internal property name".
+     * @return array
+     * @todo Check how to return a defined order of the properties without a PHP "sort" command
+     */
+    public function getPropertyMapping()
+    {
+        if (!$this->propertyMapping) {
+            $this->propertyMapping = $this->getEntityManager()
+                                          ->getClassMetaData(get_called_class())
+                                          ->getReflectionProperties();
+            array_walk($this->propertyMapping, function (&$item, $key) { $item = $item->name; });
+        }
+        return $this->propertyMapping;
+    }
+
 }
