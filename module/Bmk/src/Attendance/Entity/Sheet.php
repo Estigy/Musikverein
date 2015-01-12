@@ -9,6 +9,11 @@ use Doctrine\ORM\Mapping as ORM;
 /**
 * @ORM\Entity(repositoryClass="Attendance\Repository\List")
 * @ORM\Table(name="lt_anwesenheit_listen")
+ *
+ * @property integer $id
+ * @property string $name
+ * @property string $band
+ * @property integer $year
 */
 class Sheet extends Entity
 {
@@ -29,7 +34,7 @@ class Sheet extends Entity
 	protected $name;
 	
     /**
-    * @ORM\Column(name="orchester",length=128)
+    * @ORM\Column(name="orchester",length=128,nullable=true)
     * 
     * @var string
     */
