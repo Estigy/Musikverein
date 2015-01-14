@@ -2,7 +2,9 @@
 
 namespace Attendance\Form;
 
-use Members\Entity\AttendanceList;
+use Attendance\Entity\Sheet;
+
+use Calendar\Entity\Event as CalendarEvent;
 
 use Doctrine\Common\Persistence\ObjectManager;
 
@@ -13,13 +15,13 @@ use TwbBundle\Form\View\Helper\TwbBundleForm;
 use Zend\Form\Form;
 use Zend\InputFilter\InputFilterProviderInterface;
 
-class ListForm extends Form implements InputFilterProviderInterface
+class SheetForm extends Form implements InputFilterProviderInterface
 {
 	public function __construct(ObjectManager $objectManager)
 	{
 		parent::__construct('edit-attendance-list-form');
 
-        $this->setHydrator(new DoctrineHydrator($objectManager, false))->setObject(new AttendanceList);
+        $this->setHydrator(new DoctrineHydrator($objectManager, false))->setObject(new Sheet);
 
         $this->setAttribute('class', 'form-horizontal');
 
@@ -37,7 +39,7 @@ class ListForm extends Form implements InputFilterProviderInterface
             'name' => 'band',
             'type' => 'Radio',
             'options' => array(
-                'value_options' => Event::getBands(),
+                'value_options' => CalendarEvent::getBands(),
                 'label' => 'Orchester',
                 'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
                 'column-size' => 'sm-9',

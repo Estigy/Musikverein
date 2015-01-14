@@ -15,42 +15,42 @@ class Entry extends Entity
 	const STATUS_PRESENT = 'anwesend';
 	const STATUS_ABSENT  = 'abwesend';
 	const STATUS_EXCUSED = 'entschuldigt';
-	
+
     /**
     * @ORM\Id
     * @ORM\Column(type="integer")
     * @ORM\GeneratedValue
-    * 
+    *
     * @var integer
     */
 	protected $id;
-    
+
     /**
     * @ORM\ManyToOne(targetEntity="Member")
     * @ORM\JoinColumn(name="id_mitglied")
-    * 
+    *
     * @var Member
     */
     protected $member;
-    
+
     /**
-    * @ORM\ManyToOne(targetEntity="AttendanceList")
-    * @ORM\JoinColumn(name="id_liste")
-    * 
-    * @var AttendanceList
+    * @ORM\ManyToOne(targetEntity="Event")
+    * @ORM\JoinColumn(name="id_event")
+    *
+    * @var Event
     */
-    protected $attendanceList;
-    
+    protected $event;
+
     /**
     * @ORM\Column(type="string")
-    * 
+    *
     * Einer der STATUS_*-Konstanten
-    * 
+    *
     * @var string
     */
 	protected $status;
-    
-    
+
+
     public static function getStati()
     {
 		return array(

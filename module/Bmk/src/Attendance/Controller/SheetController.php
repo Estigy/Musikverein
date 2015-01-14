@@ -4,19 +4,21 @@ namespace Attendance\Controller;
 
 use Application\Controller\BaseController;
 
+use Attendance\Entity\Entry;
+use Attendance\Entity\Event;
 use Attendance\Entity\Sheet;
 use Attendance\Form\SheetForm;
 
 use Zend\View\Model\ViewModel;
 
-class AttendanceController extends BaseController
+class SheetController extends BaseController
 {
     public function indexAction()
     {
         $em = $this->getEntityManager();
-        
+
         $entities = $em->getRepository('\Attendance\Entity\Sheet')->getPaginator();
-        
+
         return new ViewModel(array(
             'sheets' => $entities
         ));
@@ -25,7 +27,7 @@ class AttendanceController extends BaseController
     public function editAction()
     {
         $em = $this->getEntityManager();
-        
+
         $id = (int) $this->params()->fromRoute('id', 0);
         if ($id) {
             $entity = $em->find('\Attendance\Entity\Sheet', $id);
@@ -62,17 +64,25 @@ class AttendanceController extends BaseController
         );
     }
 
-    public function entriesAction()
+    public function eventAction()
     {
         $em = $this->getEntityManager();
 
-        $entity = $this->getEntityFromRouteId('\Members\Entity\Member');
-        if (!$entity) {
-            return $this->redirect()->toRoute('members');
+        $sheet = $this->getEntityFromRouteId('\Members\Entity\Member');
+        if (!$sheet) {
+            return $this->redirect()->toRoute('attendance');
         }
 
-        $members = $em->getRepository('\Members\Entity\Member')->findEntities(array());
-
+        $eventId = $this->params()->fromRoute('eventId');
+        if ($eventId) {
+            $event = $em->find('\Attendance\Entity\Event', $eventId);
+            if ($event === null) {
+                return $this->redirect()->toRoute('attendance', array('id' => $sheet->id));
+            }
+        } else {
+            $event = new Event();
+            $event->sheet = $sheet;
+        }
 
     }
 

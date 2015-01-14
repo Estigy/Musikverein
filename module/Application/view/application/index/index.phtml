@@ -19,6 +19,19 @@
     </div>
     <?php } ?>
 
+    <?php if ($this->isAllowed('Attendance\Controller\Sheet')) { ?>
+    <div class="col-md-4">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title"><i class="fa fa-table fa-fw"></i> Anwesenheit</h3>
+            </div>
+            <div class="panel-body">
+                <p><a href="<?php echo $this->url('attendance'); ?>">Anwesenheits-Listen</a></p>
+            </div>
+        </div>
+    </div>
+    <?php } ?>
+
     <?php if ($this->isAllowed('Instruments\Controller\Instrument')) { ?>
     <div class="col-md-4">
         <div class="panel panel-default">
@@ -33,7 +46,9 @@
         </div>
     </div>
     <?php } ?>
+</div>
 
+<div class="row">
     <?php if ($this->isAllowed('Sheetmusic\Controller\Sheetmusic')) { ?>
     <div class="col-md-4">
         <div class="panel panel-default">
@@ -46,9 +61,7 @@
         </div>
     </div>
     <?php } ?>
-</div>
 
-<div class="row">
     <?php if ($this->isAllowed('Calendar\Controller\Calendar')) { ?>
     <div class="col-md-4">
         <div class="panel panel-default">

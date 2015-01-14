@@ -49,7 +49,7 @@ return array(
             'attendance' => array(
                 'type'    => 'segment',
                 'options' => array(
-                    'route'    => '/attendance[/][:page]e',
+                    'route'    => '/attendance[/][:page]',
                     'constraints' => array(
                         'page' => '[0-9]+',
                     ),
@@ -69,6 +69,20 @@ return array(
                     'defaults' => array(
                         'controller' => 'Attendance\Controller\Sheet',
                         'action'     => 'edit',
+                    ),
+                ),
+            ),
+            'attendanceEventEdit' => array(
+                'type'    => 'segment',
+                'options' => array(
+                    'route'    => '/attendance/edit/:id/event/:eventId',
+                    'constraints' => array(
+                        'id'      => '[0-9]+',
+                        'eventId' => '[0-9]+',
+                    ),
+                    'defaults' => array(
+                        'controller' => 'Attendance\Controller\Sheet',
+                        'action'     => 'event',
                     ),
                 ),
             ),

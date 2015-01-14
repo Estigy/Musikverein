@@ -56,6 +56,10 @@
                         </li>
                         <?php } ?>
 
+                        <?php if ($this->isAllowed('Attendance\Controller\Sheet')) { ?>
+                        <li><a href="<?php echo $this->url('attendance') ?>"><i class="fa fa-table fa-fw fa-lg"></i> Anwesenheit</a></li>
+                        <?php } ?>
+
                         <?php if ($this->isAllowed('Calendar\Controller\Calendar')) { ?>
                         <li><a href="<?php echo $this->url('calendar') ?>"><i class="fa fa-calendar fa-fw fa-lg"></i> Termine</a></li>
                         <?php } ?>

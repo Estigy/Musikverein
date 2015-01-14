@@ -4,10 +4,11 @@ namespace Attendance\Entity;
 
 use Application\Entity\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
-* @ORM\Entity(repositoryClass="Attendance\Repository\List")
+* @ORM\Entity(repositoryClass="Attendance\Repository\Sheet")
 * @ORM\Table(name="lt_anwesenheit_listen")
  *
  * @property integer $id
@@ -21,29 +22,42 @@ class Sheet extends Entity
     * @ORM\Id
     * @ORM\Column(type="integer")
     * @ORM\GeneratedValue
-    * 
+    *
     * @var integer
     */
 	protected $id;
-    
+
     /**
-    * @ORM\Column(name="bezeichnung",length=128)
-    * 
+    * @ORM\Column(length=128)
+    *
     * @var string
     */
 	protected $name;
-	
+
     /**
-    * @ORM\Column(name="orchester",length=128,nullable=true)
-    * 
+    * @ORM\Column(length=128,nullable=true)
+    *
     * @var string
     */
 	protected $band;
 
     /**
-     * @ORM\Column(type="integer",name="jahr",length=128)
+     * @ORM\Column(type="integer",length=128)
      *
      * @var integer
      */
     protected $year;
+
+    /**
+    * @ORM\OneToMany(targetEntity="Event", mappedBy="sheet")
+    *
+    * @var Sheet
+    */
+    protected $events;
+
+
+    public function __construct()
+    {
+        $this->events = new ArrayCollection();
+    }
 }
