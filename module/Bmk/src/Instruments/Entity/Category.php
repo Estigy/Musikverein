@@ -17,46 +17,46 @@ class Category extends Entity
     * @ORM\Id
     * @ORM\Column(type="integer")
     * @ORM\GeneratedValue
-    * 
+    *
     * @var integer
     */
 	protected $id;
-    
+
     /**
     * @ORM\Column(name="bezeichnung",length=128)
-    * 
+    *
     * @var string
     */
 	protected $name;
-    
+
     /**
-    * @ORM\ManyToOne(targetEntity="Register", inversedBy="categories")
+    * @ORM\ManyToOne(targetEntity="\Bmk\Entity\Register", inversedBy="categories")
     * @ORM\JoinColumn(name="id_register")
-    * 
+    *
     * @var Register
     */
     protected $register;
-    
+
     /**
     * @ORM\OneToMany(targetEntity="Instrument", mappedBy="category")
-    * 
+    *
     * @var array
-    */    
+    */
     protected $instruments;
-    
-    
+
+
     public function __construct()
     {
         $this->instruments = new ArrayCollection();
         $this->children    = new ArrayCollection();
     }
-    
+
     public function getInstruments($filter = array())
     {
         $filter['category'] = $this;
-        
+
         $instruments = $this->getEntityManager()->getRepository('\Instruments\Entity\Instrument')->findEntities($filter);
-        
+
         return $instruments;
     }
 }

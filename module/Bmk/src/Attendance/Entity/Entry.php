@@ -18,14 +18,6 @@ class Entry extends Entity
 
     /**
     * @ORM\Id
-    * @ORM\Column(type="integer")
-    * @ORM\GeneratedValue
-    *
-    * @var integer
-    */
-	protected $id;
-
-    /**
     * @ORM\ManyToOne(targetEntity="Member")
     * @ORM\JoinColumn(name="id_mitglied")
     *
@@ -34,6 +26,7 @@ class Entry extends Entity
     protected $member;
 
     /**
+    * @ORM\Id
     * @ORM\ManyToOne(targetEntity="Event")
     * @ORM\JoinColumn(name="id_event")
     *

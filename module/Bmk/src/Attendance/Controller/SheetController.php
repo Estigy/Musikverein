@@ -7,6 +7,7 @@ use Application\Controller\BaseController;
 use Attendance\Entity\Entry;
 use Attendance\Entity\Event;
 use Attendance\Entity\Sheet;
+use Attendance\Form\EventForm;
 use Attendance\Form\SheetForm;
 
 use Zend\View\Model\ViewModel;
@@ -68,7 +69,7 @@ class SheetController extends BaseController
     {
         $em = $this->getEntityManager();
 
-        $sheet = $this->getEntityFromRouteId('\Members\Entity\Member');
+        $sheet = $this->getEntityFromRouteId('\Attendance\Entity\Sheet');
         if (!$sheet) {
             return $this->redirect()->toRoute('attendance');
         }
@@ -84,7 +85,19 @@ class SheetController extends BaseController
             $event->sheet = $sheet;
         }
 
+        $form = new EventForm($em);
+        $form->bind($event);
 
+        $index = $this->getBaseIndex($sheet->band, $sheet->year);
+
+        return array(
+            'id'      => $sheet->id ?: 0,
+            'eventId' => $event->id ?: 0,
+            'index'   => $index,
+            'sheet'   => $sheet,
+            'event'   => $event,
+            'form'    => $form,
+        );
     }
 
     protected function getBaseIndex($band, $year)
@@ -92,16 +105,40 @@ class SheetController extends BaseController
         $em    = $this->getEntityManager();
         $index = array();
 
-        $registers = $em->getRepository('\Instruments\Entity\Register')->findEntities(array());
-
-        foreach ($registers as $r) {
-            $index[$r->id] = array(
-
-            );
+        // Wenn wir im aktuellen Jahr sind, nehmen wir den Stand des heutigen Tages.
+        // Bei einem vergangenen Jahr nehmen wir jenen Stand, der zu Jahresende gegolten hat.
+        if ($year == date('Y')) {
+            $date = $year . date('-m-d');
+        } else {
+            $date = $year . '-12-31';
         }
 
-        $members = $em->getRepository('\Members\Entity\Member')->findEntities(array());
+        $registers = $em->getRepository('\Bmk\Entity\Register')->findEntities(array());
 
+        foreach ($registers as $r) {
+            $member2bands = $em->getRepository('\Members\Entity\Member2Band')->findEntities(array(
+                'register' => $r->id,
+                'band' => $band,
+                'date' => $date,
+            ));
+            $data = array(
+                'registerName' => $r->name,
+                'members' => array()
+            );
+            foreach ($member2bands as $m2b) {
+                $data['members'][] = $m2b->member;
+            }
+            usort($data['members'], function($a, $b) {
+                $aName = $a->lastname . ' ' . $a->firstname;
+                $bName = $b->lastname . ' ' . $b->firstname;
+                if ($aName < $bName) return -1;
+                if ($aName > $bName) return 1;
+                return 0;
+            });
+            $index[$r->id] = $data;
+        }
+
+        return $index;
     }
 
 }

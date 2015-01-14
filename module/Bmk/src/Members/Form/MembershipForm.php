@@ -2,7 +2,7 @@
 
 namespace Members\Form;
 
-use Members\Entity\Member2Band;
+use Members\Entity\Membership;
 
 use Doctrine\Common\Persistence\ObjectManager;
 
@@ -13,47 +13,16 @@ use TwbBundle\Form\View\Helper\TwbBundleForm;
 use Zend\Form\Form;
 use Zend\InputFilter\InputFilterProviderInterface;
 
-class Member2BandForm extends Form implements InputFilterProviderInterface
+class MembershipForm extends Form implements InputFilterProviderInterface
 {
 	public function __construct(ObjectManager $objectManager)
 	{
-		parent::__construct('member2band-form');
+		parent::__construct('membership-form');
 
-        $this->setHydrator(new DoctrineHydrator($objectManager, false))->setObject(new Member2Band);
+        $this->setHydrator(new DoctrineHydrator($objectManager, false))->setObject(new Membership);
 
         $this->setAttribute('class', 'form-horizontal');
 
-        $bandOptions = array(
-            'BMK' => 'BMK',
-            'JK'  => 'JK',
-            'NWK' => 'NWK',
-        );
-
-        $this->add(array(
-            'name' => 'band',
-            'type' => 'Select',
-            'options' => array(
-                'label' => 'Orchester',
-                'value_options' => $bandOptions,
-                'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
-                'column-size' => 'sm-9',
-                'label_attributes' => array('class' => 'col-sm-3'),
-            ),
-        ));
-        $this->add(array(
-            'name' => 'register',
-            'type' => '\DoctrineModule\Form\Element\ObjectSelect',
-            'options' => array(
-                'label' => 'Register',
-                'object_manager' => $objectManager,
-                'target_class' => 'Bmk\Entity\Register',
-                'property' => 'name',
-                'empty_option' => 'Bitte wählen...',
-                'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
-                'column-size' => 'sm-9',
-                'label_attributes' => array('class' => 'col-sm-3'),
-            ),
-        ));
         $this->add(array(
             'name' => 'beginDate',
             'type' => 'Date',
@@ -95,14 +64,8 @@ class Member2BandForm extends Form implements InputFilterProviderInterface
     public function getInputFilterSpecification()
     {
         return array(
-            'band' => array(
-                'required' => true,
-            ),
-            'register' => array(
-                'required' => false,
-            ),
             'beginDate' => array(
-                'required' => true,
+                'required' => false,
             ),
             'endDate' => array(
                 'required' => false,

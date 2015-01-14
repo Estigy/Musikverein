@@ -15,9 +15,9 @@ class CategoryController extends BaseController
     public function indexAction()
     {
         $em = $this->getEntityManager();
-        
-        $entities = $em->getRepository('\Instruments\Entity\Register')->findAll();
-        
+
+        $entities = $em->getRepository('\Bmk\Entity\Register')->findAll();
+
         return new ViewModel(array(
             'registers' => $entities
         ));
@@ -26,7 +26,7 @@ class CategoryController extends BaseController
     public function editAction()
     {
         $em = $this->getEntityManager();
-        
+
         $id = (int) $this->params()->fromRoute('id', 0);
         if ($id) {
             $entity = $em->find('\Instruments\Entity\Category', $id);

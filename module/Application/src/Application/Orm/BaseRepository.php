@@ -19,10 +19,10 @@ class BaseRepository extends EntityRepository
     protected $entityName = ''; // zB Application\Entity\User
     protected $tableAlias = ''; // zB u
     protected $idField    = 'id';
-    
+
     /**
      * Sucht Entities, gibt ein Array zurück
-     * 
+     *
      * @param array $filters
      * @param integer $limit
      * @param integer $offset
@@ -33,15 +33,15 @@ class BaseRepository extends EntityRepository
         $qb = $this->_em->createQueryBuilder();
         $qb->select($this->tableAlias)
            ->from($this->entityName, $this->tableAlias);
-        
+
         $this->handleFilters($qb, $filters);
-        
+
         return $qb->getQuery()->getResult();
     }
-    
+
     /**
     * Sucht Entities, gibt aber das Resultat als Paginator zurück
-    * 
+    *
     * @param array $filters
     * @param integer $itemsPerPage
     * @return \Zend\Paginator\Paginator
@@ -51,16 +51,16 @@ class BaseRepository extends EntityRepository
         $qb = $this->_em->createQueryBuilder();
         $qb->select($this->tableAlias)
            ->from($this->entityName, $this->tableAlias);
-        
+
         $this->handleFilters($qb, $filters);
-        
+
         $adapter = new DoctrineAdapter(new ORMPaginator($qb));
         $paginator = new Paginator($adapter);
         $paginator->setDefaultItemCountPerPage($itemsPerPage);
-        
+
         return $paginator;
     }
-    
+
     /**
      * Zählt Entities
      *
@@ -72,18 +72,18 @@ class BaseRepository extends EntityRepository
         $qb = $this->_em->createQueryBuilder();
         $qb->select('COUNT(' . $this->tableAlias . '.' . $this->idField . ')')
            ->from($this->entityName, $this->tableAlias);
-        
+
         $this->handleFilters($qb, $filters, true);
-        
+
         $count = $qb->getQuery()->getSingleScalarResult();
-        
+
         return $count;
     }
-    
+
     /**
      * Fügt einen Join hinzu.
      * Falls es den Join schon gibt, wir er nicht nochmals hinzugefügt
-     * 
+     *
      * @param QueryBuilder $qb
      * @param string $joinField
      * @param string $joinAlias
@@ -109,10 +109,10 @@ class BaseRepository extends EntityRepository
             $qb->leftJoin($joinField, $joinAlias);
         }
     }
-    
+
     /**
     * Fügt den Query-Filter für bestimmte Felder hinzu ("name LIKE '%value%'")
-    * 
+    *
     * @param QueryBuilder $qb
     * @param string $value
     * @param string $tableAlias
@@ -123,7 +123,7 @@ class BaseRepository extends EntityRepository
         if ($value === null || $value === '') {
             return;
         }
-        
+
         if (is_numeric($value)) {
             $qb->andWhere(
                 $qb->expr()->eq($tableAlias . '.id', ':id')
@@ -131,7 +131,7 @@ class BaseRepository extends EntityRepository
             $qb->setParameter('id', $value);
             return;
         }
-        
+
         $phrases = array();
         foreach ($searchFields as $field) {
             $phrases[] = $qb->expr()->like($tableAlias . '.' . $field, ':searchPhrase');

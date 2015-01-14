@@ -1,14 +1,12 @@
 SETUP
 logging bei login
 logging bei änderungen
-user bearbeiten (?)
 tabs mit "hidden" nicht anzeigen
+datums-eingabefelder
+user bearbeiten (?)
 
 MITGLIEDER
-
 suche
-"mitgliedschaft": ähnlich wie bands, aber für ganzen verein
-bands: registerzugehörigkeit bearbeitbar machen
 anzeige stammdatenblatt mit allen infos
 runde geburtstage / anstehende verleihungen pro jahr
 board-liste durch verwaltungs-tool speisen
@@ -17,7 +15,10 @@ e-mail-liste pro orchester
 KALENDER
 
 INSTRUMENTE
+kategorie-zuordnung korrigieren (!)
 export stammdatenblatt
+bands nach BMK auslagern
+kategorien: an register zuweisen
 
 NOTEN
 noten verborgen (wann, wer, an wen)

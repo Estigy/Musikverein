@@ -16,6 +16,7 @@ class Module implements AutoloaderProviderInterface, ConfigProviderInterface
 			'Zend\Loader\StandardAutoloader' => array(
 				'namespaces' => array(
                     'Attendance'  => __DIR__ . '/src/Attendance',
+                    'Bmk'         => __DIR__ . '/src/Bmk',
                     'Calendar'    => __DIR__ . '/src/Calendar',
                     'Documents'   => __DIR__ . '/src/Documents',
                     'Instruments' => __DIR__ . '/src/Instruments',

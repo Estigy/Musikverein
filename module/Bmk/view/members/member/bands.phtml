@@ -7,10 +7,10 @@ $this->headTitle($title);
 
 <?php echo $this->getTabnav($tabnav); ?>
 
-<h2>Mitgliedschaft <?php echo $form->getObject()->id === null ? 'eintragen' : 'bearbeiten'; ?></h2>
+<h2>Besetzung <?php echo $form->getObject()->id === null ? 'eintragen' : 'bearbeiten'; ?></h2>
 
 <?php
-$form->setAttribute('action', $this->url('memberBands', array('id' => $id)));
+$form->setAttribute('action', $this->url('memberBands', array('id' => $id, 'connId' => $connId)));
 $form->prepare();
 
 echo $this->form()->openTag($form);
@@ -19,6 +19,7 @@ echo $this->form()->openTag($form);
     <div class="col-sm-6">
         <?php
             echo $this->formRow($form->get('band'));
+            echo $this->formRow($form->get('register'));
             echo $this->formRow($form->get('beginDate'));
             echo $this->formRow($form->get('endDate'));
         ?>
@@ -45,8 +46,9 @@ if (count($member->member2bands)) {
         <thead>
             <tr>
                 <th>Orchester</th>
-                <th>Eintritt</th>
-                <th>Austritt</th>
+                <th>Register</th>
+                <th>Beginn</th>
+                <th>Ende</th>
                 <th>&nbsp;</th>
             </tr>
         </thead>
@@ -54,6 +56,9 @@ if (count($member->member2bands)) {
             <tr>
                 <td>
                     <?php echo $connector->band; ?>
+                </td>
+                <td>
+                    <?php echo $connector->register->name; ?>
                 </td>
                 <td>
                     <?php echo $connector->beginDate->format('d.m.Y'); ?>

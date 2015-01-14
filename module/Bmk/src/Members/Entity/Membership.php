@@ -16,29 +16,29 @@ class Membership extends Entity
     * @ORM\Id
     * @ORM\Column(type="integer")
     * @ORM\GeneratedValue
-    * 
+    *
     * @var integer
     */
 	protected $id;
-    
+
     /**
     * @ORM\ManyToOne(targetEntity="Member")
     * @ORM\JoinColumn(name="id_mitglied")
-    * 
+    *
     * @var Member
     */
     protected $member;
-    
+
     /**
-    * @ORM\Column(name="eintritt", type="date")
-    * 
+    * @ORM\Column(name="eintritt", type="date", nullable=true)
+    *
     * @var DateTime
     */
     protected $beginDate;
 
     /**
-    * @ORM\Column(name="austritt", type="date")
-    * 
+    * @ORM\Column(name="austritt", type="date", nullable=true)
+    *
     * @var DateTime
     */
     protected $endDate;

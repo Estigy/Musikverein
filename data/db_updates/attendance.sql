@@ -26,3 +26,17 @@ CREATE TABLE `lt_anwesenheit_entries` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 ALTER TABLE `lt_anwesenheit_entries` ADD INDEX ( `id_event`, `id_mitglied` );
+
+-- ------------
+
+ALTER TABLE `lt_mitglieder2orchester` ADD `id_register` INT UNSIGNED NOT NULL AFTER `orchester` ,
+ADD INDEX ( `id_register` ) ;
+
+CREATE TABLE IF NOT EXISTS `lt_mitgliedschaft` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `id_mitglied` int(10) unsigned NOT NULL DEFAULT '0',
+  `eintritt` date DEFAULT NULL,
+  `austritt` date DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id_mitglied` (`id_mitglied`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;

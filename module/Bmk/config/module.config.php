@@ -22,6 +22,7 @@ return array(
                 'cache' => 'array',
                 'paths' => array(
                     __DIR__  . '/../src/Attendance/Entity',
+                    __DIR__  . '/../src/Bmk/Entity',
                     __DIR__  . '/../src/Calendar/Entity',
                     __DIR__  . '/../src/Documents/Entity',
                     __DIR__  . '/../src/Instruments/Entity',
@@ -32,6 +33,7 @@ return array(
             'orm_default' => array(
                 'drivers' => array(
                     'Attendance\Entity'  => 'ApplicationDriver',
+                    'Bmk\Entity'         => 'ApplicationDriver',
                     'Calendar\Entity'    => 'ApplicationDriver',
                     'Documents\Entity'   => 'ApplicationDriver',
                     'Instruments\Entity' => 'ApplicationDriver',

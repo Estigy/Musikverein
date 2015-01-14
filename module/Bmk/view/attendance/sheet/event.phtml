@@ -1,12 +1,12 @@
 <?php
-$title = 'Liste bearbeiten';
+$title = 'Termin bearbeiten';
 $this->headTitle($title);
 ?>
 
 <h1><?php echo $this->escapeHtml($title); ?></h1>
 
 <?php
-$form->setAttribute('action', $this->url('attendanceEdit', array('id' => $id)));
+$form->setAttribute('action', $this->url('attendanceEventEdit', array('id' => $id, 'eventId' => $eventId)));
 $form->prepare();
 
 echo $this->form()->openTag($form);
@@ -15,12 +15,35 @@ echo $this->form()->openTag($form);
     <div class="col-sm-6">
         <?php
         echo $this->formRow($form->get('name'));
-        echo $this->formRow($form->get('band'));
-        echo $this->formRow($form->get('year'));
+        echo $this->formRow($form->get('date'));
         ?>
-    </div>
-    <div class="col-sm-6">
+        <hr>
         <?php
+        foreach ($index as $registerId => $registerData) {
+            if (empty($registerData['members'])) {
+                continue;
+            }
+            echo '<h2>' . $registerData['registerName'] . '</h2>';
+            foreach ($registerData['members'] as $member) {
+                echo '
+                <div class="form-group ">
+                    <label class="col-sm-3 control-label">' . $member->lastname . ' ' . $member->firstname . '</label>
+                    <div class="col-sm-9">
+                        <div class="btn-group" data-toggle="buttons">
+                            <label class="btn btn-default active">
+                                <input type="radio" name="entry[' . $event->id . '][' . $member->id . ']" autocomplete="off" checked> <i class="fa fa-check fa-fw"></i>
+                            </label>
+                            <label class="btn btn-default">
+                                <input type="radio" name="entry[' . $event->id . '][' . $member->id . ']" autocomplete="off"> <i class="fa fa-close fa-fw"></i>
+                            </label>
+                            <label class="btn btn-default">
+                                <input type="radio" name="entry[' . $event->id . '][' . $member->id . ']" autocomplete="off"> <i class="fa fa-info fa-fw"></i>
+                            </label>
+                        </div>
+                    </div>
+                </div>';
+            }
+        }
         ?>
     </div>
 </div>

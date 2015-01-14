@@ -31,7 +31,7 @@ class InstrumentController extends BaseController
 
         $filters = $form->getFilledValues();
 
-        $entities = $em->getRepository('\Instruments\Entity\Register')->findAll();
+        $entities = $em->getRepository('\Bmk\Entity\Register')->findAll();
 
         return new ViewModel(array(
             'form' => $form,

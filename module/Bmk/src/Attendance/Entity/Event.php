@@ -43,4 +43,6 @@ class Event extends Entity
     */
 	protected $name;
 
+    protected $entries;
+
 }

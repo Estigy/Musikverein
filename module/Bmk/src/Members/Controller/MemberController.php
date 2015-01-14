@@ -215,6 +215,7 @@ class MemberController extends BaseController
 
         return array(
             'id'     => $entity->id,
+            'connId' => $connId,
             'member' => $entity,
             'form'   => $form,
             'tabnav' => $this->getTabnav($entity->id),
@@ -259,6 +260,7 @@ class MemberController extends BaseController
 
         return array(
             'id'     => $entity->id,
+            'connId' => $connId,
             'member' => $entity,
             'form'   => $form,
             'tabnav' => $this->getTabnav($entity->id),
@@ -303,6 +305,7 @@ class MemberController extends BaseController
 
         return array(
             'id'     => $entity->id,
+            'connId' => $connId,
             'member' => $entity,
             'form'   => $form,
             'tabnav' => $this->getTabnav($entity->id),
