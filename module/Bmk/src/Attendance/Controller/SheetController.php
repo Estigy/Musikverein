@@ -84,6 +84,24 @@ class SheetController extends BaseController
             $event->sheet = $sheet;
         }
 
+
+    }
+
+    protected function getBaseIndex($band, $year)
+    {
+        $em    = $this->getEntityManager();
+        $index = array();
+
+        $registers = $em->getRepository('\Instruments\Entity\Register')->findEntities(array());
+
+        foreach ($registers as $r) {
+            $index[$r->id] = array(
+
+            );
+        }
+
+        $members = $em->getRepository('\Members\Entity\Member')->findEntities(array());
+
     }
 
 }

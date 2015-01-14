@@ -4,15 +4,15 @@ namespace Members\Controller;
 
 use Application\Controller\BaseController;
 
-use Members\Entity\Medal;
 use Members\Entity\Member;
+use Members\Entity\Membership;
 use Members\Entity\Member2Band;
 use Members\Entity\Member2Medal;
 use Members\Entity\Member2Role;
 use Members\Entity\Member2Workshop;
-use Members\Entity\Workshop;
 use Members\Form\MemberFilterForm;
 use Members\Form\MemberForm;
+use Members\Form\MembershipForm;
 use Members\Form\Member2BandForm;
 use Members\Form\Member2MedalForm;
 use Members\Form\Member2RoleForm;
@@ -100,7 +100,7 @@ class MemberController extends BaseController
         if ($connId) {
             $connector = $em->find('\Members\Entity\Member2Medal', $connId);
             if ($connector === null) {
-                return $this->redirect()->toRoute('memberMedals', array('id' => $id));
+                return $this->redirect()->toRoute('memberMedals', array('id' => $entity->id));
             }
         } else {
             $connector = new Member2Medal();
@@ -145,7 +145,7 @@ class MemberController extends BaseController
         if ($connId) {
             $connector = $em->find('\Members\Entity\Member2Workshop', $connId);
             if ($connector === null) {
-                return $this->redirect()->toRoute('memberWorkshops', array('id' => $id));
+                return $this->redirect()->toRoute('memberWorkshops', array('id' => $entity->id));
             }
         } else {
             $connector = new Member2Workshop();
@@ -190,7 +190,7 @@ class MemberController extends BaseController
         if ($connId) {
             $connector = $em->find('\Members\Entity\Member2Band', $connId);
             if ($connector === null) {
-                return $this->redirect()->toRoute('memberBands', array('id' => $id));
+                return $this->redirect()->toRoute('memberBands', array('id' => $entity->id));
             }
         } else {
             $connector = new Member2Band();
@@ -221,6 +221,50 @@ class MemberController extends BaseController
         );
     }
 
+    public function membershipAction()
+    {
+        $em = $this->getEntityManager();
+
+        $entity = $this->getEntityFromRouteId('\Members\Entity\Member');
+        if (!$entity) {
+            return $this->redirect()->toRoute('members');
+        }
+
+        $connId = $this->params()->fromRoute('connId');
+        if ($connId) {
+            $connector = $em->find('\Members\Entity\Membership', $connId);
+            if ($connector === null) {
+                return $this->redirect()->toRoute('memberMembership', array('id' => $entity->id));
+            }
+        } else {
+            $connector = new Membership();
+            $connector->member = $entity;
+        }
+
+        $form = new MembershipForm($em);
+        $form->bind($connector);
+
+        $request = $this->getRequest();
+
+        if ($request->isPost()) {
+            //$form->setInputFilter($entity->getInputFilter());
+            $form->setData($request->getPost());
+
+            if ($form->isValid()) {
+                $em->persist($connector);
+                $em->flush();
+                return $this->redirect()->toRoute('memberMembership', array('id' => $entity->id));
+            }
+        }
+
+        return array(
+            'id'     => $entity->id,
+            'member' => $entity,
+            'form'   => $form,
+            'tabnav' => $this->getTabnav($entity->id),
+        );
+    }
+
     public function rolesAction()
     {
         $em = $this->getEntityManager();
@@ -234,7 +278,7 @@ class MemberController extends BaseController
         if ($connId) {
             $connector = $em->find('\Members\Entity\Member2Role', $connId);
             if ($connector === null) {
-                return $this->redirect()->toRoute('memberRoles', array('id' => $id));
+                return $this->redirect()->toRoute('memberRoles', array('id' => $entity->id));
             }
         } else {
             $connector = new Member2Role();
@@ -296,6 +340,14 @@ class MemberController extends BaseController
             array(
                 'label' => 'Orchester',
                 'route' => 'memberBands',
+                'params' => array(
+                    'id' => $id
+                ),
+                'visible' => $id != 0,
+            ),
+            array(
+                'label' => 'Mitgliedschaft',
+                'route' => 'memberMembership',
                 'params' => array(
                     'id' => $id
                 ),

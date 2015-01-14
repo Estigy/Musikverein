@@ -2,10 +2,13 @@ SETUP
 logging bei login
 logging bei änderungen
 user bearbeiten (?)
+tabs mit "hidden" nicht anzeigen
 
 MITGLIEDER
+
 suche
-registerzugehörigkeit bearbeitbar machen
+"mitgliedschaft": ähnlich wie bands, aber für ganzen verein
+bands: registerzugehörigkeit bearbeitbar machen
 anzeige stammdatenblatt mit allen infos
 runde geburtstage / anstehende verleihungen pro jahr
 board-liste durch verwaltungs-tool speisen
@@ -23,7 +26,7 @@ DOKUMENTE
 verzeichnisschutz für upload-ordner
 
 ANWESENHEITSLISTE
-tabellen anlegen
+namensliste aus "bands" aufbauen
 listen anzeigen/bearbeiten
 anwesenheit erfassen
 tabelle anzeigen

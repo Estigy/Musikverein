@@ -301,6 +301,20 @@ return array(
                     ),
                 ),
             ),
+            'memberMembership' => array(
+                'type'    => 'segment',
+                'options' => array(
+                    'route'    => '/members/edit/:id/membership[/:connId]',
+                    'constraints' => array(
+                        'id'     => '[0-9]+',
+                        'connId' => '[0-9]+',
+                    ),
+                    'defaults' => array(
+                        'controller' => 'Members\Controller\Member',
+                        'action'     => 'membership',
+                    ),
+                ),
+            ),
             'memberRoles' => array(
                 'type'    => 'segment',
                 'options' => array(
