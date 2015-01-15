@@ -6,6 +6,7 @@ datums-eingabefelder
 user bearbeiten (?)
 
 MITGLIEDER
+abzeichen hinterlegen in db
 suche
 anzeige stammdatenblatt mit allen infos
 runde geburtstage / anstehende verleihungen pro jahr
@@ -18,7 +19,6 @@ INSTRUMENTE
 kategorie-zuordnung korrigieren (!)
 export stammdatenblatt
 bands nach BMK auslagern
-kategorien: an register zuweisen
 
 NOTEN
 noten verborgen (wann, wer, an wen)
@@ -27,8 +27,4 @@ DOKUMENTE
 verzeichnisschutz für upload-ordner
 
 ANWESENHEITSLISTE
-namensliste aus "bands" aufbauen
-listen anzeigen/bearbeiten
-anwesenheit erfassen
-tabelle anzeigen
-auswertung für ein orchester fürs ganze jahr
+auswertung für ein orchester fürs ganze jahr (listenübergreifend)

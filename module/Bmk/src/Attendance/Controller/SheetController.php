@@ -67,9 +67,10 @@ class SheetController extends BaseController
 
     public function eventAction()
     {
-        $em = $this->getEntityManager();
+        $em      = $this->getEntityManager();
+        $request = $this->getRequest();
 
-        $sheet = $this->getEntityFromRouteId('\Attendance\Entity\Sheet');
+        $sheet   = $this->getEntityFromRouteId('\Attendance\Entity\Sheet');
         if (!$sheet) {
             return $this->redirect()->toRoute('attendance');
         }
@@ -88,7 +89,50 @@ class SheetController extends BaseController
         $form = new EventForm($em);
         $form->bind($event);
 
-        $index = $this->getBaseIndex($sheet->band, $sheet->year);
+        $index   = $this->getRegisterMemberData($sheet->band, $sheet->year);
+        $entries = array();
+
+        foreach ($index as $register) {
+            foreach ($register['members'] as $member) {
+                $entry = null;
+                // Wenn wir ein Event bearbeiten, dann versuchen den gespeicherten Eintrag zu finden
+                if ($event->id !== null) {
+                    $entry = $em->find('\Attendance\Entity\Entry', array('event' => $event->id, 'member' => $member->id));
+                }
+                // Wenn es den Eintrag nicht gibt oder wir bei einem völlig neuen Event sind, dann neu anlegen
+                if ($entry === null) {
+                    $entry = new Entry();
+                    $entry->event = $event;
+                    $entry->member = $member;
+                }
+                $entries[$member->id] = $entry;
+            }
+        }
+
+        if ($request->isPost()) {
+            //$form->setInputFilter($entity->getInputFilter());
+            $postData = $request->getPost();
+            $form->setData($request->getPost());
+
+            foreach ($entries as $memberId => $entry) {
+                if (!isset($postData['entries'][$memberId])) {
+                    continue;
+                }
+                $entry->status = $postData['entries'][$memberId];
+            }
+
+            if ($form->isValid()) {
+                $em->persist($event);
+                $em->flush();
+
+                foreach ($entries as $entry) {
+                    $em->persist($entry);
+                }
+                $em->flush();
+                return $this->redirect()->toRoute('attendance');
+            }
+        }
+
 
         return array(
             'id'      => $sheet->id ?: 0,
@@ -96,11 +140,36 @@ class SheetController extends BaseController
             'index'   => $index,
             'sheet'   => $sheet,
             'event'   => $event,
+            'entries' => $entries,
             'form'    => $form,
         );
     }
 
-    protected function getBaseIndex($band, $year)
+    protected function tableAction()
+    {
+        $sheet = $this->getEntityFromRouteId('\Attendance\Entity\Sheet');
+        if (!$sheet) {
+            return $this->redirect()->toRoute('attendance');
+        }
+
+        $index = $this->getRegisterMemberData($sheet->band, $sheet->year);
+
+        $entries = array();
+
+        foreach ($sheet->events as $event) {
+            foreach ($event->entries as $entry) {
+                $entries[$event->id][$entry->member->id] = $entry;
+            }
+        }
+
+        return array(
+            'sheet'   => $sheet,
+            'index'   => $index,
+            'entries' => $entries,
+        );
+    }
+
+    protected function getRegisterMemberData($band, $year)
     {
         $em    = $this->getEntityManager();
         $index = array();
@@ -113,6 +182,7 @@ class SheetController extends BaseController
             $date = $year . '-12-31';
         }
 
+        // Alle Register
         $registers = $em->getRepository('\Bmk\Entity\Register')->findEntities(array());
 
         foreach ($registers as $r) {

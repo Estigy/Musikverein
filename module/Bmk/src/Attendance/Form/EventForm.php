@@ -33,6 +33,7 @@ class EventForm extends Form implements InputFilterProviderInterface
                 'label_attributes' => array('class' => 'col-sm-3'),
             ),
         ));
+        $this->get('date')->setFormat('d.m.Y');
         $this->add(array(
             'name' => 'name',
             'type' => 'Text',

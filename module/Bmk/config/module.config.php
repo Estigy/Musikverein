@@ -88,6 +88,19 @@ return array(
                     ),
                 ),
             ),
+            'attendanceTable' => array(
+                'type'    => 'segment',
+                'options' => array(
+                    'route'    => '/attendance/table/:id',
+                    'constraints' => array(
+                        'id'      => '[0-9]+',
+                    ),
+                    'defaults' => array(
+                        'controller' => 'Attendance\Controller\Sheet',
+                        'action'     => 'table',
+                    ),
+                ),
+            ),
             'calendar' => array(
                 'type'    => 'literal',
                 'options' => array(

@@ -18,7 +18,7 @@ class Entry extends Entity
 
     /**
     * @ORM\Id
-    * @ORM\ManyToOne(targetEntity="Member")
+    * @ORM\ManyToOne(targetEntity="\Members\Entity\Member")
     * @ORM\JoinColumn(name="id_mitglied")
     *
     * @var Member

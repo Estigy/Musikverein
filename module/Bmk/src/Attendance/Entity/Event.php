@@ -4,6 +4,7 @@ namespace Attendance\Entity;
 
 use Application\Entity\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -43,6 +44,17 @@ class Event extends Entity
     */
 	protected $name;
 
+    /**
+    * @ORM\OneToMany(targetEntity="Entry", mappedBy="event")
+    *
+    * @var array
+    */
     protected $entries;
+
+
+    public function __construct()
+    {
+        $this->entries = new ArrayCollection();
+    }
 
 }

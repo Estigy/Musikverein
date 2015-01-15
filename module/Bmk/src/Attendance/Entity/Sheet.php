@@ -50,8 +50,9 @@ class Sheet extends Entity
 
     /**
     * @ORM\OneToMany(targetEntity="Event", mappedBy="sheet")
+    * @ORM\OrderBy({"date" = "ASC"})
     *
-    * @var Sheet
+    * @var array
     */
     protected $events;
 

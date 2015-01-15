@@ -1,9 +1,11 @@
 <?php
+use Attendance\Entity\Entry;
+
 $title = 'Termin bearbeiten';
 $this->headTitle($title);
 ?>
 
-<h1><?php echo $this->escapeHtml($title); ?></h1>
+<h1><?php echo $this->escapeHtml($title); ?> <small><?php echo $sheet->name . ' ' . $sheet->year . ', ' . $sheet->band;?></small></h1>
 
 <?php
 $form->setAttribute('action', $this->url('attendanceEventEdit', array('id' => $id, 'eventId' => $eventId)));
@@ -14,8 +16,8 @@ echo $this->form()->openTag($form);
 <div class="row">
     <div class="col-sm-6">
         <?php
-        echo $this->formRow($form->get('name'));
         echo $this->formRow($form->get('date'));
+        echo $this->formRow($form->get('name'));
         ?>
         <hr>
         <?php
@@ -25,19 +27,20 @@ echo $this->form()->openTag($form);
             }
             echo '<h2>' . $registerData['registerName'] . '</h2>';
             foreach ($registerData['members'] as $member) {
+                $entry = $entries[$member->id];
                 echo '
                 <div class="form-group ">
                     <label class="col-sm-3 control-label">' . $member->lastname . ' ' . $member->firstname . '</label>
                     <div class="col-sm-9">
                         <div class="btn-group" data-toggle="buttons">
-                            <label class="btn btn-default active">
-                                <input type="radio" name="entry[' . $event->id . '][' . $member->id . ']" autocomplete="off" checked> <i class="fa fa-check fa-fw"></i>
+                            <label class="btn btn-default' . ($entry->status == Entry::STATUS_PRESENT ? ' active' : '') . '">
+                                <input type="radio" value="' . Entry::STATUS_PRESENT . '" name="entries[' . $member->id . ']" autocomplete="off"' . ($entry->status == Entry::STATUS_PRESENT ? ' checked' : '') . '> <i class="fa fa-check fa-fw"></i>
                             </label>
-                            <label class="btn btn-default">
-                                <input type="radio" name="entry[' . $event->id . '][' . $member->id . ']" autocomplete="off"> <i class="fa fa-close fa-fw"></i>
+                            <label class="btn btn-default' . ($entry->status == Entry::STATUS_ABSENT ? ' active' : '') . '">
+                                <input type="radio" value="' . Entry::STATUS_ABSENT . '" name="entries[' . $member->id . ']" autocomplete="off"' . ($entry->status == Entry::STATUS_ABSENT ? ' checked' : '') . '> <i class="fa fa-close fa-fw"></i>
                             </label>
-                            <label class="btn btn-default">
-                                <input type="radio" name="entry[' . $event->id . '][' . $member->id . ']" autocomplete="off"> <i class="fa fa-info fa-fw"></i>
+                            <label class="btn btn-default' . ($entry->status == Entry::STATUS_EXCUSED ? ' active' : '') . '">
+                                <input type="radio" value="' . Entry::STATUS_EXCUSED . '" name="entries[' . $member->id . ']" autocomplete="off"' . ($entry->status == Entry::STATUS_EXCUSED ? ' checked' : '') . '> <i class="fa fa-info fa-fw"></i>
                             </label>
                         </div>
                     </div>
