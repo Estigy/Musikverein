@@ -42,6 +42,10 @@ echo $this->form()->openTag($form);
         echo $this->formRow($form->get('preYears'));
         echo $this->formRow($form->get('preYearsComment'));
         ?>
+        <h2>Status</h2>
+        <?php
+        echo $this->formRow($form->get('status'));
+        ?>
     </div>
 </div>
 <div class="row">

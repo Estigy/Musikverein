@@ -186,6 +186,17 @@ class MemberForm extends Form implements InputFilterProviderInterface
                 'label_attributes' => array('class' => 'col-sm-3'),
             )
         ));
+        $this->add(array(
+            'name' => 'status',
+            'type' => 'Radio',
+            'options' => array(
+                'value_options' => Member::getStati(),
+                'label' => 'Status',
+                'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
+                'column-size' => 'sm-9',
+                'label_attributes' => array('class' => 'col-sm-3'),
+            ),
+        ));
 
         $this->add(array(
             'name' => 'submit',

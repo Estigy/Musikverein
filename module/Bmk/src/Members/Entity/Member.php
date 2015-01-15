@@ -13,6 +13,9 @@ use Doctrine\ORM\Mapping as ORM;
 */
 class Member extends Entity
 {
+    const STATUS_AKTIV   = 1;
+    const STATUS_INAKTIV = 0;
+
     /**
     * @ORM\Id
     * @ORM\Column(type="integer")
@@ -191,5 +194,13 @@ class Member extends Entity
         $this->member2bands       = new ArrayCollection();
         $this->member2roles       = new ArrayCollection();
         $this->memberships        = new ArrayCollection();
+    }
+
+    public static function getStati()
+    {
+        return array(
+            self::STATUS_AKTIV => 'Aktiv',
+            self::STATUS_INAKTIV => 'Inaktiv',
+        );
     }
 }
