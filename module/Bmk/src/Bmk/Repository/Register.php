@@ -27,6 +27,26 @@ class Register extends BaseRepository
      */
     protected function handleFilters(QueryBuilder $qb, array $filters, $countMode = false)
     {
+        foreach ($filters as $clause => $value) {
+            if ($value === null) {
+                continue;
+            }
+            switch ($clause) {
+                case 'getForInstruments':
+                    $qb->andWhere(
+                        $qb->expr()->neq('r.sortingForInstruments', -1)
+                    );
+                    $qb->addOrderBy('r.sortingForInstruments', 'ASC');
+                    break;
+                case 'getForAttendance':
+                    $qb->andWhere(
+                        $qb->expr()->neq('r.sortingForAttendance', -1)
+                    );
+                    $qb->addOrderBy('r.sortingForAttendance', 'ASC');
+                    break;
+            }
+        }
+
         if (!$countMode) {
             if (!empty($filters['order'])) {
                 $this->addOrderBy($qb, $filters['order'], 'r');

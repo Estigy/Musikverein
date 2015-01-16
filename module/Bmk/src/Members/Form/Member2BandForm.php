@@ -47,6 +47,12 @@ class Member2BandForm extends Form implements InputFilterProviderInterface
                 'label' => 'Register',
                 'object_manager' => $objectManager,
                 'target_class' => 'Bmk\Entity\Register',
+                'find_method' => array(
+                    'name' => 'findEntities',
+                    'params' => array(
+                        'filters' => array('getForAttendance' => 1),
+                    )
+                ),
                 'property' => 'name',
                 'empty_option' => 'Bitte wählen...',
                 'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,

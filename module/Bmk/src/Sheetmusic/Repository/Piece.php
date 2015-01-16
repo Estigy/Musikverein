@@ -52,7 +52,7 @@ class Piece extends BaseRepository
         
         if (!$countMode) {
             if (!empty($filters['order'])) {
-                $this->addOrderBy($qb, $filters['order'], 'p');
+                $qb->addOrderBy('p.' . $filters['order'], 'ASC');
             }
             // Standard-Sortierung
             if (!count($qb->getDQLPart('orderBy'))) {

@@ -183,7 +183,7 @@ class SheetController extends BaseController
         }
 
         // Alle Register
-        $registers = $em->getRepository('\Bmk\Entity\Register')->findEntities(array());
+        $registers = $em->getRepository('\Bmk\Entity\Register')->findEntities(array('getForAttendance' => true));
 
         foreach ($registers as $r) {
             $member2bands = $em->getRepository('\Members\Entity\Member2Band')->findEntities(array(

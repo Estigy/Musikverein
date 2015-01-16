@@ -98,7 +98,7 @@ class PieceForm extends Form implements InputFilterProviderInterface
                 'find_method' => array(
                     'name' => 'findEntities',
                     'params' => array(
-                        array('order' => 'title')
+                        'filters' => array('order' => 'title')
                     )
                 ),
                 'label' => 'Archiviert unter',
