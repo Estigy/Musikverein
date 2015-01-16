@@ -16,7 +16,7 @@ class CategoryController extends BaseController
     {
         $em = $this->getEntityManager();
 
-        $entities = $em->getRepository('\Bmk\Entity\Register')->findAll();
+        $entities = $em->getRepository('\Bmk\Entity\Register')->findEntities(array('getForInstruments' => true));
 
         return new ViewModel(array(
             'registers' => $entities

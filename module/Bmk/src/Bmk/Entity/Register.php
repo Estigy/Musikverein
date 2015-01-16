@@ -30,6 +30,20 @@ class Register extends Entity
 	protected $name;
 
     /**
+     * @ORM\Column(name="sortierung_instrumente", type="integer")
+     *
+     * @var integer
+     */
+    protected $sortingForInstruments;
+
+    /**
+     * @ORM\Column(name="sortierung_listen", type="integer")
+     *
+     * @var integer
+     */
+    protected $sortingForAttendance;
+
+    /**
     * @ORM\OneToMany(targetEntity="\Instruments\Entity\Category", mappedBy="register")
     *
     * @var array
