@@ -86,7 +86,7 @@ class MemberForm extends Form implements InputFilterProviderInterface
         ));
         $this->add(array(
             'name' => 'birthDate',
-            'type' => 'Date',
+            'type' => 'Application\Form\Element\GermanDate',
             'options' => array(
                 'label' => 'Geburtstag',
                 'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
@@ -94,7 +94,6 @@ class MemberForm extends Form implements InputFilterProviderInterface
                 'label_attributes' => array('class' => 'col-sm-3'),
             ),
         ));
-        $this->get('birthDate')->setFormat('d.m.Y');
         $this->add(array(
             'name' => 'birthCity',
             'type' => 'Text',

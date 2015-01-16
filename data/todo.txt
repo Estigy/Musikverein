@@ -2,7 +2,6 @@ SETUP
 logging bei login
 logging bei änderungen
 tabs mit "hidden" nicht anzeigen
-datums-eingabefelder
 user bearbeiten (?)
 
 MITGLIEDER

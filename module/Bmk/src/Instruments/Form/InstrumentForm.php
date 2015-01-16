@@ -70,7 +70,7 @@ class InstrumentForm extends Form implements InputFilterProviderInterface
         ));
         $this->add(array(
             'name' => 'buyDate',
-            'type' => 'Date',
+            'type' => 'Application\Form\Element\GermanDate',
             'options' => array(
                 'label' => 'Ankauf',
                 'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
@@ -78,10 +78,9 @@ class InstrumentForm extends Form implements InputFilterProviderInterface
                 'label_attributes' => array('class' => 'col-sm-3'),
             ),
         ));
-        $this->get('buyDate')->setFormat('d.m.Y');
         $this->add(array(
             'name' => 'outDate',
-            'type' => 'Date',
+            'type' => 'Application\Form\Element\GermanDate',
             'options' => array(
                 'label' => 'Ausgeschieden',
                 'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
@@ -89,7 +88,6 @@ class InstrumentForm extends Form implements InputFilterProviderInterface
                 'label_attributes' => array('class' => 'col-sm-3'),
             ),
         ));
-        $this->get('outDate')->setFormat('d.m.Y');
         $this->add(array(
             'name' => 'insurance',
             'type' => 'Textarea',

@@ -40,7 +40,7 @@ class GiveAwayForm extends Form implements InputFilterProviderInterface
         ));
         $this->add(array(
             'name' => 'giveAwayDate',
-            'type' => 'Date',
+            'type' => 'Application\Form\Element\GermanDate',
             'options' => array(
                 'label' => 'Datum',
                 'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
@@ -48,7 +48,6 @@ class GiveAwayForm extends Form implements InputFilterProviderInterface
                 'label_attributes' => array('class' => 'col-sm-3'),
             ),
         ));
-        $this->get('giveAwayDate')->setFormat('d.m.Y');
         $this->add(array(
             'name' => 'giveAwayMember',
             'type' => '\DoctrineModule\Form\Element\ObjectSelect',

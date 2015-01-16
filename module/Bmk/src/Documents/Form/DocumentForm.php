@@ -62,7 +62,7 @@ class DocumentForm extends Form implements InputFilterProviderInterface
         ));
         $this->add(array(
             'name' => 'referenceDate',
-            'type' => 'Date',
+            'type' => 'Application\Form\Element\GermanDate',
             'options' => array(
                 'label' => 'Referenz-Datum',
                 'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
@@ -71,7 +71,6 @@ class DocumentForm extends Form implements InputFilterProviderInterface
                 'help-block' => 'zB Datum der Sitzung',
             ),
         ));
-        $this->get('referenceDate')->setFormat('d.m.Y');
         $this->add(array(
             'name' => 'comment',
             'type' => 'Textarea',

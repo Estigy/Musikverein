@@ -1,7 +1,7 @@
 $(function() {
-    $('input[type="date"]').datepicker({
+    $('input[data-type="german-date"]').datepicker({
         language: 'de',
         format: 'dd.mm.yyyy',
-        autoclose: true,
+        autoclose: true
     });
 });

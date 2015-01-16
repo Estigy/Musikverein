@@ -36,7 +36,7 @@ class WorkshopForm extends Form implements InputFilterProviderInterface
         ));
         $this->add(array(
             'name' => 'beginDate',
-            'type' => 'Date',
+            'type' => 'Application\Form\Element\GermanDate',
             'options' => array(
                 'label' => 'Von',
                 'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
@@ -44,10 +44,9 @@ class WorkshopForm extends Form implements InputFilterProviderInterface
                 'label_attributes' => array('class' => 'col-sm-3'),
             ),
         ));
-        $this->get('beginDate')->setFormat('d.m.Y');
         $this->add(array(
             'name' => 'endDate',
-            'type' => 'Date',
+            'type' => 'Application\Form\Element\GermanDate',
             'options' => array(
                 'label' => 'Bis',
                 'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
@@ -55,7 +54,6 @@ class WorkshopForm extends Form implements InputFilterProviderInterface
                 'label_attributes' => array('class' => 'col-sm-3'),
             ),
         ));
-        $this->get('endDate')->setFormat('d.m.Y');
         $this->add(array(
             'name' => 'city',
             'type' => 'Text',

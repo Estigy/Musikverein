@@ -26,7 +26,7 @@ class TakeBackForm extends Form implements InputFilterProviderInterface
              
         $this->add(array(
             'name' => 'takeBackDate',
-            'type' => 'Date',
+            'type' => 'Application\Form\Element\GermanDate',
             'options' => array(
                 'label' => 'Datum',
                 'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
@@ -34,7 +34,6 @@ class TakeBackForm extends Form implements InputFilterProviderInterface
                 'label_attributes' => array('class' => 'col-sm-3'),
             ),
         ));
-        $this->get('takeBackDate')->setFormat('d.m.Y');
         $this->add(array(
             'name' => 'takeBackMember',
             'type' => '\DoctrineModule\Form\Element\ObjectSelect',
