@@ -13,6 +13,9 @@ class GetTabnav extends AbstractHelper
     {
         $str = '<ul class="nav nav-tabs">';
         foreach ($navigation as $item) {
+            if ($item->visible === false) {
+                continue;
+            }
             $str .= '  <li role="presentation"' . ($item->isActive() ? ' class="active"' : '') . '>'
                  .  '<a href="' . $item->getHref() . '">' . $item->label . '</a>'
                  .  '</li>';

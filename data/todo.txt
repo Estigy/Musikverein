@@ -1,7 +1,6 @@
 SETUP
 logging bei login
 logging bei änderungen
-tabs mit "hidden" nicht anzeigen
 user bearbeiten (?)
 
 MITGLIEDER
@@ -13,9 +12,9 @@ board-liste durch verwaltungs-tool speisen
 e-mail-liste pro orchester
 
 KALENDER
+verrechnungs-infos integrieren
 
 INSTRUMENTE
-kategorie-zuordnung korrigieren (!)
 export stammdatenblatt
 bands nach BMK auslagern
 

@@ -11,8 +11,9 @@ $this->headTitle($title);
     <thead>
 	    <tr>
             <th>Jahr</th>
-            <th>Orchester</th>
+            <th class="text-center">Orchester</th>
             <th>Name</th>
+            <th class="text-center">Einträge</th>
             <th>&nbsp;</th>
 	    </tr>
     </thead>
@@ -21,8 +22,9 @@ $this->headTitle($title);
         ?>
         <tr>
             <td><?php echo $this->escapeHtml($sheet->year);?></td>
-            <td><?php echo $this->escapeHtml($sheet->band);?></td>
+            <td class="text-center"><?php echo $this->escapeHtml($sheet->band);?></td>
             <td><?php echo $this->escapeHtml($sheet->name);?></td>
+            <td class="text-center"><?php echo count($sheet->events);?></td>
             <td>
                 <a href="<?php echo $this->url('attendanceEventEdit', array('id' => $sheet->id, 'eventId' => 0));?>">Eintragen</a>
                 <a href="<?php echo $this->url('attendanceTable', array('id' => $sheet->id));?>">Liste</a>
