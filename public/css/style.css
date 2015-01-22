@@ -34,3 +34,7 @@ h2, h1 small {
     margin-bottom:10px;
 }
 
+.nav-tabs > li.no-tab a:hover {
+	background:none;
+	border-color:#fff #fff #ddd;
+}

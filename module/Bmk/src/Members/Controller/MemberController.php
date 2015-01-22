@@ -311,6 +311,24 @@ class MemberController extends BaseController
             'tabnav' => $this->getTabnav($entity->id),
         );
     }
+    
+    public function printsheetAction()
+    {
+    	// Print-Layout
+        $this->layout('layout/print');
+
+        $em = $this->getEntityManager();
+
+        $entity = $this->getEntityFromRouteId('\Members\Entity\Member');
+        if (!$entity) {
+            return $this->redirect()->toRoute('members');
+        }
+        
+		
+        return array(
+            'member' => $entity,
+        );
+    }
 
     protected function getTabnav($id = null)
     {
@@ -363,6 +381,16 @@ class MemberController extends BaseController
                     'id' => $id
                 ),
                 'visible' => $id != 0,
+            ),
+            array(
+                'label' => '<i class="fa fa-print"></i> Datenblatt',
+                'route' => 'memberPrintsheet',
+                'params' => array(
+                    'id' => $id
+                ),
+                'visible' => $id != 0,
+                'target' => '_blank',
+                'class' => 'no-tab',
             ),
         );
 

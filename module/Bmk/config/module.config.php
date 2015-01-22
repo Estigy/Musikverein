@@ -344,6 +344,19 @@ return array(
                     ),
                 ),
             ),
+            'memberPrintsheet' => array(
+                'type'    => 'segment',
+                'options' => array(
+                    'route'    => '/members/printsheet/:id',
+                    'constraints' => array(
+                        'id'     => '[0-9]+',
+                    ),
+                    'defaults' => array(
+                        'controller' => 'Members\Controller\Member',
+                        'action'     => 'printsheet',
+                    ),
+                ),
+            ),
             'medals' => array(
                 'type'    => 'segment',
                 'options' => array(

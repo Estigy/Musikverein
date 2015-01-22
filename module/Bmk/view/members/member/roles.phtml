@@ -59,7 +59,11 @@ if (count($member->member2roles)) {
                     <?php echo $connector->beginDate->format('d.m.Y'); ?>
                 </td>
                 <td>
-                    <?php echo $connector->endDate->format('d.m.Y'); ?>
+                    <?php
+                    if ($connector->endDate) {
+						echo $connector->endDate->format('d.m.Y');
+                    }
+                    ?>
                 </td>
                 <td>
                     <a href="<?php echo $this->url('memberRoles', array('id' => $id, 'connId' => $connector->id)); ?>">Bearbeiten</a>

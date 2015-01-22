@@ -1,0 +1,160 @@
+<?php
+$title = 'Datenblatt';
+$this->headTitle($title);
+?>
+
+<h1>Personalblatt für Musikvereinsmitglieder</h1>
+
+<h2>Person</h2>
+
+<div class="row">
+    <div class="col-xs-4">
+        Familienname:<br><strong><?php echo $this->escapeHtml($member->lastname); ?></strong>
+    </div>
+    <div class="col-xs-4">
+        Vorname:<br><strong><?php echo $this->escapeHtml($member->firstname); ?></strong>
+    </div>
+    <div class="col-xs-4">
+        Geburtsdatum: <?php echo $this->escapeHtml($member->birthDate ? $member->birthDate->format('d.m.Y') : ''); ?><br>
+        geb. in: <?php echo $this->escapeHtml($member->birthCity); ?>
+    </div>
+</div>
+<div class="row" style="margin-top:14pt;">
+    <div class="col-xs-6">
+        E-Mail: <strong><?php echo $this->escapeHtml($member->email1); ?></strong><br>
+        Beruf: <strong><?php echo $this->escapeHtml($member->email1); ?></strong><br>
+        Tel.Nr. Mobil: <strong><?php echo $this->escapeHtml($member->phone1); ?></strong><br>
+        E-Mail Arbeit: <strong><?php echo $this->escapeHtml($member->email2); ?></strong>
+    </div>
+    <div class="col-xs-6">
+        Anschrift: <strong><?php echo $this->escapeHtml($member->address); ?></strong><br>
+        PLZ, Ort: <strong><?php echo $this->escapeHtml($member->zip . ' ' . $member->city); ?></strong><br>
+        Tel.Nr.: <strong><?php echo $this->escapeHtml($member->phone2); ?></strong>
+    </div>
+</div>
+
+<h2>Musikalische Ausbilddung</h2>
+<table>
+	<thead>
+		<tr>
+			<th>Instrument</th>
+			<th>Ausbildungszeit von-bis</th>
+			<th>Unterricht genommen bei</th>
+		</tr>
+	</thead>
+</table>
+
+<h2>Besuchte Kurse</h2>
+<table>
+	<thead>
+		<tr>
+			<th>Jahr und Dauer</th>
+			<th>Kurs</th>
+			<th>Ort</th>
+			<th>Zusatzinfos</th>
+		</tr>
+	</thead>
+    <?php foreach ($member->member2workshops as $connector) { ?>
+        <tr>
+            <td>
+                <?php
+                echo $connector->workshop->beginDate->format('d.m.Y');
+                if ($connector->workshop->endDate) {
+                    echo ' &ndash; ' . $connector->workshop->endDate->format('d.m.Y');
+                }
+                ?>
+            </td>
+            <td>
+                <?php echo $connector->workshop->name; ?>
+            </td>
+            <td>
+                <?php echo $connector->workshop->city; ?>
+            </td>
+            <td>
+                <?php echo $connector->infos; ?>
+            </td>
+        </tr>
+    <?php } ?>
+</table>
+
+<h2>Aktive Mitgliedschaft bei Blasmusikkapellen</h2>
+<table>
+	<thead>
+		<tr>
+			<th>von</th>
+			<th>bis</th>
+			<th>Musikkapelle</th>
+		</tr>
+	</thead>
+    <?php foreach ($member->memberships as $membership) { ?>
+        <tr>
+            <td>
+                <?php
+                echo $membership->beginDate->format('d.m.Y');
+                ?>
+            </td>
+            <td>
+                <?php
+				if ($membership->endDate) {
+                    echo $membership->endDate->format('d.m.Y');
+                }
+                ?>
+            </td>
+        </tr>
+    <?php } ?>
+</table>
+
+<h2>Funktionen innerhalb der Blasmusikorganisation</h2>
+<table>
+	<thead>
+		<tr>
+			<th>von</th>
+			<th>bis</th>
+			<th>Funktion</th>
+		</tr>
+	</thead>
+	<?php foreach ($member->member2roles as $connector) { ?>
+	    <tr>
+	        <td>
+	            <?php echo $connector->beginDate->format('d.m.Y'); ?>
+	        </td>
+	        <td>
+	            <?php
+	            if ($connector->endDate) {
+					echo $connector->endDate->format('d.m.Y');
+	            }
+	            ?>
+	        </td>
+	        <td>
+	            <?php echo $connector->role->name; ?>
+	        </td>
+	    </tr>
+	<?php } ?>
+</table>
+
+<h2>Auszeichnungen, Ernennungen, Ehrungen, event. Geschenke</h2>
+<table>
+	<thead>
+		<tr>
+			<th>Art</th>
+			<th>Datum</th>
+			<th>Zusatzinfos</th>
+		</tr>
+	</thead>
+    <?php foreach ($member->member2medals as $connector) { ?>
+        <tr>
+            <td>
+                <?php echo $connector->medal->name; ?>
+            </td>
+            <td>
+                <?php echo $connector->date->format('d.m.Y'); ?>
+            </td>
+            <td>
+                <?php echo $connector->infos; ?>
+            </td>
+        </tr>
+    <?php } ?>
+</table>
+
+<hr>
+Stand: <?php echo date('d.m.Y'); ?>

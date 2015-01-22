@@ -16,8 +16,9 @@ class GetTabnav extends AbstractHelper
             if ($item->visible === false) {
                 continue;
             }
-            $str .= '  <li role="presentation"' . ($item->isActive() ? ' class="active"' : '') . '>'
-                 .  '<a href="' . $item->getHref() . '">' . $item->label . '</a>'
+            $class = $item->getClass();
+            $str .= '  <li role="presentation" class="' . $class . ($item->isActive() ? ' active' : '') . '">'
+                 .  '<a href="' . $item->getHref() . '"' . ($item->getTarget() ? ' target="' . $item->getTarget() . '"' : '') . '>' . $item->label . '</a>'
                  .  '</li>';
         }
         $str .= '</ul>';
