@@ -180,6 +180,13 @@ class Member extends Entity
     protected $member2roles;
 
     /**
+    * @ORM\OneToMany(targetEntity="\Members\Entity\Member2Education", mappedBy="member")
+    *
+    * @var array
+    */
+    protected $member2educations;
+
+    /**
     * @ORM\OneToMany(targetEntity="\Members\Entity\Membership", mappedBy="member")
     *
     * @var array
@@ -190,9 +197,10 @@ class Member extends Entity
     {
         $this->instrument2members = new ArrayCollection();
         $this->member2medals      = new ArrayCollection();
-        $this->members2workshops  = new ArrayCollection();
+        $this->member2workshops   = new ArrayCollection();
         $this->member2bands       = new ArrayCollection();
         $this->member2roles       = new ArrayCollection();
+        $this->member2educations  = new ArrayCollection();
         $this->memberships        = new ArrayCollection();
     }
 

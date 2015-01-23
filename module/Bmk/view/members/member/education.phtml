@@ -1,0 +1,89 @@
+<?php
+$title = 'Unterricht eintragen';
+$this->headTitle($title);
+?>
+
+<h1><?php echo $this->escapeHtml($member->firstname . ' ' . $member->lastname); ?></h1>
+
+<?php echo $this->getTabnav($tabnav); ?>
+
+<h2>Unterricht <?php echo $form->getObject()->id === null ? 'eintragen' : 'bearbeiten'; ?></h2>
+
+<?php
+$form->setAttribute('action', $this->url('memberEducation', array('id' => $id, 'connId' => $connId)));
+$form->prepare();
+
+echo $this->form()->openTag($form);
+?>
+<div class="row">
+    <div class="col-sm-6">
+        <?php
+            echo $this->formRow($form->get('register'));
+            echo $this->formRow($form->get('teacher'));
+            echo $this->formRow($form->get('group'));
+        ?>
+    </div>
+    <div class="col-sm-6">
+        <?php
+            echo $this->formRow($form->get('beginDate'));
+            echo $this->formRow($form->get('endDate'));
+        ?>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-6">
+        <a href="<?php echo $this->url('members'); ?>" class="btn btn-default">Abbrechen</a>
+        <?php echo $this->formSubmit($form->get('submit')); ?>
+    </div>
+</div>
+<?php
+echo $this->form()->closeTag();
+
+echo '<h2>Unterricht</h2>';
+
+if (count($member->member2educations)) {
+    ?>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Von</th>
+                <th>Bis</th>
+                <th>Instrument</th>
+                <th>Lehrer</th>
+                <th>Gruppe</th>
+                <th>&nbsp;</th>
+            </tr>
+        </thead>
+        <?php foreach ($member->member2educations as $connector) { ?>
+            <tr>
+                <td>
+                    <?php
+                    if ($connector->beginDate) {
+						echo $connector->beginDate->format('d.m.Y');
+                    }
+                    ?>
+                </td>
+                <td>
+                    <?php
+                    if ($connector->endDate) {
+						echo $connector->endDate->format('d.m.Y');
+                    }
+                    ?>
+                </td>
+                <td>
+                    <?php echo $connector->register->name; ?>
+                </td>
+                <td>
+                    <?php echo $connector->teacher; ?>
+                </td>
+                <td>
+                    <?php echo $connector->group; ?>
+                </td>
+                <td>
+                    <a href="<?php echo $this->url('memberEducation', array('id' => $id, 'connId' => $connector->id)); ?>">Bearbeiten</a>
+                </td>
+            </tr>
+        <?php } ?>
+    </table>
+    <?php
+}

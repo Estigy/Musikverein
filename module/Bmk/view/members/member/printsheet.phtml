@@ -9,10 +9,10 @@ $this->headTitle($title);
 
 <div class="row">
     <div class="col-xs-4">
-        Familienname:<br><strong><?php echo $this->escapeHtml($member->lastname); ?></strong>
+        Familienname:<br><strong style="font-size:18pt;"><?php echo $this->escapeHtml($member->lastname); ?></strong>
     </div>
     <div class="col-xs-4">
-        Vorname:<br><strong><?php echo $this->escapeHtml($member->firstname); ?></strong>
+        Vorname:<br><strong style="font-size:18pt"><?php echo $this->escapeHtml($member->firstname); ?></strong>
     </div>
     <div class="col-xs-4">
         Geburtsdatum: <?php echo $this->escapeHtml($member->birthDate ? $member->birthDate->format('d.m.Y') : ''); ?><br>
@@ -42,7 +42,31 @@ $this->headTitle($title);
 			<th>Unterricht genommen bei</th>
 		</tr>
 	</thead>
-</table>
+        <?php foreach ($member->member2educations as $connector) { ?>
+            <tr>
+                <td>
+                    <?php echo $connector->register->name; ?>
+                </td>
+                <td>
+                    <?php
+                    if ($connector->beginDate) {
+						echo $connector->beginDate->format('d.m.Y');
+                    } else {
+						echo 'n/a';
+                    }
+                    echo ' &ndash; ';
+                    if ($connector->endDate) {
+						echo $connector->endDate->format('d.m.Y');
+                    } else {
+						echo 'n/a';
+                    }
+                    ?>
+                </td>
+                <td>
+                    <?php echo $connector->teacher; ?>
+                </td>
+            </tr>
+        <?php } ?></table>
 
 <h2>Besuchte Kurse</h2>
 <table>

@@ -288,6 +288,20 @@ return array(
                     ),
                 ),
             ),
+            'memberEducation' => array(
+                'type'    => 'segment',
+                'options' => array(
+                    'route'    => '/members/edit/:id/education[/:connId]',
+                    'constraints' => array(
+                        'id'     => '[0-9]+',
+                        'connId' => '[0-9]+',
+                    ),
+                    'defaults' => array(
+                        'controller' => 'Members\Controller\Member',
+                        'action'     => 'education',
+                    ),
+                ),
+            ),
             'memberWorkshops' => array(
                 'type'    => 'segment',
                 'options' => array(

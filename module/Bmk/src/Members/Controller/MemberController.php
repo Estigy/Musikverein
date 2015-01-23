@@ -7,6 +7,7 @@ use Application\Controller\BaseController;
 use Members\Entity\Member;
 use Members\Entity\Membership;
 use Members\Entity\Member2Band;
+use Members\Entity\Member2Education;
 use Members\Entity\Member2Medal;
 use Members\Entity\Member2Role;
 use Members\Entity\Member2Workshop;
@@ -14,6 +15,7 @@ use Members\Form\MemberFilterForm;
 use Members\Form\MemberForm;
 use Members\Form\MembershipForm;
 use Members\Form\Member2BandForm;
+use Members\Form\Member2EducationForm;
 use Members\Form\Member2MedalForm;
 use Members\Form\Member2RoleForm;
 use Members\Form\Member2WorkshopForm;
@@ -87,6 +89,50 @@ class MemberController extends BaseController
         );
     }
 
+    public function educationAction()
+    {
+        $em = $this->getEntityManager();
+
+        $entity = $this->getEntityFromRouteId('\Members\Entity\Member');
+        if (!$entity) {
+            return $this->redirect()->toRoute('members');
+        }
+
+        $connId = $this->params()->fromRoute('connId');
+        if ($connId) {
+            $connector = $em->find('\Members\Entity\Member2Education', $connId);
+            if ($connector === null) {
+                return $this->redirect()->toRoute('memberEducation', array('id' => $entity->id));
+            }
+        } else {
+            $connector = new Member2Education();
+            $connector->member = $entity;
+        }
+
+        $form = new Member2EducationForm($em);
+        $form->bind($connector);
+
+        $request = $this->getRequest();
+
+        if ($request->isPost()) {
+            //$form->setInputFilter($entity->getInputFilter());
+            $form->setData($request->getPost());
+
+            if ($form->isValid()) {
+                $em->persist($connector);
+                $em->flush();
+                return $this->redirect()->toRoute('memberEducation', array('id' => $entity->id));
+            }
+        }
+
+        return array(
+            'id'     => $entity->id,
+            'connId' => $connId,
+            'member' => $entity,
+            'form'   => $form,
+            'tabnav' => $this->getTabnav($entity->id),
+        );
+    }    
     public function medalsAction()
     {
         $em = $this->getEntityManager();
@@ -341,6 +387,14 @@ class MemberController extends BaseController
                 'params' => array(
                     'id' => $id
                 ),
+            ),
+            array(
+                'label' => 'Unterricht',
+                'route' => 'memberEducation',
+                'params' => array(
+                    'id' => $id
+                ),
+                'visible' => $id != 0,
             ),
             array(
                 'label' => 'Verleihungen',

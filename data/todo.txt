@@ -6,7 +6,6 @@ user bearbeiten (?)
 MITGLIEDER
 abzeichen hinterlegen in db
 suche
-anzeige stammdatenblatt mit allen infos
 neuen kurs direkt beim mitglied anlegbar machen (oder zumindest verlinken)
 (funktion: anderen vereinsnamen eingebbar machen)
 (mitgliedschaft: anderen vereinsnamen eingebbar machen)
