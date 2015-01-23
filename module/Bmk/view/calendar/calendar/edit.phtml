@@ -35,17 +35,19 @@ echo $this->form()->openTag($form);
 
 <div class="row">
     <div class="col-sm-6">
-        <h2>Homepage</h2>
+    	<h2>Anzeige</h2>
         <?php
         echo $this->formRow($form->get('showOnHomepage'));
         echo $this->formRow($form->get('homepageText'));
+        echo $this->formRow($form->get('showInBoard'));
+        echo $this->formRow($form->get('boardText'));
         ?>
     </div>
     <div class="col-sm-6">
-        <h2>Board</h2>
+    	<h2>Verrechnung</h2>
         <?php
-        echo $this->formRow($form->get('showInBoard'));
-        echo $this->formRow($form->get('boardText'));
+        echo $this->formRow($form->get('accountingInfo'));
+        echo $this->formRow($form->get('accountingAddress'));
         ?>
     </div>
 </div>
@@ -59,3 +61,34 @@ echo $this->form()->openTag($form);
 
 <?php
 echo $this->form()->closeTag();
+?>
+
+<script>
+$(function() {
+	var linkElement = $('<a href="#">Standard-Text erzeugen</a>');
+	linkElement.click(function(event) {
+		event.preventDefault();
+		
+		s = $('[name="name"]').val();
+		s += "\r\n" + 'Datum: ' + $('[name="date"]').val();
+		if ($('[name="dateTo"]').val()) {
+			s += "\r\n" + 'Bis: ' + $('[name="dateTo"]').val();
+		}
+		if ($('[name="beginTime"]').val()) {
+			s += "\r\n" + 'Beginn: ' + $('[name="beginTime"]').val();
+		}
+		if ($('[name="appointmentTime"]').val()) {
+			s += "\r\n" + 'Treffpunkt: ' + $('[name="appointmentTime"]').val();
+		}
+		if ($('[name="city"]').val()) {
+			s += "\r\n" + 'Ort: ' + $('[name="city"]').val();
+		}
+		if ($('[name="location"]').val()) {
+			s += ' (' + $('[name="city"]').val() + ')';
+		}
+		$('[name="boardText"]').val(s);
+	});
+	
+	$('[name="boardText"] + .help-block').append(' | ').append(linkElement);
+});
+</script>

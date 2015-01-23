@@ -141,6 +141,33 @@ class EventForm extends Form implements InputFilterProviderInterface
             )
         ));
         $this->add(array(
+            'name' => 'accountingInfo',
+            'type' => 'Textarea',
+            'options' => array(
+                'label' => 'Infos',
+                'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
+                'column-size' => 'sm-9',
+                'label_attributes' => array('class' => 'col-sm-3'),
+            ),
+            'attributes' => array(
+            	'rows' => 5,
+            ),
+        ));
+        $this->add(array(
+            'name' => 'accountingAddress',
+            'type' => 'Textarea',
+            'options' => array(
+                'label' => 'Rechnung an',
+                'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
+                'column-size' => 'sm-9',
+                'label_attributes' => array('class' => 'col-sm-3'),
+            ),
+            'attributes' => array(
+            	'rows' => 5,
+            ),
+        ));
+        
+        $this->add(array(
             'name' => 'showOnHomepage',
             'type' => 'Checkbox',
             'options' => array(

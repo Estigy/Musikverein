@@ -5,7 +5,7 @@ user bearbeiten (?)
 
 MITGLIEDER
 abzeichen hinterlegen in db
-suche
+suche (default-filter: aktive mitglieder)
 (funktion: anderen vereinsnamen eingebbar machen)
 (mitgliedschaft: anderen vereinsnamen eingebbar machen)
 dritte telefonnummer?
@@ -14,7 +14,6 @@ board-liste durch verwaltungs-tool speisen
 e-mail-liste pro orchester
 
 KALENDER
-verrechnungs-infos integrieren
 
 INSTRUMENTE
 export stammdatenblatt
