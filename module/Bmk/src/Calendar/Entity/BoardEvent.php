@@ -3,6 +3,7 @@
 namespace Calendar\Entity;
 
 use DateTime;
+use DateInterval;
 use Application\Entity\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -168,6 +169,10 @@ class BoardEvent extends Entity
         $this->year = $date->format('Y');
         $this->month = $date->format('m');
         $this->mday = $date->format('d');
+        
+        // Für die Berechnung des Unix-Timestamps die Uhrzeit auf 23:59:59 setzen
+        $date->add(new DateInterval('PT23H59M59S'));
+        
         $this->unix_stamp = $date->getTimestamp();
     }
 }
