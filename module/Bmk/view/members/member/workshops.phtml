@@ -22,8 +22,13 @@ echo $this->form()->openTag($form);
             echo $this->formRow($form->get('infos'));
         ?>
     </div>
-    <div class="col-sm-6">
-        <?php
+	<div class="col-sm-6">
+		<div class="form-group">
+			<div class="col-sm-12">
+				<p class="form-control-static"><a href="<?php echo $this->url('workshopEdit', array('id' => 0)); ?>" target="_blank">Neuer Kurs...</a></p>
+			</div>
+		</div>    
+		<?php
         ?>
     </div>
 </div>

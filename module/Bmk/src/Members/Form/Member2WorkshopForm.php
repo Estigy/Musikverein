@@ -31,7 +31,13 @@ class Member2WorkshopForm extends Form implements InputFilterProviderInterface
                 'label' => 'Kurs',
                 'object_manager' => $objectManager,
                 'target_class' => 'Members\Entity\Workshop',
-                'label_generator' => function($entity) { return $entity->name . ' (' . $entity->beginDate->format('d.m.Y.'); },
+                'label_generator' => function($entity) {
+                		return $entity->name
+                		     . ' ('
+                		     . $entity->beginDate->format('d.m.Y.')
+                		     . ($entity->endDate ? ' - ' . $entity->endDate->format('d.m.Y.') : '')
+                		     . ')';
+                },
                 'empty_option' => 'Bitte wählen...',
                 'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
                 'column-size' => 'sm-9',
