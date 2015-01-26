@@ -2,6 +2,8 @@
 
 namespace Attendance\Controller;
 
+use \DateTime;
+
 use Application\Controller\BaseController;
 
 use Attendance\Entity\Entry;
@@ -84,6 +86,7 @@ class SheetController extends BaseController
         } else {
             $event = new Event();
             $event->sheet = $sheet;
+            $event->date  = new DateTime();
         }
 
         $form = new EventForm($em);
