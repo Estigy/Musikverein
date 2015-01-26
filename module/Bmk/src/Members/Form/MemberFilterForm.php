@@ -6,6 +6,8 @@ use Application\Form\SessionForm;
 
 use Doctrine\Common\Persistence\ObjectManager;
 
+use Members\Entity\Member;
+
 use TwbBundle\Form\View\Helper\TwbBundleForm;
 
 use Zend\InputFilter\InputFilter;
@@ -18,12 +20,23 @@ class MemberFilterForm extends SessionForm implements InputFilterProviderInterfa
         parent::__construct('member-filter-form');
         
         $this->setAttribute('class', 'form-horizontal');
-
+        
         $this->add(array(
             'name' => 'namesearch',
             'type' => 'Text',
             'options' => array(
                 'label' => 'Name',
+                'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
+                'column-size' => 'sm-9',
+                'label_attributes' => array('class' => 'col-sm-3'),
+            ),
+        ));
+        $this->add(array(
+            'name' => 'status',
+            'type' => 'Select',
+            'options' => array(
+                'value_options' => Member::getStati(),
+                'label' => 'Status',
                 'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
                 'column-size' => 'sm-9',
                 'label_attributes' => array('class' => 'col-sm-3'),
@@ -51,6 +64,18 @@ class MemberFilterForm extends SessionForm implements InputFilterProviderInterfa
             'namesearch' => array(
                 'required' => false,
             ),
+            'status' => array(
+                'required' => false,
+            ),
         );
+    }
+    
+    protected function getDefaultData()
+    {
+        $data = parent::getDefaultData();
+        
+        $data['status'] = Member::STATUS_AKTIV;
+        
+        return $data;
     }
 }

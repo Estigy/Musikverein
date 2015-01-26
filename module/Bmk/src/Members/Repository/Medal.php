@@ -10,11 +10,11 @@ use Application\Orm\SimplePaginator;
 use Doctrine\ORM\QueryBuilder;
 
 /**
- * Repository-Klasse für Member
+ * Repository-Klasse für Medal
  */
-class Member extends BaseRepository
+class Medal extends BaseRepository
 {
-    protected $entityName = 'Members\Entity\Member';
+    protected $entityName = 'Members\Entity\Medal';
     protected $tableAlias = 'm';
     
     /**
@@ -33,25 +33,18 @@ class Member extends BaseRepository
             }
             switch ($clause) {
                 case 'namesearch':
-                    $this->addQueryFilter($qb, $value, 'm', array('firstname', 'lastname'));
-                    break;
-                case 'status':
-                    $qb->andWhere(
-                        $qb->expr()->eq('m.' . $clause, ':' . $clause)
-                    );
-                    $qb->setParameter($clause, $value);
+                    $this->addQueryFilter($qb, $value, 'w', array('name'));
                     break;
             }
         }
         
         if (!$countMode) {
             if (!empty($filters['order'])) {
-                $this->addOrderBy($qb, $filters['order'], 'm');
+                $this->addOrderBy($qb, $filters['order'], 'w');
             }
             // Standard-Sortierung
             if (!count($qb->getDQLPart('orderBy'))) {
-                $qb->addOrderBy('m.lastname', 'ASC')
-                   ->addOrderBy('m.firstname', 'ASC');
+                $qb->addOrderBy('m.sorting', 'ASC');
             }
         }
         

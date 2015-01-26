@@ -5,8 +5,6 @@ user bearbeiten (?)
 eigene daten bearbeiten
 
 MITGLIEDER
-abzeichen hinterlegen in db
-suche (default-filter: aktive mitglieder)
 (funktion: anderen vereinsnamen eingebbar machen)
 (mitgliedschaft: anderen vereinsnamen eingebbar machen)
 dritte telefonnummer?

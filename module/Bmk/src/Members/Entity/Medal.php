@@ -7,7 +7,7 @@ use Application\Entity\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
-* @ORM\Entity
+* @ORM\Entity(repositoryClass="Members\Repository\Medal")
 * @ORM\Table(name="lt_abzeichen")
 */
 class Medal extends Entity
@@ -27,4 +27,11 @@ class Medal extends Entity
     * @var string
     */
 	protected $name;
+	
+    /**
+     * @ORM\Column(name="sortierung", type="integer")
+     *
+     * @var integer
+     */
+    protected $sorting;
 }
