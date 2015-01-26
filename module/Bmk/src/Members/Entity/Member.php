@@ -68,14 +68,14 @@ class Member extends Entity
     protected $city;
 
     /**
-    * @ORM\Column(name="birthdate", type="date")
+    * @ORM\Column(name="birthdate", type="date", nullable=true)
     *
     * @var DateTime
     */
     protected $birthDate;
 
     /**
-    * @ORM\Column(name="birthcity", length=64)
+    * @ORM\Column(name="birthcity", length=64, nullable=true)
     *
     * @var string
     */
