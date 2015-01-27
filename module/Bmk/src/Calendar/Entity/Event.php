@@ -159,16 +159,6 @@ class Event extends Entity
         );
     }
 
-    public static function getBands()
-    {
-        return array(
-            'BMK'           => 'BMK',
-            'JK'            => 'JK',
-            'NWK'           => 'NWK',
-            'Kleine Gruppe' => 'Kleine Gruppe',
-        );
-    }
-
     public static function getStati()
     {
         return array(

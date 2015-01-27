@@ -16,7 +16,6 @@ KALENDER
 
 INSTRUMENTE
 export stammdatenblatt
-bands nach BMK auslagern
 
 NOTEN
 noten verborgen (wann, wer, an wen)

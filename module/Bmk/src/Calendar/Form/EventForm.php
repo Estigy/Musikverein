@@ -2,6 +2,8 @@
 
 namespace Calendar\Form;
 
+use Application\Factory\ServiceLocatorFactory;
+
 use Calendar\Entity\Event;
 
 use Doctrine\Common\Persistence\ObjectManager;
@@ -111,7 +113,7 @@ class EventForm extends Form implements InputFilterProviderInterface
             'name' => 'band',
             'type' => 'MultiCheckbox',
             'options' => array(
-                'value_options' => Event::getBands(),
+                'value_options' => ServiceLocatorFactory::getInstance()->get('BandService')->getBands(),
                 'label' => 'Wer',
                 'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
                 'column-size' => 'sm-9',

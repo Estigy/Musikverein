@@ -2,11 +2,13 @@
 
 namespace Members\Form;
 
-use Members\Entity\Member2Band;
+use Application\Factory\ServiceLocatorFactory;
 
 use Doctrine\Common\Persistence\ObjectManager;
 
 use DoctrineModule\Stdlib\Hydrator\DoctrineObject as DoctrineHydrator;
+
+use Members\Entity\Member2Band;
 
 use TwbBundle\Form\View\Helper\TwbBundleForm;
 
@@ -23,18 +25,12 @@ class Member2BandForm extends Form implements InputFilterProviderInterface
 
         $this->setAttribute('class', 'form-horizontal');
 
-        $bandOptions = array(
-            'BMK' => 'BMK',
-            'JK'  => 'JK',
-            'NWK' => 'NWK',
-        );
-
         $this->add(array(
             'name' => 'band',
             'type' => 'Select',
             'options' => array(
                 'label' => 'Orchester',
-                'value_options' => $bandOptions,
+                'value_options' => ServiceLocatorFactory::getInstance()->get('BandService')->getBands(),
                 'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
                 'column-size' => 'sm-9',
                 'label_attributes' => array('class' => 'col-sm-3'),

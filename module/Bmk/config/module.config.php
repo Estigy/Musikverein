@@ -1,6 +1,10 @@
 <?php
 
 return array(
+	'band_service' => array(
+		'bands' => array(
+		),
+	),
 	'controllers' => array(
 		'invokables' => array(
             'Attendance\Controller\Sheet'       => 'Attendance\Controller\SheetController',
@@ -451,6 +455,11 @@ return array(
             ),
 		),
 	),
+    'service_manager' => array(
+        'invokables' => array(
+            'BandService' => 'Bmk\Service\BandService',
+        ),
+    ),
 	'view_manager' => array(
 		'template_path_stack' => array(
 			'album' => __DIR__ . '/../view',
