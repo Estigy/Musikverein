@@ -22,7 +22,6 @@ NOTEN
 noten verborgen (wann, wer, an wen)
 
 DOKUMENTE
-verzeichnisschutz für upload-ordner
 
 ANWESENHEITSLISTE
 auswertung für ein orchester fürs ganze jahr (listenübergreifend)
