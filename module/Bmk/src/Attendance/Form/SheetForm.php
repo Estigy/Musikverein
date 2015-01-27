@@ -4,6 +4,8 @@ namespace Attendance\Form;
 
 use Attendance\Entity\Sheet;
 
+use Application\Factory\ServiceLocatorFactory;
+
 use Calendar\Entity\Event as CalendarEvent;
 
 use Doctrine\Common\Persistence\ObjectManager;
@@ -39,7 +41,7 @@ class SheetForm extends Form implements InputFilterProviderInterface
             'name' => 'band',
             'type' => 'Radio',
             'options' => array(
-                'value_options' => CalendarEvent::getBands(),
+                'value_options' => ServiceLocatorFactory::getInstance()->get('BandService')->getBands(),
                 'label' => 'Orchester',
                 'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
                 'column-size' => 'sm-9',

@@ -2,11 +2,14 @@
 
 namespace Calendar\Form;
 
-use Doctrine\Common\Persistence\ObjectManager;
-
+use Application\Factory\ServiceLocatorFactory;
 use Application\Form\SessionForm;
 
+use Bmk\Service\BandService;
+
 use Calendar\Entity\Event;
+
+use Doctrine\Common\Persistence\ObjectManager;
 
 use TwbBundle\Form\View\Helper\TwbBundleForm;
 
@@ -66,7 +69,7 @@ class EventFilterForm extends SessionForm implements InputFilterProviderInterfac
             'type' => 'Select',
             'options' => array(
                 'label' => 'Kapelle',
-                'value_options' => Event::getBands(),
+                'value_options' => ServiceLocatorFactory::getInstance()->get('BandService')->getBands(),
                 'empty_option' => '',
                 'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
                 'column-size' => 'sm-9',
