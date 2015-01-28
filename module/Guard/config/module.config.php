@@ -38,6 +38,11 @@ return array(
             'Application\Controller\Index' => '*',
             'Sheetmusic\Controller\Sheetmusic' => '*',
         ),
+        'Kapellmeister' => array(
+            'Application\Controller\Index' => '*',
+            'Sheetmusic\Controller\Sheetmusic' => '*',
+            'Attendance\Controller\Sheet' => '*',
+        ),
     ),
     'service_manager' => array(
         'invokables' => array(
