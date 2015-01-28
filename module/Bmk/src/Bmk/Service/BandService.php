@@ -14,7 +14,8 @@ class BandService implements ServiceLocatorAwareInterface
 	public function getBands()
 	{
 		if ($this->bands === null) {
-			$this->bands = $this->getServiceLocator()->get('Config')['band_service']['bands'];
+			$bands = $this->getServiceLocator()->get('Config')['band_service']['bands'];
+            $this->bands = array_combine($bands, $bands);
 		}
 		return $this->bands;
 	}
