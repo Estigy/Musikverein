@@ -10,9 +10,7 @@ $this->headTitle($title);
 <table class="table table-striped table-hover">
     <thead>
 	    <tr>
-            <th>Datum</th>
             <th>Name</th>
-            <th>Ort</th>
             <th>&nbsp;</th>
 	    </tr>
     </thead>
@@ -20,16 +18,7 @@ $this->headTitle($title);
     foreach ($workshops as $workshop) {
         ?>
         <tr>
-            <td>
-                <?php
-                echo $this->escapeHtml($workshop->beginDate->format('d. m. Y'));
-                if ($workshop->endDate) {
-                    echo ' bis ' . $this->escapeHtml($workshop->endDate->format('d. m. Y'));
-                }
-                ?>
-            </td>
             <td><?php echo $this->escapeHtml($workshop->name);?></td>
-            <td><?php echo $this->escapeHtml($workshop->city);?></td>
             <td>
                 <a href="<?php echo $this->url('workshopEdit', array('id' => $workshop->id));?>">Bearbeiten</a>
             </td>

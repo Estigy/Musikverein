@@ -105,6 +105,16 @@ class MemberForm extends Form implements InputFilterProviderInterface
             ),
         ));
         $this->add(array(
+            'name' => 'profession',
+            'type' => 'Text',
+            'options' => array(
+                'label' => 'Beruf',
+                'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
+                'column-size' => 'sm-9',
+                'label_attributes' => array('class' => 'col-sm-3'),
+            ),
+        ));
+        $this->add(array(
             'name' => 'email1',
             'type' => 'Text',
             'options' => array(
@@ -218,6 +228,12 @@ class MemberForm extends Form implements InputFilterProviderInterface
                 'required' => true,
             ),
             'birthDate' => array(
+                'required' => false,
+            ),
+            'birthCity' => array(
+                'required' => false,
+            ),
+            'profession' => array(
                 'required' => false,
             ),
         );

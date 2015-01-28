@@ -19,7 +19,7 @@ echo $this->form()->openTag($form);
     <div class="col-sm-6">
         <?php
             echo $this->formRow($form->get('medal'));
-            echo $this->formRow($form->get('date'));
+            echo $this->formRow($form->get('year'));
             echo $this->formRow($form->get('infos'));
         ?>
     </div>
@@ -45,7 +45,7 @@ if (count($member->member2medals)) {
         <thead>
             <tr>
                 <th>Abzeichen</th>
-                <th>Datum</th>
+                <th>Jahr</th>
                 <th>Zusatzinfos</th>
                 <th>&nbsp;</th>
             </tr>
@@ -56,7 +56,7 @@ if (count($member->member2medals)) {
                     <?php echo $connector->medal->name; ?>
                 </td>
                 <td>
-                    <?php echo $connector->date->format('d.m.Y'); ?>
+                    <?php echo $connector->year; ?>
                 </td>
                 <td>
                     <?php echo $connector->infos; ?>

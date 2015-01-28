@@ -38,11 +38,11 @@ class Member2Medal extends Entity
     protected $member;
     
     /**
-    * @ORM\Column(name="datum", type="date")
+    * @ORM\Column(name="jahr", type="integer")
     * 
-    * @var DateTime
+    * @var integer
     */
-    protected $date;
+    protected $year;
     
     /**
     * @ORM\Column(name="zusatz")

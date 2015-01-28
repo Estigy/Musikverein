@@ -65,8 +65,8 @@ class Member2EducationForm extends Form implements InputFilterProviderInterface
         ));
         
         $this->add(array(
-            'name' => 'beginDate',
-            'type' => 'Application\Form\Element\GermanDate',
+            'name' => 'beginYear',
+            'type' => 'Number',
             'options' => array(
                 'label' => 'Beginn',
                 'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
@@ -75,8 +75,8 @@ class Member2EducationForm extends Form implements InputFilterProviderInterface
             ),
         ));
         $this->add(array(
-            'name' => 'endDate',
-            'type' => 'Application\Form\Element\GermanDate',
+            'name' => 'endYear',
+            'type' => 'Number',
             'options' => array(
                 'label' => 'Ende',
                 'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
@@ -112,10 +112,10 @@ class Member2EducationForm extends Form implements InputFilterProviderInterface
             'group' => array(
                 'required' => false,
             ),
-            'beginDate' => array(
+            'beginYear' => array(
                 'required' => false,
             ),
-            'endDate' => array(
+            'endYear' => array(
                 'required' => false,
             ),
         );

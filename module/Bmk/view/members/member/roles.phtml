@@ -19,8 +19,8 @@ echo $this->form()->openTag($form);
     <div class="col-sm-6">
         <?php
             echo $this->formRow($form->get('role'));
-            echo $this->formRow($form->get('beginDate'));
-            echo $this->formRow($form->get('endDate'));
+            echo $this->formRow($form->get('beginYear'));
+            echo $this->formRow($form->get('endYear'));
         ?>
     </div>
     <div class="col-sm-6">
@@ -45,8 +45,8 @@ if (count($member->member2roles)) {
         <thead>
             <tr>
                 <th>Funktion</th>
-                <th>Eintritt</th>
-                <th>Austritt</th>
+                <th>Beginn</th>
+                <th>Ende</th>
                 <th>&nbsp;</th>
             </tr>
         </thead>
@@ -56,12 +56,12 @@ if (count($member->member2roles)) {
                     <?php echo $connector->role->name; ?>
                 </td>
                 <td>
-                    <?php echo $connector->beginDate->format('d.m.Y'); ?>
+                    <?php echo $connector->beginYear; ?>
                 </td>
                 <td>
                     <?php
-                    if ($connector->endDate) {
-						echo $connector->endDate->format('d.m.Y');
+                    if ($connector->endYear) {
+						echo $connector->endYear;
                     }
                     ?>
                 </td>

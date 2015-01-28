@@ -25,8 +25,8 @@ echo $this->form()->openTag($form);
     </div>
     <div class="col-sm-6">
         <?php
-            echo $this->formRow($form->get('beginDate'));
-            echo $this->formRow($form->get('endDate'));
+            echo $this->formRow($form->get('beginYear'));
+            echo $this->formRow($form->get('endYear'));
         ?>
     </div>
 </div>
@@ -58,15 +58,15 @@ if (count($member->member2educations)) {
             <tr>
                 <td>
                     <?php
-                    if ($connector->beginDate) {
-						echo $connector->beginDate->format('d.m.Y');
+                    if ($connector->beginYear) {
+						echo $connector->beginYear;
                     }
                     ?>
                 </td>
                 <td>
                     <?php
-                    if ($connector->endDate) {
-						echo $connector->endDate->format('d.m.Y');
+                    if ($connector->endYear) {
+						echo $connector->endYear;
                     }
                     ?>
                 </td>

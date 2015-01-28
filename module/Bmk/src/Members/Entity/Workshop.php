@@ -29,24 +29,4 @@ class Workshop extends Entity
     */
     protected $name;
     
-    /**
-    * @ORM\Column(name="beginn", type="date")
-    * 
-    * @var Datetime
-    */
-    protected $beginDate;
-    
-    /**
-    * @ORM\Column(name="ende", type="date")
-    * 
-    * @var Datetime
-    */
-    protected $endDate;
-    
-    /**
-    * @ORM\Column(name="ort", length=64)
-    * 
-    * @var string
-    */
-    protected $city;
 }

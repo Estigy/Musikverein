@@ -38,6 +38,13 @@ class Member2Workshop extends Entity
     protected $member;
     
     /**
+    * @ORM\Column(name="jahr", type="integer")
+    * 
+    * @var integer
+    */
+    protected $year;
+
+    /**
     * @ORM\Column(name="zusatz")
     * 
     * @var string

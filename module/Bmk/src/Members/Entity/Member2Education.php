@@ -52,17 +52,17 @@ class Member2Education extends Entity
     protected $group;
     
     /**
-    * @ORM\Column(name="beginn", type="date", nullable=true)
+    * @ORM\Column(name="beginn", type="integer", nullable=true)
     * 
-    * @var DateTime
+    * @var integer
     */
-    protected $beginDate;
+    protected $beginYear;
 
     /**
-    * @ORM\Column(name="ende", type="date", nullable=true)
+    * @ORM\Column(name="ende", type="integer", nullable=true)
     * 
-    * @var DateTime
+    * @var integer
     */
-    protected $endDate;
+    protected $endYear;
     
 }

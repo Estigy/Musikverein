@@ -21,15 +21,16 @@ $this->headTitle($title);
 </div>
 <div class="row" style="margin-top:14pt;">
     <div class="col-xs-6">
-        E-Mail: <strong><?php echo $this->escapeHtml($member->email1); ?></strong><br>
-        Beruf: <strong><?php echo $this->escapeHtml($member->email1); ?></strong><br>
-        Tel.Nr. Mobil: <strong><?php echo $this->escapeHtml($member->phone1); ?></strong><br>
-        E-Mail Arbeit: <strong><?php echo $this->escapeHtml($member->email2); ?></strong>
+        Tel.Nr. 1: <strong><?php echo $this->escapeHtml($member->phone1); ?></strong><br>
+        Tel.Nr. 2: <strong><?php echo $this->escapeHtml($member->phone2); ?></strong>
+        E-Mail 1: <strong><?php echo $this->escapeHtml($member->email1); ?></strong><br>
+        E-Mail 2: <strong><?php echo $this->escapeHtml($member->email2); ?></strong>
     </div>
     <div class="col-xs-6">
         Anschrift: <strong><?php echo $this->escapeHtml($member->address); ?></strong><br>
         PLZ, Ort: <strong><?php echo $this->escapeHtml($member->zip . ' ' . $member->city); ?></strong><br>
-        Tel.Nr.: <strong><?php echo $this->escapeHtml($member->phone2); ?></strong>
+        <br>
+        Beruf: <strong><?php echo $this->escapeHtml($member->profession); ?></strong><br>
     </div>
 </div>
 
@@ -49,14 +50,14 @@ $this->headTitle($title);
                 </td>
                 <td>
                     <?php
-                    if ($connector->beginDate) {
-						echo $connector->beginDate->format('d.m.Y');
+                    if ($connector->beginYear) {
+						echo $connector->beginYear;
                     } else {
 						echo 'n/a';
                     }
                     echo ' &ndash; ';
-                    if ($connector->endDate) {
-						echo $connector->endDate->format('d.m.Y');
+                    if ($connector->endYear) {
+						echo $connector->endYear;
                     } else {
 						echo 'n/a';
                     }
@@ -70,29 +71,20 @@ $this->headTitle($title);
 
 <h2>Besuchte Kurse</h2>
 <table>
-	<thead>
-		<tr>
-			<th>Jahr und Dauer</th>
-			<th>Kurs</th>
-			<th>Ort</th>
-			<th>Zusatzinfos</th>
-		</tr>
-	</thead>
+    <thead>
+        <tr>
+            <th>Jahr</th>
+            <th>Kurs</th>
+            <th>Zusatzinfos</th>
+        </tr>
+    </thead>
     <?php foreach ($member->member2workshops as $connector) { ?>
         <tr>
             <td>
-                <?php
-                echo $connector->workshop->beginDate->format('d.m.Y');
-                if ($connector->workshop->endDate) {
-                    echo ' &ndash; ' . $connector->workshop->endDate->format('d.m.Y');
-                }
-                ?>
+                <?php echo $connector->year; ?>
             </td>
             <td>
                 <?php echo $connector->workshop->name; ?>
-            </td>
-            <td>
-                <?php echo $connector->workshop->city; ?>
             </td>
             <td>
                 <?php echo $connector->infos; ?>
@@ -140,12 +132,12 @@ $this->headTitle($title);
 	<?php foreach ($member->member2roles as $connector) { ?>
 	    <tr>
 	        <td>
-	            <?php echo $connector->beginDate->format('d.m.Y'); ?>
+	            <?php echo $connector->beginYear; ?>
 	        </td>
 	        <td>
 	            <?php
-	            if ($connector->endDate) {
-					echo $connector->endDate->format('d.m.Y');
+	            if ($connector->endYear) {
+					echo $connector->endYear;
 	            }
 	            ?>
 	        </td>
@@ -161,7 +153,7 @@ $this->headTitle($title);
 	<thead>
 		<tr>
 			<th>Art</th>
-			<th>Datum</th>
+			<th>Jahr</th>
 			<th>Zusatzinfos</th>
 		</tr>
 	</thead>
@@ -171,7 +163,7 @@ $this->headTitle($title);
                 <?php echo $connector->medal->name; ?>
             </td>
             <td>
-                <?php echo $connector->date->format('d.m.Y'); ?>
+                <?php echo $connector->year; ?>
             </td>
             <td>
                 <?php echo $connector->infos; ?>

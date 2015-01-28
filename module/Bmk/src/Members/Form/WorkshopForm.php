@@ -34,36 +34,6 @@ class WorkshopForm extends Form implements InputFilterProviderInterface
                 'label_attributes' => array('class' => 'col-sm-3'),
             ),
         ));
-        $this->add(array(
-            'name' => 'beginDate',
-            'type' => 'Application\Form\Element\GermanDate',
-            'options' => array(
-                'label' => 'Von',
-                'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
-                'column-size' => 'sm-9',
-                'label_attributes' => array('class' => 'col-sm-3'),
-            ),
-        ));
-        $this->add(array(
-            'name' => 'endDate',
-            'type' => 'Application\Form\Element\GermanDate',
-            'options' => array(
-                'label' => 'Bis',
-                'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
-                'column-size' => 'sm-9',
-                'label_attributes' => array('class' => 'col-sm-3'),
-            ),
-        ));
-        $this->add(array(
-            'name' => 'city',
-            'type' => 'Text',
-            'options' => array(
-                'label' => 'Ort',
-                'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
-                'column-size' => 'sm-9',
-                'label_attributes' => array('class' => 'col-sm-3'),
-            ),
-        ));
 
         $this->add(array(
             'name' => 'submit',
@@ -81,15 +51,6 @@ class WorkshopForm extends Form implements InputFilterProviderInterface
         return array(
             'name' => array(
                 'required' => true,
-            ),
-            'beginDate' => array(
-                'required' => true,
-            ),
-            'endDate' => array(
-                'required' => false,
-            ),
-            'city' => array(
-                'required' => false,
             ),
         );
     }

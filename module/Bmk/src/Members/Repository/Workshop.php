@@ -44,7 +44,7 @@ class Workshop extends BaseRepository
             }
             // Standard-Sortierung
             if (!count($qb->getDQLPart('orderBy'))) {
-                $qb->addOrderBy('w.beginDate', 'DESC');
+                $qb->addOrderBy('w.name', 'ASC');
             }
         }
         

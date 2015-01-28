@@ -82,6 +82,13 @@ class Member extends Entity
     protected $birthCity;
 
     /**
+    * @ORM\Column(name="beruf", length=64, nullable=true)
+    *
+    * @var string
+    */
+    protected $profession;
+
+    /**
     * @ORM\Column(name="email_priv", length=64)
     *
     * @var string
@@ -153,6 +160,7 @@ class Member extends Entity
 
     /**
     * @ORM\OneToMany(targetEntity="\Members\Entity\Member2Medal", mappedBy="member")
+    * @ORM\OrderBy({"year" = "ASC"})
     *
     * @var array
     */
@@ -160,6 +168,7 @@ class Member extends Entity
 
     /**
     * @ORM\OneToMany(targetEntity="\Members\Entity\Member2Workshop", mappedBy="member")
+    * @ORM\OrderBy({"year" = "ASC"})
     *
     * @var array
     */

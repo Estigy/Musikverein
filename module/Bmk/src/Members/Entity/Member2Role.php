@@ -38,16 +38,16 @@ class Member2Role extends Entity
     protected $role;
     
     /**
-    * @ORM\Column(name="beginn", type="date")
+    * @ORM\Column(name="beginn", type="integer")
     * 
-    * @var DateTime
+    * @var integer
     */
-    protected $beginDate;
+    protected $beginYear;
 
     /**
-    * @ORM\Column(name="ende", type="date")
+    * @ORM\Column(name="ende", type="integer")
     * 
-    * @var DateTime
+    * @var integer
     */
-    protected $endDate;
+    protected $endYear;
 }

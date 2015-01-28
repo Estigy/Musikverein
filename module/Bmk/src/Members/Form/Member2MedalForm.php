@@ -32,6 +32,9 @@ class Member2MedalForm extends Form implements InputFilterProviderInterface
                 'object_manager' => $objectManager,
                 'target_class' => 'Members\Entity\Medal',
                 'property' => 'name',
+                'find_method' => array(
+                    'name' => 'findEntities',
+                ),
                 'empty_option' => 'Bitte wählen...',
                 'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
                 'column-size' => 'sm-9',
@@ -39,10 +42,10 @@ class Member2MedalForm extends Form implements InputFilterProviderInterface
             ),
         ));
         $this->add(array(
-            'name' => 'date',
-            'type' => 'Application\Form\Element\GermanDate',
+            'name' => 'year',
+            'type' => 'Number',
             'options' => array(
-                'label' => 'Datum',
+                'label' => 'Jahr',
                 'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
                 'column-size' => 'sm-9',
                 'label_attributes' => array('class' => 'col-sm-3'),

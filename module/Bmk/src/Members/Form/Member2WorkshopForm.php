@@ -31,14 +31,21 @@ class Member2WorkshopForm extends Form implements InputFilterProviderInterface
                 'label' => 'Kurs',
                 'object_manager' => $objectManager,
                 'target_class' => 'Members\Entity\Workshop',
-                'label_generator' => function($entity) {
-                		return $entity->name
-                		     . ' ('
-                		     . $entity->beginDate->format('d.m.Y.')
-                		     . ($entity->endDate ? ' - ' . $entity->endDate->format('d.m.Y.') : '')
-                		     . ')';
-                },
+                'property' => 'name',
+                'find_method' => array(
+                    'name' => 'findEntities',
+                ),
                 'empty_option' => 'Bitte wählen...',
+                'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
+                'column-size' => 'sm-9',
+                'label_attributes' => array('class' => 'col-sm-3'),
+            ),
+        ));
+        $this->add(array(
+            'name' => 'year',
+            'type' => 'Text',
+            'options' => array(
+                'label' => 'Jahr',
                 'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
                 'column-size' => 'sm-9',
                 'label_attributes' => array('class' => 'col-sm-3'),
@@ -49,7 +56,7 @@ class Member2WorkshopForm extends Form implements InputFilterProviderInterface
             'type' => 'Text',
             'options' => array(
                 'label' => 'Zusatz-Infos',
-                'help-block' => 'zB. Instrument',
+                'help-block' => 'zB. genaues Datum, Instrument, Ort',
                 'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
                 'column-size' => 'sm-9',
                 'label_attributes' => array('class' => 'col-sm-3'),
@@ -75,6 +82,9 @@ class Member2WorkshopForm extends Form implements InputFilterProviderInterface
     {
         return array(
             'workshop' => array(
+                'required' => true,
+            ),
+            'year' => array(
                 'required' => true,
             ),
             'infos' => array(

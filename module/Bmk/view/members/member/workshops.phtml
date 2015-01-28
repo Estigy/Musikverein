@@ -19,6 +19,7 @@ echo $this->form()->openTag($form);
     <div class="col-sm-6">
         <?php
             echo $this->formRow($form->get('workshop'));
+            echo $this->formRow($form->get('year'));
             echo $this->formRow($form->get('infos'));
         ?>
     </div>
@@ -48,9 +49,8 @@ if (count($member->member2workshops)) {
     <table class="table table-striped">
         <thead>
             <tr>
-                <th>Datum</th>
+                <th>Jahr</th>
                 <th>Kurs</th>
-                <th>Ort</th>
                 <th>Zusatzinfos</th>
                 <th>&nbsp;</th>
             </tr>
@@ -58,18 +58,10 @@ if (count($member->member2workshops)) {
         <?php foreach ($member->member2workshops as $connector) { ?>
             <tr>
                 <td>
-                    <?php
-                    echo $connector->workshop->beginDate->format('d.m.Y');
-                    if ($connector->workshop->endDate) {
-                        echo ' &ndash; ' . $connector->workshop->endDate->format('d.m.Y');
-                    }
-                    ?>
+                    <?php echo $connector->year; ?>
                 </td>
                 <td>
                     <?php echo $connector->workshop->name; ?>
-                </td>
-                <td>
-                    <?php echo $connector->workshop->city; ?>
                 </td>
                 <td>
                     <?php echo $connector->infos; ?>

@@ -39,20 +39,20 @@ class Member2RoleForm extends Form implements InputFilterProviderInterface
             ),
         ));
         $this->add(array(
-            'name' => 'beginDate',
-            'type' => 'Application\Form\Element\GermanDate',
+            'name' => 'beginYear',
+            'type' => 'Number',
             'options' => array(
-                'label' => 'Eintritt',
+                'label' => 'Beginn',
                 'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
                 'column-size' => 'sm-9',
                 'label_attributes' => array('class' => 'col-sm-3'),
             ),
         ));
         $this->add(array(
-            'name' => 'endDate',
-            'type' => 'Application\Form\Element\GermanDate',
+            'name' => 'endYear',
+            'type' => 'Number',
             'options' => array(
-                'label' => 'Austritt',
+                'label' => 'Ende',
                 'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
                 'column-size' => 'sm-9',
                 'label_attributes' => array('class' => 'col-sm-3'),
@@ -80,10 +80,10 @@ class Member2RoleForm extends Form implements InputFilterProviderInterface
             'role' => array(
                 'required' => true,
             ),
-            'beginDate' => array(
+            'beginYear' => array(
                 'required' => false,
             ),
-            'endDate' => array(
+            'endYear' => array(
                 'required' => false,
             ),
         );
