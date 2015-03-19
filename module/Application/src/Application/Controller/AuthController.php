@@ -44,12 +44,11 @@ class AuthController extends BaseController
                 
                 if (!$result->isValid()) {
                     foreach ($result->getMessages() as $message) {
-                        echo $message . '<br>';
-                        die();
+                        $this->flashmessenger()->addErrorMessage($message);
                     }
-                } else {
-                    return $this->redirect()->toRoute('home');
                 }
+                
+                return $this->redirect()->toRoute('home');
             }
         }
         

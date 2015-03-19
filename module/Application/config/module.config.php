@@ -91,6 +91,13 @@ return array(
             'customization' => 'Application\Helper\Customization',
         ),
     ),
+    'view_helper_config' => array(
+        'flashmessenger' => array(
+            'message_open_format'      => '<div%s><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button><ul class="list-unstyled"><li>',
+            'message_close_string'     => '</li></ul></div>',
+            'message_separator_string' => '</li><li>'
+        ),
+    ),
     'view_manager' => array(
         'display_not_found_reason' => true,
         'display_exceptions'       => true,
