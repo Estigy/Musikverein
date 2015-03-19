@@ -11,7 +11,7 @@ class Module
         $eventManager   = $e->getApplication()->getEventManager();
         $serviceManager = $e->getApplication()->getServiceManager();
 
-        $eventManager->attach(MvcEvent::EVENT_DISPATCH, $serviceManager->get('AuthCheck'), 1);
+        $eventManager->attach(MvcEvent::EVENT_ROUTE, $serviceManager->get('AuthCheck'), 1);
     }
 
     public function getConfig()
