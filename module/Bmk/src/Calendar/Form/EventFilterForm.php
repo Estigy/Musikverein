@@ -81,11 +81,11 @@ class EventFilterForm extends SessionForm implements InputFilterProviderInterfac
             'name' => 'submit',
             'type' => 'Submit',
             'attributes' => array(
-                'value' => 'Filtern',
                 'id' => 'filterbutton',
                 'class' => 'btn btn-primary',
             ),
             'options' => array(
+                'label' => 'Filtern',
                 'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
                 'column-size' => 'sm-9 col-sm-push-3',
             )

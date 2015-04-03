@@ -39,11 +39,11 @@ class LoginForm extends Form implements InputFilterProviderInterface
 			'name' => 'submit',
 			'type' => 'Submit',
 			'attributes' => array(
-				'value' => 'Einloggen',
 				'id' => 'submitbutton',
                 'class' => 'btn btn-primary',
 			),
             'options' => array(
+                'label' => 'Einloggen',
                 'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
                 'column-size' => 'sm-9 col-sm-push-3',
             ),

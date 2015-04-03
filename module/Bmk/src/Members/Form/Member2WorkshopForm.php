@@ -67,11 +67,11 @@ class Member2WorkshopForm extends Form implements InputFilterProviderInterface
             'name' => 'submit',
             'type' => 'Submit',
             'attributes' => array(
-                'value' => 'Speichern',
                 'id' => 'submitbutton',
                 'class' => 'btn btn-primary',
             ),
             'options' => array(
+                'label' => 'Speichern',
                 'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
                 'column-size' => 'sm-9 col-sm-push-3',
             ),

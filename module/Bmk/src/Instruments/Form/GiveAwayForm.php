@@ -68,9 +68,11 @@ class GiveAwayForm extends Form implements InputFilterProviderInterface
             'name' => 'submit',
             'type' => 'Submit',
             'attributes' => array(
-                'value' => 'Speichern',
                 'id' => 'submitbutton',
                 'class' => 'btn btn-primary',
+            ),
+            'options' => array(
+                'label' => 'Speichern',
             ),
         ));
 	}
