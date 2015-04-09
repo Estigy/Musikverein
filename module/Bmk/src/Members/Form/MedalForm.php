@@ -34,6 +34,16 @@ class MedalForm extends Form implements InputFilterProviderInterface
                 'label_attributes' => array('class' => 'col-sm-3'),
             ),
         ));
+        $this->add(array(
+            'name' => 'sorting',
+            'type' => 'Number',
+            'options' => array(
+                'label' => 'Sortierung',
+                'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
+                'column-size' => 'sm-9',
+                'label_attributes' => array('class' => 'col-sm-3'),
+            ),
+        ));
 
         $this->add(array(
             'name' => 'submit',

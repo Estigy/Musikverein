@@ -14,9 +14,9 @@ class MedalController extends BaseController
     public function indexAction()
     {
         $em = $this->getEntityManager();
-        
-        $entities = $em->getRepository('\Members\Entity\Medal')->findAll();
-        
+
+        $entities = $em->getRepository('\Members\Entity\Medal')->findEntities();
+
         return new ViewModel(array(
             'medals' => $entities
         ));
@@ -25,7 +25,7 @@ class MedalController extends BaseController
     public function editAction()
     {
         $em = $this->getEntityManager();
-        
+
         $id = (int) $this->params()->fromRoute('id', 0);
         if ($id) {
             $entity = $em->find('\Members\Entity\Medal', $id);
