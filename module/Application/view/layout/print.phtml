@@ -10,10 +10,10 @@
         ?>
 
         <?php echo $this->headLink(array('rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/favicon.ico'))
-        ->prependStylesheet($this->basePath() . '/css/print.css')
-        ->prependStylesheet('http://fonts.googleapis.com/css?family=Josefin+Sans|Oswald')
-        ->prependStylesheet('//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css')
-        ->prependStylesheet($this->basePath() . '/vendor/bootstrap/css/bootstrap.min.css'); ?>
+        ->prependStylesheet($this->basePath() . '/css/print.css', 'screen,print')
+        ->prependStylesheet('http://fonts.googleapis.com/css?family=Josefin+Sans|Oswald', 'screen,print')
+        ->prependStylesheet('//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css', 'screen,print')
+        ->prependStylesheet($this->basePath() . '/vendor/bootstrap/css/bootstrap.min.css', 'screen,print'); ?>
 
         <?php echo $this->headScript()
         ->prependFile($this->basePath() . '/js/bmk.js')
