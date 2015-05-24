@@ -50,6 +50,7 @@ class InstrumentController extends BaseController
         }
         if ($entity === false) { // Keine ID übergeben - neues Instrument anlegen
             $entity = new Instrument();
+            $entity->status = Instrument::STATUS_IN_ARCHIVE;
         }
 
         $form = new InstrumentForm($em);
