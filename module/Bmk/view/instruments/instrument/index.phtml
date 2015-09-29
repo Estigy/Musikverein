@@ -46,8 +46,13 @@ echo $this->form()->closeTag();
             <th><?php echo $this->escapeHtml($register->name);?></th>
             <td colspan="5">&nbsp;</td>
         </tr>
-    <?php foreach ($register->categories as $category) {
-        $instruments = $category->getInstruments($instrFilter); ?>
+    <?php
+        foreach ($register->categories as $category) {
+            $instruments = $category->getInstruments($instrFilter);
+            if (count($instruments) == 0) {
+                continue;
+            }
+            ?>
         <tr class="category-row" data-row="<?php echo $category->id; ?>">
             <th>
                 &nbsp;&nbsp;&nbsp;
@@ -59,7 +64,7 @@ echo $this->form()->closeTag();
 	<?php foreach ($instruments as $instrument) {
         $currentMember = $instrument->getCurrentMember();
         ?>
-		<tr class="row-<?php echo $category->id; ?>" style="display:none;">
+		<tr class="row-<?php echo $category->id; ?>" style="<?php if (!isset($instrFilter['serialsearch'])) {?>display:none;<?php } ?>">
             <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $this->escapeHtml($instrument->brand);?></td>
             <td><?php echo $this->escapeHtml($instrument->serialNumber);?></td>
             <td><?php echo $this->escapeHtml($instrument->variant);?></td>

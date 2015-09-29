@@ -35,7 +35,7 @@ class Instrument extends BaseRepository
             }
             switch ($clause) {
                 case 'serialsearch':
-                    $this->addQueryFilter($qb, $value, 'i', array('serial'));
+                    $this->addQueryFilter($qb, $value, 'i', array('serialNumber'));
                     break;
                 case 'status':
                     if ($value == 'active') {
@@ -70,6 +70,6 @@ class Instrument extends BaseRepository
         
         //echo $qb->getQuery()->getSQL();
         //echo $qb->getDQL();
-        //die();        
+        //die();
     }
 }

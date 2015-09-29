@@ -124,14 +124,6 @@ class BaseRepository extends EntityRepository
             return;
         }
 
-        if (is_numeric($value)) {
-            $qb->andWhere(
-                $qb->expr()->eq($tableAlias . '.id', ':id')
-            );
-            $qb->setParameter('id', $value);
-            return;
-        }
-
         $phrases = array();
         foreach ($searchFields as $field) {
             $phrases[] = $qb->expr()->like($tableAlias . '.' . $field, ':searchPhrase');
