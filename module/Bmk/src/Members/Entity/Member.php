@@ -152,6 +152,13 @@ class Member extends Entity
     protected $status;
 
     /**
+    * @ORM\Column(name="is_instrument_lender", type="boolean")
+    *
+    * @var integer
+    */
+    protected $isInstrumentLender;
+
+    /**
     * @ORM\OneToMany(targetEntity="\Instruments\Entity\Instrument2Member", mappedBy="member")
     *
     * @var array

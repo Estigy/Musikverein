@@ -36,6 +36,7 @@ class Member extends BaseRepository
                     $this->addQueryFilter($qb, $value, 'm', array('firstname', 'lastname'));
                     break;
                 case 'status':
+                case 'isInstrumentLender':
                     $qb->andWhere(
                         $qb->expr()->eq('m.' . $clause, ':' . $clause)
                     );

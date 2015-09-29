@@ -3,6 +3,7 @@
 namespace Instruments\Form;
 
 use Instruments\Entity\Instrument2Member;
+use Members\Entity\Member;
 
 use Doctrine\Common\Persistence\ObjectManager;
 
@@ -41,7 +42,15 @@ class TakeBackForm extends Form implements InputFilterProviderInterface
                 'label' => 'Rücknehmende Person',
                 'object_manager' => $objectManager,
                 'target_class' => 'Members\Entity\Member',
-                'property_function' => 'name',
+                'find_method' => array(
+                    'name' => 'findEntities',
+                    'params' => array(
+                        'filters' => array(
+                            'status' => Member::STATUS_AKTIV,
+                            'isInstrumentLender' => true,
+                        ),
+                    ),
+                ),
                 'label_generator' => function($entity) { return $entity->lastname . ' ' . $entity->firstname; },
                 'empty_option' => 'Bitte wählen...',
                 'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
