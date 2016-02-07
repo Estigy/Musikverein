@@ -11,11 +11,11 @@
         ?>
 
         <?php echo $this->headLink(array('rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/favicon.ico'))
-        ->prependStylesheet($this->basePath() . '/css/style.css')
-        ->prependStylesheet('http://fonts.googleapis.com/css?family=Josefin+Sans|Oswald')
-        ->prependStylesheet('//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css')
-        ->prependStylesheet($this->basePath() . '/vendor/datepicker/datepicker3.css')
-        ->prependStylesheet($this->basePath() . '/vendor/bootstrap/css/bootstrap.min.css'); ?>
+        ->prependStylesheet($this->basePath() . '/css/style.css', 'screen,print')
+        ->prependStylesheet('http://fonts.googleapis.com/css?family=Josefin+Sans|Oswald', 'screen,print')
+        ->prependStylesheet('//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css', 'screen,print')
+        ->prependStylesheet($this->basePath() . '/vendor/datepicker/datepicker3.css', 'screen,print')
+        ->prependStylesheet($this->basePath() . '/vendor/bootstrap/css/bootstrap.min.css', 'screen,print'); ?>
 
         <?php echo $this->headScript()
         ->prependFile($this->basePath() . '/js/application.js')
@@ -56,11 +56,20 @@
                         <?php } ?>
 
                         <?php if ($this->isAllowed('Attendance\Controller\Sheet')) { ?>
-                        <li><a href="<?php echo $this->url('attendance') ?>"><i class="fa fa-table fa-fw fa-lg"></i> Anwesenheit</a></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-table fa-fw fa-lg"></i> Anwesenheit <span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="<?php echo $this->url('attendance'); ?>">Anwesenheits-Listen</a></li>
+                                <li class="divider"></li>
+                                <li><a href="<?php echo $this->url('attendanceReport'); ?>">Auswertung</a></li>
+                            </ul>
+                        </li>
                         <?php } ?>
 
                         <?php if ($this->isAllowed('Calendar\Controller\Calendar')) { ?>
-                        <li><a href="<?php echo $this->url('calendar') ?>"><i class="fa fa-calendar fa-fw fa-lg"></i> Termine</a></li>
+                        <li>
+                            <a href="<?php echo $this->url('calendar') ?>"><i class="fa fa-calendar fa-fw fa-lg"></i> Termine</a>
+                        </li>
                         <?php } ?>
 
                         <?php if ($this->isAllowed('Instruments\Controller\Instrument')) { ?>

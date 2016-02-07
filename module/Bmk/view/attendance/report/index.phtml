@@ -1,0 +1,59 @@
+<?php
+$title = 'Anwesenheitslisten - Auswertung';
+$this->headTitle($title);
+?>
+<h1>
+    <?php echo $this->escapeHtml($title); ?>
+</h1>
+
+<form action="<?php echo $this->url('attendanceReportResult');?>" method="get">
+    <div class="well">
+        <p>
+            Wähle jene Listen, welche zusammengerechnet werden sollen, und starte die Auswertung mit dem Button rechts.
+            <input type="submit" id="show-report-btn" class="btn btn-success pull-right" value="Auswertung anzeigen">
+        </p>
+    </div>
+
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th>&nbsp;</th>
+                <th>Jahr</th>
+                <th class="text-center">Orchester</th>
+                <th>Name</th>
+                <th class="text-center">Einträge</th>
+                <th>&nbsp;</th>
+            </tr>
+        </thead>
+        <?php
+        foreach ($sheets as $sheet) {
+            ?>
+            <tr>
+                <td><input type="checkbox" name="sheetIds[]" value="<?php echo $sheet->id; ?>"></td>
+                <td><?php echo $this->escapeHtml($sheet->year);?></td>
+                <td class="text-center"><?php echo $this->escapeHtml($sheet->band);?></td>
+                <td><?php echo $this->escapeHtml($sheet->name);?></td>
+                <td class="text-center"><?php echo count($sheet->events);?></td>
+            </tr>
+            <?php
+        }
+        ?>
+    </table>
+</form>
+<?php
+echo $this->paginationControl($sheets,
+    'Sliding',
+    '_partials/paginator', array(
+        'route' => 'attendance',
+        'route_params' => array()
+    )
+);
+?>
+
+<script>
+    $(function() {
+        $('#show-report-btn').click(function() {
+
+        });
+    });
+</script>

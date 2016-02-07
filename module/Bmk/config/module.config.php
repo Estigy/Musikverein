@@ -8,6 +8,7 @@ return array(
 	'controllers' => array(
 		'invokables' => array(
             'Attendance\Controller\Sheet'       => 'Attendance\Controller\SheetController',
+            'Attendance\Controller\Report'      => 'Attendance\Controller\ReportController',
             'Calendar\Controller\Calendar'      => 'Calendar\Controller\CalendarController',
             'Documents\Controller\Category'     => 'Documents\Controller\CategoryController',
             'Documents\Controller\Document'     => 'Documents\Controller\DocumentController',
@@ -102,6 +103,26 @@ return array(
                     'defaults' => array(
                         'controller' => 'Attendance\Controller\Sheet',
                         'action'     => 'table',
+                    ),
+                ),
+            ),
+            'attendanceReport' => array(
+                'type'    => 'literal',
+                'options' => array(
+                    'route'    => '/attendance/report',
+                    'defaults' => array(
+                        'controller' => 'Attendance\Controller\Report',
+                        'action'     => 'index',
+                    ),
+                ),
+            ),
+            'attendanceReportResult' => array(
+                'type'    => 'literal',
+                'options' => array(
+                    'route'    => '/attendance/report/result',
+                    'defaults' => array(
+                        'controller' => 'Attendance\Controller\Report',
+                        'action'     => 'result',
                     ),
                 ),
             ),

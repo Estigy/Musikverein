@@ -8,6 +8,7 @@ return array(
         'Administrator' => array(
             'Application\Controller\Index' => '*',
             'Attendance\Controller\Sheet' => '*',
+            'Attendance\Controller\Report' => '*',
             'Calendar\Controller\Calendar' => '*',
             'Documents\Controller\Document' => '*',
             'Instruments\Controller\Category' => '*',
@@ -20,6 +21,7 @@ return array(
         'Vorstand' => array(
             'Application\Controller\Index' => '*',
             'Attendance\Controller\Sheet' => '*',
+            'Attendance\Controller\Report' => '*',
             'Calendar\Controller\Calendar' => '*',
             'Documents\Controller\Document' => '*',
             'Instruments\Controller\Category' => '*',
@@ -42,6 +44,7 @@ return array(
             'Application\Controller\Index' => '*',
             'Sheetmusic\Controller\Sheetmusic' => '*',
             'Attendance\Controller\Sheet' => '*',
+            'Attendance\Controller\Report' => '*',
         ),
     ),
     'service_manager' => array(

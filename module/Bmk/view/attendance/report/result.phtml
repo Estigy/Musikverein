@@ -1,0 +1,57 @@
+<?php
+$title = 'Anwesenheitslisten - Auswertungsergebnis';
+$this->headTitle($title);
+?>
+<h1>
+    <?php echo $this->escapeHtml($title); ?>
+</h1>
+
+<div class="row">
+    <div class="col-md-6">
+        <h2>Liste<?php if (count($sheets) > 1) { echo 'n'; }?></h2>
+        <ul class="list-unstyled">
+            <?php foreach ($sheets as $sheet) {
+                echo '<li>' . $sheet->band . ' ' . $sheet->year . ',  ' . $sheet->name . '</li>';
+            }
+            ?>
+        </ul>
+    </div>
+    <div class="col-md-6">
+        <h2>Daten</h2>
+        <ul class="list-unstyled">
+            <li>Anzahl Termine: <?php echo $totalEvents; ?></li>
+            <li>Anzahl Personen: <?php echo count($ranking); ?></li>
+        </ul>
+    </div>
+</div>
+
+<table class="table table-striped table-hover">
+    <thead>
+    <tr>
+        <th class="text-center">Rang</th>
+        <th class="text-left">Nachname</th>
+        <th class="text-left">Vorname</th>
+        <th class="text-center">Anzahl</th>
+    </tr>
+    </thead>
+    <?php
+    $i = 0;
+    $oldI = 0;
+    $oldCount = 0;
+    foreach ($ranking as $rank) {
+        $i++;
+        if ($oldCount != $rank['anzahl']) {
+            $oldCount = $rank['anzahl'];
+            $oldI = $i;
+        }
+        ?>
+        <tr>
+            <td class="text-center"><?php echo $oldI; ?></td>
+            <td><?php echo $this->escapeHtml($rank[0]->lastname);?></td>
+            <td><?php echo $this->escapeHtml($rank[0]->firstname);?></td>
+            <td class="text-center"><?php echo $this->escapeHtml($rank['anzahl']);?></td>
+        </tr>
+        <?php
+    }
+    ?>
+</table>
