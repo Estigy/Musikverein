@@ -47,7 +47,12 @@ echo $this->form()->closeTag();
             <td>
                 <a href="<?php echo $this->url('documentDownload', array('hash' => $document->hash));?>">
                     <i class="fa fa-download fa-fw"></i>
-                    <?php echo $this->escapeHtml($document->description);?>
+                    <?php
+                    echo $this->escapeHtml($document->description);
+                    if ($document->referenceDate) {
+                        echo ' (' . $document->referenceDate->format('d.m.Y') . ')';
+                    }
+                    ?>
                 </a>
             </td>
             <td>
