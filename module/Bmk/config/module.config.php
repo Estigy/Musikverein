@@ -126,6 +126,16 @@ return array(
                     ),
                 ),
             ),
+            'attendanceReportExport' => array(
+                'type'    => 'literal',
+                'options' => array(
+                    'route'    => '/attendance/report/result/export',
+                    'defaults' => array(
+                        'controller' => 'Attendance\Controller\Report',
+                        'action'     => 'export',
+                    ),
+                ),
+            ),
             'calendar' => array(
                 'type'    => 'literal',
                 'options' => array(
