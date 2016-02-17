@@ -10,12 +10,49 @@ $this->headTitle($title);
 
 <h2><?php echo $this->escapeHtml($sheet->name . ' ' . $sheet->year . ', ' . $sheet->band);?></h2>
 
-<table class="table table-striped table-hover table-condensed">
+<script>
+$(function() {
+   $('.rotated-header-row').each(function(){
+       var row        = $(this);
+       var headerCols = row.find('.rotated-header-col');
+       var maxWidth   = 0;
+
+       headerCols.each(function() {
+           // wrap structure
+           $(this).wrapInner('<div class="rotated-header-container"><div class="rotated-header-block"></div></div>');
+           // find max width of header content
+           var w = $(this).find('.rotated-header-block').width();
+           var h = $(this).find('.rotated-header-block').height();
+           if (w > maxWidth) {
+               maxWidth = w;
+           }
+           var d = (42 - h) / 4;
+           $(this).find('.rotated-header-block').css({
+               'transform-origin': '' + d + 'px -' + d + 'px'
+           });
+       });
+
+       headerCols.css({'height': maxWidth + 5}); // min-height funktioniert hier nicht. WTF.
+
+       headerCols.find('.rotated-header-container').css({
+           position : 'relative',
+           height   : 0,
+           width    : 42
+       });
+       headerCols.find('.rotated-header-block').css({
+           transform: 'rotate(-90deg)',
+           width: maxWidth + 5
+       });
+   });
+});
+</script>
+
+<table class="table table-striped table-hover table-condensed" style="width:auto;">
     <thead>
-	    <tr>
-            <th width="0%">&nbsp;</th>
+	    <tr class="rotated-header-row">
+            <th>&nbsp;</th>
             <?php foreach ($sheet->events as $event) { ?>
-                <th class="text-center">
+                <th class="rotated-header-col" style="line-height:1.25">
                 <?php
                     echo '<a href="' . $this->url('attendanceEventEdit', array('id' => $sheet->id, 'eventId' => $event->id)) . '">';
                     echo $event->date->format('d.m.');

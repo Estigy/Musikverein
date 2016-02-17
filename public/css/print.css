@@ -38,3 +38,7 @@ th {
 th, td {
 	/*padding:3pt;*/
 }
+
+a[href]:after {
+	content: "";
+}
