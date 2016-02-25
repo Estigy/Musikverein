@@ -20,6 +20,7 @@ $(function() {
        headerCols.each(function() {
            // wrap structure
            $(this).wrapInner('<div class="rotated-header-container"><div class="rotated-header-block"></div></div>');
+
            // find max width of header content
            var w = $(this).find('.rotated-header-block').width();
            var h = $(this).find('.rotated-header-block').height();
@@ -28,10 +29,9 @@ $(function() {
            }
            var d = (42 - h) / 4;
            $(this).find('.rotated-header-block').css({
-               'transform-origin': '' + d + 'px -' + d + 'px'
+               'transform-origin': '' + d + 'px ' + (-1 * d) + 'px'
            });
        });
-
        headerCols.css({'height': maxWidth + 5}); // min-height funktioniert hier nicht. WTF.
 
        headerCols.find('.rotated-header-container').css({

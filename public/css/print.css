@@ -17,6 +17,7 @@ body {
 }
 .container {
 	width: 20cm;
+	margin:0;
 }
 h1 {
     font-size:24pt;

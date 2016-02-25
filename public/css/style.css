@@ -40,3 +40,10 @@ h2, h1 small {
 	background:none;
 	border-color:#fff #fff #ddd;
 }
+
+
+@media print {
+    .container {
+        margin:0;
+    }
+}
