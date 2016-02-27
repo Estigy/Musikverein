@@ -218,6 +218,8 @@ class Member extends Entity
         $this->member2roles       = new ArrayCollection();
         $this->member2educations  = new ArrayCollection();
         $this->memberships        = new ArrayCollection();
+
+        $this->isInstrumentLender = false;
     }
 
     public static function getStati()
