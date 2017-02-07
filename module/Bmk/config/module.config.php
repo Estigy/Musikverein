@@ -51,6 +51,14 @@ return array(
     'documents' => array(
         'upload_path' => 'data/uploads',
     ),
+    'calendar' => array(
+        'google_calendar' => array(
+            'application_name' => 'Musikverein',
+            'calendar_id' => 'primary', // overwrite in local.php!
+            'client_secret_file' => 'config/google/client_secret_000000000000.json', // overwrite in local.php
+            'credentials_temp_file' => 'config/google/google_credentials_temp.json',
+        ),
+    ),
 	'router' => array(
 		'routes' => array(
             'attendance' => array(
@@ -489,6 +497,7 @@ return array(
     'service_manager' => array(
         'invokables' => array(
             'BandService' => 'Bmk\Service\BandService',
+            'GoogleCalendarService' => 'Calendar\Service\GoogleCalendarService',
         ),
     ),
 	'view_manager' => array(

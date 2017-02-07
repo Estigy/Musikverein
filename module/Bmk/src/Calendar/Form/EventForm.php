@@ -200,7 +200,16 @@ class EventForm extends Form implements InputFilterProviderInterface
             'name' => 'boardText',
             'type' => 'Textarea',
             'options' => array(
-                'help-block' => 'Zusätzlicher Text fürs Board (optional)',
+                'help-block' => 'Zusätzlicher Text für Board und Google Cal (optional)',
+                'column-size' => 'sm-12',
+            )
+        ));
+        $this->add(array(
+            'name' => 'showInGoogleCalendar',
+            'type' => 'Checkbox',
+            'options' => array(
+                'label' => 'Im Google-Kalender anzeigen',
+                'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
                 'column-size' => 'sm-12',
             )
         ));

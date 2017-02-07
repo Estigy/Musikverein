@@ -37,8 +37,8 @@ class AuthController extends BaseController
                     'credentialProperty' => 'password',
                     'credentialCallable' => 'Application\Entity\User::checkHashedPassword',
                 ));
-                $adapter->setIdentityValue($data['username']);
-                $adapter->setCredentialValue($data['password']);
+                $adapter->setIdentity($data['username']);
+                $adapter->setCredential($data['password']);
                 
                 $result = $auth->authenticate($adapter);
                 

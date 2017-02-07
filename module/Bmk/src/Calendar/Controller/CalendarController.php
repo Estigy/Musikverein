@@ -8,8 +8,8 @@ use Calendar\Entity\Event;
 use Calendar\Entity\BoardEvent;
 use Calendar\Form\EventFilterForm;
 use Calendar\Form\EventForm;
-use Calendar\Form\DemoForm;
 
+use Calendar\Service\GoogleCalendarService;
 use Zend\View\Model\ViewModel;
 
 class CalendarController extends BaseController
@@ -35,6 +35,10 @@ class CalendarController extends BaseController
 
     public function editAction()
     {
+        /** @var GoogleCalendarService $googleService */
+        $googleService = $this->getServiceLocator()->get('GoogleCalendarService');
+        //$googleService->doTest();
+        //die();
         $id = (int) $this->params()->fromRoute('id', 0);
         $em = $this->getEntityManager();
         if ($id) {
@@ -52,6 +56,8 @@ class CalendarController extends BaseController
         } else {
             $entity = new Event();
         }
+
+        /** @var Event $entity */
 
         $form = new EventForm($em);
         $form->bind($entity);
@@ -81,6 +87,20 @@ class CalendarController extends BaseController
                     $entity->boardEvent->title = $entity->name;
                     $entity->boardEvent->event_text = $form->get('boardText')->getValue();
                     $entity->boardEvent->setDate($entity->date);
+                }
+
+                if ($entity->showInGoogleCalendar == 0) { // Keine Anzeige im Google Kalender?
+                    if ($entity->googleCalendarId) {
+                        $googleService->deleteEvent($entity->googleCalendarId);
+                    }
+                } else {                                  // Anzeige im Google Kalender?
+                    if ($entity->googleCalendarId) {
+                        // Event aktualisieren
+                        // Falls es inzwischen gelöscht wurde, wird es neu angelegt, daher die ID immer zuweisen
+                        $entity->googleCalendarId = $googleService->updateEvent($entity->googleCalendarId, $entity);
+                    } else {
+                        $entity->googleCalendarId = $googleService->createEvent($entity);
+                    }
                 }
 
                 $em->persist($entity);

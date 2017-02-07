@@ -3,11 +3,16 @@
 namespace Calendar\Entity;
 
 use Application\Entity\Entity;
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
-* @ORM\Entity(repositoryClass="Calendar\Repository\Event")
-* @ORM\Table(name="lt_termine")
+ * @ORM\Entity(repositoryClass="Calendar\Repository\Event")
+ * @ORM\Table(name="lt_termine")
+ *
+ * @property BoardEvent $boardEvent
+ * @property int $googleCalendarId
+ * @property int $showInGoogleCalendar
 */
 class Event extends Entity
 {
@@ -44,7 +49,7 @@ class Event extends Entity
     /**
     * @ORM\Column(name="treffpunkt", type="time", nullable=true)
     *
-    * @var string
+    * @var DateTime
     */
     protected $appointmentTime;
 
@@ -112,7 +117,7 @@ class Event extends Entity
     protected $homepageText;
 
     /**
-    * @ORM\Column(name="board_anzeige", type="string", length=50)
+    * @ORM\Column(name="board_anzeige", type="integer")
     *
     * @var integer
     */
@@ -147,6 +152,20 @@ class Event extends Entity
     */
     protected $boardText;
 
+    /**
+     * @ORM\Column(name="google_cal_anzeige", type="integer")
+     *
+     * @var integer
+     */
+    protected $showInGoogleCalendar;
+
+    /**
+     * @ORM\Column(name="id_google_cal", type="string", length=64, nullable=true)
+     *
+     * @var integer
+     */
+    protected $googleCalendarId;
+
     public static function getTypes()
     {
         return array(
@@ -178,6 +197,7 @@ class Event extends Entity
                 $this->boardText = $this->boardEvent->event_text;
             }
             $this->boardEvent = null;
+            $this->googleCalendarId = null;
         }
     }
 }

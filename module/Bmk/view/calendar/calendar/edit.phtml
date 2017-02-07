@@ -39,6 +39,7 @@ echo $this->form()->openTag($form);
         <?php
         echo $this->formRow($form->get('showOnHomepage'));
         echo $this->formRow($form->get('homepageText'));
+        echo $this->formRow($form->get('showInGoogleCalendar'));
         echo $this->formRow($form->get('showInBoard'));
         echo $this->formRow($form->get('boardText'));
         ?>
@@ -84,7 +85,7 @@ $(function() {
 			s += "\r\n" + 'Ort: ' + $('[name="city"]').val();
 		}
 		if ($('[name="location"]').val()) {
-			s += ' (' + $('[name="city"]').val() + ')';
+			s += ' (' + $('[name="location"]').val() + ')';
 		}
 		$('[name="boardText"]').val(s);
 	});

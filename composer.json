@@ -13,7 +13,8 @@
         "php": ">=5.3.3",
         "zendframework/zendframework": "2.3.*",
         "doctrine/doctrine-orm-module": "0.*",
-        "neilime/zf2-twb-bundle": "2.*@stable"
+        "neilime/zf2-twb-bundle": "2.*@stable",
+        "google/apiclient": "^2.0"
     },
  "autoload": {
      "classmap": [
