@@ -10,7 +10,7 @@ $this->headTitle($title);
 <h2>Kursbesuch <?php echo $form->getObject()->id === null ? 'eintragen' : 'bearbeiten'; ?></h2>
 
 <?php
-$form->setAttribute('action', $this->url('memberWorkshops', array('id' => $id)));
+$form->setAttribute('action', $this->url('memberWorkshops', array('id' => $id, 'connId' => $connId)));
 $form->prepare();
 
 echo $this->form()->openTag($form);

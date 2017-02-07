@@ -77,7 +77,7 @@ class MemberController extends BaseController
             if ($form->isValid()) {
                 $em->persist($entity);
                 $em->flush();
-                return $this->redirect()->toRoute('members');
+                return $this->redirect()->toRoute('memberEdit', array('id' => $entity->id));
             }
         }
 
