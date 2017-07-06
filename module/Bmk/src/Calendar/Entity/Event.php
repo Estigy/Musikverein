@@ -82,6 +82,13 @@ class Event extends Entity
     protected $band;
 
     /**
+    * @ORM\Column(name="adjustierung", type="string", length=50, nullable=true)
+    *
+    * @var string
+    */
+    protected $clothing;
+
+    /**
     * @ORM\Column(name="einordnung", type="string", length=50, nullable=true)
     *
     * @var string
@@ -184,6 +191,16 @@ class Event extends Entity
             'Anbahnung' => 'Anbahnung',
             'Fixiert'   => 'Fixiert',
             'Abgesagt'  => 'Abgesagt',
+        );
+    }
+
+    public static function getClothings()
+    {
+        return array(
+            'Uniform'       => 'Uniform',
+            'Blaue Leiberl' => 'Blaue Leiberl',
+            'Zivil'         => 'Zivil',
+            'Arbeitsgewand' => 'Arbeitsgewand',
         );
     }
 

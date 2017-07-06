@@ -67,6 +67,17 @@ class EventForm extends Form implements InputFilterProviderInterface
             ),
         ));
         $this->add(array(
+            'name' => 'clothing',
+            'type' => 'Radio',
+            'options' => array(
+                'value_options' => Event::getClothings(),
+                'label' => 'Adjustierung',
+                'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
+                'column-size' => 'sm-9',
+                'label_attributes' => array('class' => 'col-sm-3'),
+            ),
+        ));
+        $this->add(array(
             'name' => 'name',
             'type' => 'Text',
             'options' => array(

@@ -12,12 +12,15 @@
 body {
 	margin:0;
 	padding:0;
-	font: 12pt "Times New Roman", Times, serif;
+	font: 12pt Arial, Helvetica, sans-serif;
 	line-height: 1.25;
 }
 .container {
 	width: 20cm;
 	margin:0;
+}
+.container.a3 {
+	width: 28cm;
 }
 h1 {
     font-size:24pt;
@@ -37,9 +40,20 @@ th {
 	font-weight:normal;
 }
 th, td {
-	/*padding:3pt;*/
+	padding:3pt;
+	vertical-align:top;
 }
 
 a[href]:after {
 	content: "";
+}
+
+.calendar-print-year tr.information td {
+	font-style:italic;
+}
+.calendar-print-year tr.anbahnung td {
+	color:#333;
+}
+.calendar-print-year td {
+	border-bottom:1px solid #ddd;
 }

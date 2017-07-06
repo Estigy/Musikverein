@@ -118,7 +118,6 @@ class CalendarController extends BaseController
     public function exportAction()
     {
         $em = $this->getEntityManager();
-        $request = $this->getRequest();
 
         $form = new EventFilterForm($em);
         $form->handleRequest($this->getRequest());
@@ -165,6 +164,27 @@ class CalendarController extends BaseController
         ));
 
         return $r;
+    }
+
+    public function printYearAction()
+    {
+        // Print-Layout
+        $this->layout('layout/print');
+        $this->layout()->format = 'A3';
+
+        $em = $this->getEntityManager();
+
+        $form = new EventFilterForm($em);
+        $form->handleRequest($this->getRequest());
+        $filters = $form->getFilledValues();
+        //$filters['status'] = 'Fixiert';
+
+        $entities = $em->getRepository('\Calendar\Entity\Event')->findEntities($filters);
+
+        return new ViewModel(array(
+            'events' => $entities,
+            'year' => $filters['year'],
+        ));
     }
 
     protected function echoCsvData($array)

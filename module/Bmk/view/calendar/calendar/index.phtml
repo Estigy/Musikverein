@@ -41,7 +41,10 @@ echo $this->form()->closeTag();
             <th>Ort</th>
             <th>Wer</th>
             <th>Status</th>
-            <td><a href="<?php echo $this->url('calendarExport'); ?>"><i class="fa fa-file-excel-o"></i> Exportieren</a></td>
+            <td>
+                <a href="<?php echo $this->url('calendarExport'); ?>"><i class="fa fa-file-excel-o"></i> Export</a>
+                <a href="<?php echo $this->url('calendarPrintYear'); ?>" target="_blank"><i class="fa fa-print"></i> Drucken</a>
+            </td>
         </tr>
     </thead>
     <?php foreach ($events as $event) : ?>

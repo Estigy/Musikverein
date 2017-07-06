@@ -177,6 +177,16 @@ return array(
                     ),
                 ),
             ),
+            'calendarPrintYear' => array(
+                'type'    => 'literal',
+                'options' => array(
+                    'route'    => '/calendar/print-year',
+                    'defaults' => array(
+                        'controller' => 'Calendar\Controller\Calendar',
+                        'action'     => 'printYear',
+                    ),
+                ),
+            ),
             'documents' => array(
                 'type'    => 'segment',
                 'options' => array(

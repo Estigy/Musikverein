@@ -23,7 +23,6 @@ class Event extends BaseRepository
      * @param QueryBuilder $qb
      * @param array $filters
      * @param boolean $countMode When doing a COUNT(), some things need not be done (like adding ORDER BY clauses)
-     * @throws BadRequestException
      */
     protected function handleFilters(QueryBuilder $qb, array $filters, $countMode = false)
     {
