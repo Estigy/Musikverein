@@ -4,6 +4,7 @@ namespace Members\Entity;
 
 use Application\Entity\Entity;
 
+use Bmk\Entity\Register;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -33,7 +34,7 @@ class Member2Education extends Entity
     * @ORM\ManyToOne(targetEntity="\Bmk\Entity\Register")
     * @ORM\JoinColumn(name="instrument")
     * 
-    * @var Category
+    * @var Register
     */
     protected $register;
     

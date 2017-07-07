@@ -57,10 +57,21 @@ if (count($member->member2bands)) {
                     <?php echo $connector->endDate ? $connector->endDate->format('d.m.Y') : '&nbsp;'; ?>
                 </td>
                 <td>
-                    <a href="<?php echo $this->url('memberMembership', array('id' => $id, 'connId' => $connector->id)); ?>">Bearbeiten</a>
+                    <a class="btn btn-primary btn-xs" href="<?php echo $this->url('memberMembership', array('id' => $id, 'connId' => $connector->id)); ?>">Bearbeiten</a>
+                    <button type="button" class="btn btn-danger btn-xs js-button-delete" data-href="<?php echo $this->url('memberMembership', array('id' => $id, 'connId' => $connector->id)); ?>">Löschen</button>
                 </td>
             </tr>
         <?php } ?>
     </table>
     <?php
 }
+?>
+
+<script>
+    $(function() {
+        $('.js-button-delete').click(function() {
+            var target = $(this).data('href');
+            $('<form action="' + target + '" method="post"><input type="hidden" name="do" value="delete"></form>').appendTo('body').submit();
+        });
+    });
+</script

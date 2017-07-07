@@ -14,7 +14,10 @@ use Zend\View\Model\ViewModel;
 class BaseController extends AbstractActionController
 {
     use EntityManagerAwareTrait;
-    
+
+    /**
+     * @return EntityManager
+     */
     public function getEntityManager()
     {
         if ($this->entityManager === null) {

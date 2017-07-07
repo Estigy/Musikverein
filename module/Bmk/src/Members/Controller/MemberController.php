@@ -115,6 +115,15 @@ class MemberController extends BaseController
         $request = $this->getRequest();
 
         if ($request->isPost()) {
+
+            // delete?
+            if ($request->getPost('do') === 'delete') {
+                $em->remove($connector);
+                $em->flush();
+                return $this->redirect()->toRoute('memberEducation', array('id' => $entity->id));
+            }
+
+
             //$form->setInputFilter($entity->getInputFilter());
             $form->setData($request->getPost());
 
@@ -132,7 +141,8 @@ class MemberController extends BaseController
             'form'   => $form,
             'tabnav' => $this->getTabnav($entity->id),
         );
-    }    
+    }
+
     public function medalsAction()
     {
         $em = $this->getEntityManager();
@@ -159,6 +169,14 @@ class MemberController extends BaseController
         $request = $this->getRequest();
 
         if ($request->isPost()) {
+
+            // delete?
+            if ($request->getPost('do') === 'delete') {
+                $em->remove($connector);
+                $em->flush();
+                return $this->redirect()->toRoute('memberMedals', array('id' => $entity->id));
+            }
+
             //$form->setInputFilter($entity->getInputFilter());
             $form->setData($request->getPost());
 
@@ -204,6 +222,14 @@ class MemberController extends BaseController
         $request = $this->getRequest();
 
         if ($request->isPost()) {
+
+            // delete?
+            if ($request->getPost('do') === 'delete') {
+                $em->remove($connector);
+                $em->flush();
+                return $this->redirect()->toRoute('memberWorkshops', array('id' => $entity->id));
+            }
+
             //$form->setInputFilter($entity->getInputFilter());
             $form->setData($request->getPost());
 
@@ -294,6 +320,14 @@ class MemberController extends BaseController
         $request = $this->getRequest();
 
         if ($request->isPost()) {
+
+            // delete?
+            if ($request->getPost('do') === 'delete') {
+                $em->remove($connector);
+                $em->flush();
+                return $this->redirect()->toRoute('memberMembership', array('id' => $entity->id));
+            }
+
             //$form->setInputFilter($entity->getInputFilter());
             $form->setData($request->getPost());
 
@@ -339,6 +373,14 @@ class MemberController extends BaseController
         $request = $this->getRequest();
 
         if ($request->isPost()) {
+
+            // delete?
+            if ($request->getPost('do') === 'delete') {
+                $em->remove($connector);
+                $em->flush();
+                return $this->redirect()->toRoute('memberRoles', array('id' => $entity->id));
+            }
+
             //$form->setInputFilter($entity->getInputFilter());
             $form->setData($request->getPost());
 
