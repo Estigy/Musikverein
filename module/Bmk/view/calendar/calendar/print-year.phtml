@@ -1,0 +1,66 @@
+<?php
+$title = 'Termine ' . $this->year;
+$this->headTitle($title);
+
+$oldMonth = '';
+$months = array("Jänner","Februar","März","April","Mai","Juni","Juli","August","September","Oktober","November","Dezember");
+?>
+
+<h1>Termine <?php echo $this->year; ?></h1>
+
+<table class="calendar-print-year">
+    <thead>
+    <tr>
+        <th>Datum</th>
+        <th>Termin</th>
+        <th>Ort, Location</th>
+        <th class="text-center">Beginn</th>
+        <th class="text-center">Adjustierung</th>
+        <th class="text-center">Treffpunkt</th>
+    </tr>
+    </thead>
+    <?php
+    foreach ($this->events as $event) {
+
+        $month = $months[$event->date->format('n') - 1];
+        if ($month != $oldMonth) {
+            $oldMonth = $month;
+            ?>
+            <tr>
+                <td colspan="6"><strong><?php echo $month; ?></strong></td>
+            </tr>
+            <?php
+        }
+
+        $rowClass = array();
+        if ($event->type === 'Information') {
+            $rowClass[] = 'information';
+        }
+        if ($event->status === 'Anbahnung') {
+            $rowClass[] = 'anbahnung';
+        }
+        ?>
+        <tr class="<?php echo implode(' ', $rowClass); ?>">
+            <td>
+                <?php echo $event->date->format('d.m') . ($event->dateTo ? '&nbsp;&ndash;<br>' . $event->dateTo->format('d.m') : ''); ?>
+            </td>
+            <td>
+                <?php echo $event->name; ?>
+            </td>
+            <td>
+                <?php echo $event->city . ($event->location ? ', ' . $event->location : ''); ?>
+            </td>
+            <td class="text-center">
+                <?php echo $event->beginTime ? $event->beginTime->format('H:i') : ''; ?>
+            </td>
+            <td class="text-center">
+                <?php echo $event->clothing; ?>
+            </td>
+            <td class="text-center">
+                <?php echo $event->appointmentTime ? $event->appointmentTime->format('H:i') : ''; ?>
+            </td>
+        </tr>
+    <?php } ?>
+</table>
+
+<small>Stand: <?php echo date('d.m.Y'); ?></small>
